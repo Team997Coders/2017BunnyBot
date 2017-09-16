@@ -1,14 +1,33 @@
 package org.usfirst.frc.team997.robot;
 
-import edu.wpi.first.wpilibj.buttons.Button;
-
-import org.usfirst.frc.team997.robot.commands.ExampleCommand;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	
+	public final Joystick
+	GamePad;
+	
+	public final JoystickButton
+	speedShiftButton,
+	bunnyCollectorButton,
+	bucketLifterButton;
+	
+	public OI() {
+		//Joystick Init
+		GamePad = new Joystick(RobotMap.Ports.GamePadPort);
+		
+		//Buttons Init
+		speedShiftButton = new JoystickButton(GamePad, RobotMap.Ports.speedShiftButton);
+		bunnyCollectorButton = new JoystickButton(GamePad, RobotMap.Ports.bunnyCollector);
+		bucketLifterButton = new JoystickButton(GamePad, RobotMap.Ports.bucketLifterButton);
+		
+	}
+	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
