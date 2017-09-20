@@ -13,7 +13,8 @@ public class OI {
 	GamePad;
 	
 	public final JoystickButton
-	speedShiftButton,
+	shiftUpButton,
+	shiftDownButton,
 	bunnyCollectorButton,
 	bucketLifterButton;
 	
@@ -22,7 +23,8 @@ public class OI {
 		GamePad = new Joystick(RobotMap.Ports.GamePadPort);
 		
 		//Buttons Init
-		speedShiftButton = new JoystickButton(GamePad, RobotMap.Ports.speedShiftButton);
+		shiftUpButton = new JoystickButton(GamePad, RobotMap.Ports.shiftUpButton);
+		shiftDownButton = new JoystickButton(GamePad, RobotMap.Ports.shiftDownButton);
 		bunnyCollectorButton = new JoystickButton(GamePad, RobotMap.Ports.bunnyCollector);
 		bucketLifterButton = new JoystickButton(GamePad, RobotMap.Ports.bucketLifterButton);
 		

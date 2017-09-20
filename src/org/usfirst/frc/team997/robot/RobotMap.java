@@ -24,13 +24,19 @@ public class RobotMap {
 		rightEncoderFirstPort = 2,
 		rightEncoderSecondPort = 3,
 		
+		//PNEUMATICS
+		shifterSolenoidLow = 0,
+		shifterSolenoidHigh = 1,
+		
+		
 		//ANALOG
 		
 		//JOYSTICKS *TEMPORARY*
 		GamePadPort = 0,
 		
 		//BUTTONS
-		speedShiftButton = 2,
+		shiftDownButton = 0,
+		shiftUpButton = 2,
 		bunnyCollectorButton = 3,
 		bucketLifterButton = 1,
 		
