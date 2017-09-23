@@ -43,6 +43,24 @@ public class DriveTrain extends Subsystem {
     	}
     }
     
+    public double[] DecellCheck(double LeftVoltage, double RightVoltage) {
+    	double[] Volts = new double[2];
+    	
+    	//if ()
+    	
+    	return Volts;
+    }
+    
+    public void SetVoltages(double LeftVolts, double RightVolts) {
+    	leftMotor.set(LeftVolts);
+    	rightMotor.set(RightVolts);
+    }
+    
+    public void StopVoltage() {
+    	leftMotor.set(0);
+    	rightMotor.set(0);
+    }
+    
     public void initDefaultCommand() {
     	//lonely and does nothing
     }
