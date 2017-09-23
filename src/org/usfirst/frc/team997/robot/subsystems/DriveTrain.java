@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveTrain extends Subsystem {
 
-    private SpeedController leftMotor, rightMotor;
+    public VictorSP leftMotor, rightMotor;
     public Encoder leftEncoder, rightEncoder;
-    private DoubleSolenoid shiftSolenoid;
+    public DoubleSolenoid shiftSolenoid;
     
     //variables here
     public int gear;
@@ -25,12 +25,9 @@ public class DriveTrain extends Subsystem {
     public DriveTrain() {
     	leftMotor = new VictorSP(RobotMap.Ports.leftMotorPort);
     	rightMotor = new VictorSP(RobotMap.Ports.rightMotorPort);
-    	leftEncoder = new Encoder(RobotMap.Ports.leftEncoderFirstPort,
-    			 RobotMap.Ports.leftEncoderSecondPort);
-    	rightEncoder = new Encoder(RobotMap.Ports.rightEncoderFirstPort,
-    			 RobotMap.Ports.rightEncoderSecondPort);
-    	shiftSolenoid = new DoubleSolenoid(RobotMap.Ports.shifterSolenoidLow,
-    			 RobotMap.Ports.shifterSolenoidHigh);
+    	leftEncoder = new Encoder(RobotMap.Ports.leftEncoderFirstPort, RobotMap.Ports.leftEncoderSecondPort);
+    	rightEncoder = new Encoder(RobotMap.Ports.rightEncoderFirstPort, RobotMap.Ports.rightEncoderSecondPort);
+    	shiftSolenoid = new DoubleSolenoid(RobotMap.Ports.shifterSolenoidLow, RobotMap.Ports.shifterSolenoidHigh);
     	
     	gear = 0;
     	this.shift(0);
