@@ -36,6 +36,15 @@ public class DriveTrain extends Subsystem {
     	this.shift(0);
     }
     
+    public void shift(int g) {
+    	if (gear != g && gear != 0) {
+    		shiftSolenoid.set(DoubleSolenoid.Value.kForward);
+    		gear = 0;
+    	} else if (gear != g) {
+    		shiftSolenoid.set(DoubleSolenoid.Value.kReverse);
+    		gear = 1;
+    	}
+    }
     
     public void initDefaultCommand() {
     	//lonely and does nothing
