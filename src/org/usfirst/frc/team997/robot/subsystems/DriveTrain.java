@@ -4,9 +4,9 @@ import org.usfirst.frc.team997.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import java.lang.Math;
 
 /**
  *
@@ -46,7 +46,16 @@ public class DriveTrain extends Subsystem {
     public double[] DecellCheck(double LeftVoltage, double RightVoltage) {
     	double[] Volts = new double[2];
     	
-    	//if ()
+    	if (Math.abs(LeftVoltage - leftMotor.get()) > 0.4) {
+    		double a = (LeftVoltage + leftMotor.get()) / 2;
+    		double b = (a + leftMotor.get()) / 2;
+    		Volts[0] = b;
+    	}
+    	if (Math.abs(RightVoltage - rightMotor.get()) > 0.4) {
+    		double a = (RightVoltage + rightMotor.get()) / 2;
+    		double b = (a + rightMotor.get()) / 2;
+    		Volts[1] = b;
+    	}
     	
     	return Volts;
     }
