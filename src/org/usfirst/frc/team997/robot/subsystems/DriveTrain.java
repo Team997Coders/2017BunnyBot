@@ -38,7 +38,7 @@ public class DriveTrain extends Subsystem {
     
     
     public void initDefaultCommand() {
-    	//lonely and does nothing
+    	//lonely and does something
     }
 }
 
