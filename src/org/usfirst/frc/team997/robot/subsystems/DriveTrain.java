@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class DriveTrain extends Subsystem {
+	
+	//Hunter says xi
 
     public VictorSP leftMotor, rightMotor;
     public Encoder leftEncoder, rightEncoder;
