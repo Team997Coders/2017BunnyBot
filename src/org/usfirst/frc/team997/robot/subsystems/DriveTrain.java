@@ -33,7 +33,7 @@ public class DriveTrain extends Subsystem {
     			 RobotMap.Ports.shifterSolenoidHigh);
     	
     	gear = 0;
-    	//this.shift(0);  FIX
+    	this.shift(0);
     }
     
     
