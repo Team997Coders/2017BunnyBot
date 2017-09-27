@@ -1,12 +1,12 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
 import org.usfirst.frc.team997.robot.RobotMap;
+import org.usfirst.frc.team997.robot.commands.ArcadeDrive;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import java.lang.Math;
 
 /**
  *
@@ -71,7 +71,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void initDefaultCommand() {
-    	//lonely and does nothing
+    	setDefaultCommand(new ArcadeDrive());
     }
 }
 
