@@ -33,6 +33,8 @@ public class DriveTrain extends Subsystem {
     	this.shift(0);
     }
     
+    // Gear 0 is low gear, gear 1 is high gear. -Timothy
+    
     public void shift(int g) {
     	if (gear != g && gear != 0) {
     		shiftSolenoid.set(DoubleSolenoid.Value.kForward);
@@ -40,8 +42,22 @@ public class DriveTrain extends Subsystem {
     	} else if (gear != g) {
     		shiftSolenoid.set(DoubleSolenoid.Value.kReverse);
     		gear = 1;
+    			}
+    }
+    
+    //If the robot goes backwards when you push forwards, this is why. v
+    
+    public void driveVoltage(double leftSpeed, double rightSpeed) {
+    	if(gear == 0) {
+    		leftMotor.set(leftSpeed/2);
+    		rightMotor.set(-rightSpeed/2);
+    	}
+    	else if(gear == 1) {
+    		leftMotor.set(leftSpeed);
+    		rightMotor.set(-rightSpeed);
     	}
     }
+    
     
     public void initDefaultCommand() {
     	//lonely and does nothing
