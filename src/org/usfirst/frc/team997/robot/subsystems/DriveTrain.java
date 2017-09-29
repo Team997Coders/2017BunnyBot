@@ -47,14 +47,22 @@ public class DriveTrain extends Subsystem {
     	double[] Volts = new double[2];
     	
     	if (Math.abs(LeftVoltage - leftMotor.get()) > 0.4) {
-    		double a = (LeftVoltage + leftMotor.get()) / 2;
-    		double b = (a + leftMotor.get()) / 2;
-    		Volts[0] = b;
+    		double AHH = 0;
+    		if (LeftVoltage < leftMotor.get()) {
+    			AHH = leftMotor.get() - 0.4;
+    		} else {
+    			AHH = leftMotor.get() + 0.4;
+    		}
+    		Volts[0] = AHH;
     	}
     	if (Math.abs(RightVoltage - rightMotor.get()) > 0.4) {
-    		double a = (RightVoltage + rightMotor.get()) / 2;
-    		double b = (a + rightMotor.get()) / 2;
-    		Volts[1] = b;
+    		double AHH = 0;
+    		if (LeftVoltage < leftMotor.get()) {
+    			AHH = leftMotor.get() - 0.4;
+    		} else {
+    			AHH = leftMotor.get() + 0.4;
+    		}
+    		Volts[1] = AHH;
     	}
     	
     	return Volts;
