@@ -19,6 +19,10 @@ public class DriveTrain extends Subsystem {
     
     //variables here
     public int gear;
+    public double decellRate;
+    
+    //decellRate controls how fast the robot decellerates. Subtracted from the current motor
+    // speed each time the motor speed loop is called. -Timothy
     
     //arbitrary motor name
     
@@ -48,6 +52,8 @@ public class DriveTrain extends Subsystem {
     //If the robot goes backwards when you push forwards, this is why. v
     
     public void driveVoltage(double leftSpeed, double rightSpeed) {
+    	
+    	
     	if(gear == 0) {
     		leftMotor.set(leftSpeed/2);
     		rightMotor.set(-rightSpeed/2);
