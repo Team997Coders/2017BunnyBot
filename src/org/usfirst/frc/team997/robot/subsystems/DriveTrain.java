@@ -29,6 +29,9 @@ public class DriveTrain extends Subsystem {
     	rightEncoder = new Encoder(RobotMap.Ports.rightEncoderFirstPort, RobotMap.Ports.rightEncoderSecondPort);
     	shiftSolenoid = new DoubleSolenoid(RobotMap.Ports.shifterSolenoidLow, RobotMap.Ports.shifterSolenoidHigh);
     	
+    	leftEncoder.reset();
+    	rightEncoder.reset();
+    	
     	gear = 0;
     	this.shift(0);
     }
@@ -70,7 +73,7 @@ public class DriveTrain extends Subsystem {
     
     public void SetVoltages(double LeftVolts, double RightVolts) {
     	leftMotor.set(LeftVolts);
-    	rightMotor.set(RightVolts);
+    	rightMotor.set(-RightVolts);
     }
     
     public void StopVoltage() {
