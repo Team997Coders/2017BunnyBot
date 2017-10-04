@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -16,6 +17,8 @@ public class DriveTrain extends Subsystem {
     public VictorSP leftMotor, rightMotor;
     public Encoder leftEncoder, rightEncoder;
     public DoubleSolenoid shiftSolenoid;
+    
+    public SmartDashboard dash;
     
     //variables here
     public int gear;
@@ -44,6 +47,8 @@ public class DriveTrain extends Subsystem {
     		shiftSolenoid.set(DoubleSolenoid.Value.kReverse);
     		gear = 1;
     	}
+    	
+    	dash.setDefaultNumber("Gear iN Use", gear);
     }
     
     public double[] DecellCheck(double LeftVoltage, double RightVoltage) {
@@ -74,6 +79,8 @@ public class DriveTrain extends Subsystem {
     public void SetVoltages(double LeftVolts, double RightVolts) {
     	leftMotor.set(LeftVolts);
     	rightMotor.set(-RightVolts);
+    	dash.setDefaultNumber("Left Voltage", LeftVolts);
+    	dash.setDefaultNumber("Right Voltage", RightVolts);
     }
     
     public void StopVoltage() {
