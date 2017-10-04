@@ -20,23 +20,13 @@ public class TankDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double[] volts = getVolts();
+    	volts = Robot.driveTrain.decellerate(volts[0], volts[1]);
+    	Robot.driveTrain.driveVoltage(volts[0], volts[1]);
     }
     public double[] getVolts() {
     	double[] volts = new double[2];
-    	double leftMotorSpeed = 0;
-    	double rightMotorSpeed = 0;
-    	
-    	if(Robot.oi.GamePad.getRawAxis(1) > 0 && Robot.oi.GamePad.getRawAxis(5) > 0) {
-    		Robot.driveTrain.driveVoltage(Robot.oi.GamePad.getRawAxis(1), Robot.oi.GamePad.getRawAxis(5));
-    		leftMotorSpeed = Robot.oi.GamePad.getRawAxis(1);
-    		rightMotorSpeed = Robot.oi.GamePad.getRawAxis(5);
-    		
-    	} else {
-    		
-    		leftMotorSpeed = 0;
-    		rightMotorSpeed = 0;
-    		
-    	}
+    	double leftMotorSpeed = Robot.oi.GamePad.getRawAxis(1);
+    	double rightMotorSpeed = Robot.oi.GamePad.getRawAxis(1);
     	
     	volts[0] = leftMotorSpeed;
     	volts[1] = rightMotorSpeed;

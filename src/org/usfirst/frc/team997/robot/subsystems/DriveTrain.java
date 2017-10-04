@@ -19,10 +19,9 @@ public class DriveTrain extends Subsystem {
     
     //variables here
     public int gear;
-    public double decellRate;
+    public double accellRate;
     
-    //decellRate controls how fast the robot decellerates. Subtracted from the current motor
-    // speed each time the motor speed loop is called. -Timothy
+    //accellRate controls how fast the robot can accelerate. -Timothy
     
     //arbitrary motor name
     
@@ -53,17 +52,46 @@ public class DriveTrain extends Subsystem {
     
     public void driveVoltage(double leftSpeed, double rightSpeed) {
     	
+    	leftMotor.set(leftSpeed);
+    	rightMotor.set(rightSpeed);
     	
-    	if(gear == 0) {
-    		leftMotor.set(leftSpeed/2);
-    		rightMotor.set(-rightSpeed/2);
-    	}
-    	else if(gear == 1) {
-    		leftMotor.set(leftSpeed);
-    		rightMotor.set(-rightSpeed);
-    	}
     }
     
+    // FreeStick is a random storage double. -Timothy
+    
+    public double[] decellerate(double leftVolts, double rightVolts) {
+    	
+    	double FreeStick = 0.0;
+    	double[] decellVolts = new double[2];
+    	
+    	if(Math.abs(leftVolts - leftMotor.get()) > 0.4) {
+    		if(leftVolts < leftMotor.get()) {
+    			FreeStick = leftMotor.get() - accellRate;
+    		} else {
+    			FreeStick = leftMotor.get() + accellRate;
+    		}
+    	}
+    	decellVolts[0] = FreeStick;	
+    	
+    	if(Math.abs(rightVolts - rightMotor.get()) > 0.4) {
+    		if(rightVolts < rightMotor.get()) {
+    			FreeStick = rightMotor.get() - accellRate;
+    		} else {
+    			FreeStick = rightMotor.get() + accellRate;
+    		}
+    	}
+    	decellVolts[1] = FreeStick;
+    	
+    	
+    	return decellVolts;
+    	
+    }
+    
+    public void stopVoltage() {
+    	
+    	leftMotor.set(0);
+    	rightMotor.set(0);
+    }
     
     public void initDefaultCommand() {
     	//lonely and does nothing
