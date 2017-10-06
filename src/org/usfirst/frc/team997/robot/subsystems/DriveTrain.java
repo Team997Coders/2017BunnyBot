@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class DriveTrain extends Subsystem {
-
+    //arbitrary motor names
     public VictorSP leftMotor, rightMotor;
     public Encoder leftEncoder, rightEncoder;
     public DoubleSolenoid shiftSolenoid;
@@ -21,9 +21,7 @@ public class DriveTrain extends Subsystem {
     public SmartDashboard dash;
     
     //variables here
-    public int gear;
-    
-    //arbitrary motor name
+    public int gear; 
     
     public DriveTrain() {
     	leftMotor = new VictorSP(RobotMap.Ports.leftMotorPort);
@@ -39,6 +37,8 @@ public class DriveTrain extends Subsystem {
     	this.shift(0);
     }
     
+    // Gear 0 is low gear, gear 1 is high gear. -Timothy
+    
     public void shift(int g) {
     	if (gear != g && gear != 0) {
     		shiftSolenoid.set(DoubleSolenoid.Value.kForward);
@@ -46,11 +46,9 @@ public class DriveTrain extends Subsystem {
     	} else if (gear != g) {
     		shiftSolenoid.set(DoubleSolenoid.Value.kReverse);
     		gear = 1;
-    	}
-    	
-    	dash.setDefaultNumber("Gear iN Use", gear);
+    			}
     }
-    
+   
     public double[] DecellCheck(double LeftVoltage, double RightVoltage) {
     	double[] Volts = new double[2];
     	
@@ -84,6 +82,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void StopVoltage() {
+	    dash.setDefaultNumber("Gear iN Use", gear);
     	leftMotor.set(0);
     	rightMotor.set(0);
     }
