@@ -1,5 +1,7 @@
 package org.usfirst.frc.team997.robot;
 
+import org.usfirst.frc.team997.robot.commands.AutomatedTest;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -16,7 +18,8 @@ public class OI {
 	shiftUpButton,
 	shiftDownButton,
 	bunnyCollectorButton,
-	bucketLifterButton;
+	bucketLifterButton,
+	automatedTestButton;
 	
 	public OI() {
 		//Joystick Init
@@ -27,7 +30,8 @@ public class OI {
 		shiftDownButton = new JoystickButton(GamePad, RobotMap.Ports.shiftDownButton);
 		bunnyCollectorButton = new JoystickButton(GamePad, RobotMap.Ports.bunnyCollector);
 		bucketLifterButton = new JoystickButton(GamePad, RobotMap.Ports.bucketLifterButton);
-		
+		automatedTestButton = new JoystickButton(GamePad, 1);
+		automatedTestButton.whileHeld(new AutomatedTest());
 	}
 	
 	//// CREATING BUTTONS
