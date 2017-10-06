@@ -1,29 +1,27 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
 import org.usfirst.frc.team997.robot.RobotMap;
+import org.usfirst.frc.team997.robot.commands.ArcadeDrive;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class DriveTrain extends Subsystem {
-
+    //arbitrary motor names
     public VictorSP leftMotor, rightMotor;
     public Encoder leftEncoder, rightEncoder;
     public DoubleSolenoid shiftSolenoid;
     
+    public SmartDashboard dash;
+    
     //variables here
-    public int gear;
-    public double accellRate;
-    
-    //accellRate controls how fast the robot can accelerate. -Timothy
-    
-    //arbitrary motor name
+    public int gear; 
     
     public DriveTrain() {
     	leftMotor = new VictorSP(RobotMap.Ports.leftMotorPort);
@@ -31,6 +29,9 @@ public class DriveTrain extends Subsystem {
     	leftEncoder = new Encoder(RobotMap.Ports.leftEncoderFirstPort, RobotMap.Ports.leftEncoderSecondPort);
     	rightEncoder = new Encoder(RobotMap.Ports.rightEncoderFirstPort, RobotMap.Ports.rightEncoderSecondPort);
     	shiftSolenoid = new DoubleSolenoid(RobotMap.Ports.shifterSolenoidLow, RobotMap.Ports.shifterSolenoidHigh);
+    	
+    	leftEncoder.reset();
+    	rightEncoder.reset();
     	
     	gear = 0;
     	this.shift(0);
@@ -47,54 +48,47 @@ public class DriveTrain extends Subsystem {
     		gear = 1;
     			}
     }
-    
-    //If the robot goes backwards when you push forwards, this is why. v
-    
-    public void driveVoltage(double leftSpeed, double rightSpeed) {
+   
+    public double[] DecellCheck(double LeftVoltage, double RightVoltage) {
+    	double[] Volts = new double[2];
     	
-    	leftMotor.set(leftSpeed);
-    	rightMotor.set(rightSpeed);
+    	if (Math.abs(LeftVoltage - leftMotor.get()) > 0.4) {
+    		double AHH = 0;
+    		if (LeftVoltage < leftMotor.get()) {
+    			AHH = leftMotor.get() - 0.4;
+    		} else {
+    			AHH = leftMotor.get() + 0.4;
+    		}
+    		Volts[0] = AHH;
+    	}
+    	if (Math.abs(RightVoltage - rightMotor.get()) > 0.4) {
+    		double AHH = 0;
+    		if (LeftVoltage < leftMotor.get()) {
+    			AHH = leftMotor.get() - 0.4;
+    		} else {
+    			AHH = leftMotor.get() + 0.4;
+    		}
+    		Volts[1] = AHH;
+    	}
     	
+    	return Volts;
     }
     
-    // FreeStick is a random storage double. -Timothy
-    
-    public double[] decellerate(double leftVolts, double rightVolts) {
-    	
-    	double FreeStick = 0.0;
-    	double[] decellVolts = new double[2];
-    	
-    	if(Math.abs(leftVolts - leftMotor.get()) > 0.4) {
-    		if(leftVolts < leftMotor.get()) {
-    			FreeStick = leftMotor.get() - accellRate;
-    		} else {
-    			FreeStick = leftMotor.get() + accellRate;
-    		}
-    	}
-    	decellVolts[0] = FreeStick;	
-    	
-    	if(Math.abs(rightVolts - rightMotor.get()) > 0.4) {
-    		if(rightVolts < rightMotor.get()) {
-    			FreeStick = rightMotor.get() - accellRate;
-    		} else {
-    			FreeStick = rightMotor.get() + accellRate;
-    		}
-    	}
-    	decellVolts[1] = FreeStick;
-    	
-    	
-    	return decellVolts;
-    	
+    public void SetVoltages(double LeftVolts, double RightVolts) {
+    	leftMotor.set(LeftVolts);
+    	rightMotor.set(-RightVolts);
+    	dash.setDefaultNumber("Left Voltage", LeftVolts);
+    	dash.setDefaultNumber("Right Voltage", RightVolts);
     }
     
-    public void stopVoltage() {
-    	
+    public void StopVoltage() {
+	    dash.setDefaultNumber("Gear iN Use", gear);
     	leftMotor.set(0);
     	rightMotor.set(0);
     }
     
     public void initDefaultCommand() {
-    	//lonely and does nothing
+    	setDefaultCommand(new ArcadeDrive());
     }
 }
 
