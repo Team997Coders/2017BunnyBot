@@ -20,8 +20,8 @@ public class TankDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double[] volts = getVolts();
-    	volts = Robot.driveTrain.decellerate(volts[0], volts[1]);
-    	Robot.driveTrain.driveVoltage(volts[0], volts[1]);
+    	volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
+    	Robot.driveTrain.SetVoltages(volts[0], volts[1]);
     }
     public double[] getVolts() {
     	double[] volts = new double[2];
@@ -40,12 +40,12 @@ public class TankDrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrain.driveVoltage(0, 0);
+    	Robot.driveTrain.SetVoltages(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.driveTrain.driveVoltage(0, 0);
+    	Robot.driveTrain.SetVoltages(0, 0);
     }
 }
