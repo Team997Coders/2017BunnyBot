@@ -27,9 +27,15 @@ public class RobotMap {
 		//PNEUMATICS
 		shifterSolenoidLow = 0,
 		shifterSolenoidHigh = 1,
-		
+		armMoverSolenoidPort = 2,
+		armOpenerSolenoidPort = 3,
+		trapdoorSolenoidPort = 5,
 		
 		//ANALOG
+		
+		//SPIKE
+		ringLightPort = 0,
+		flashLightPort = 1,
 		
 		//JOYSTICKS *TEMPORARY*
 		GamePadPort = 0,
