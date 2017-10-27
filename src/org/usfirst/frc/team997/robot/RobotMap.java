@@ -67,7 +67,12 @@ public class RobotMap {
 		pidI = 0.0,
 		pidD = 0.0,
 		pidMinimumInput = 0.0,
-		pidMaximumInput = 0.0;
+		pidMaximumInput = 0.0,
+		
+		//Arm Position
+		armPosOne = 0,
+		armPosTwo = 1,
+		armPosThree = 2;
 		
 	}
 	

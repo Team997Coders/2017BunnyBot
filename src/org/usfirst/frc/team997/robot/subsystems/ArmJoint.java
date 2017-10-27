@@ -2,9 +2,8 @@ package org.usfirst.frc.team997.robot.subsystems;
 
 import org.usfirst.frc.team997.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /**
@@ -12,17 +11,19 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  */
 public class ArmJoint extends PIDSubsystem {
 	
-	public Spark Motor;
+	public TalonSRX Motor;
 	public Encoder ArmAngle;
+	public static final double absoluteTolerance = 0.01;
 
     // Initialize your subsystem here
     public ArmJoint() {
     	super("ArmJoint", RobotMap.Values.pidP, RobotMap.Values.pidI, RobotMap.Values.pidD);
     	
+    	getPIDController().setAbsoluteTolerance(absoluteTolerance);
     	getPIDController().setInputRange(RobotMap.Values.pidMinimumInput, RobotMap.Values.pidMaximumInput);
     	//getPIDController().setOutputRange(-0.5, 0.75); //Set Values Constant
     	
-    	Motor = new Spark(RobotMap.Ports.bucketLifter);
+    	Motor = new TalonSRX(RobotMap.Ports.bucketLifter);
     	ArmAngle = new Encoder(RobotMap.Ports.armEncoderFirstPort, RobotMap.Ports.armEncoderSecondPort);
     	
         // Use these to get going:
@@ -64,14 +65,10 @@ public class ArmJoint extends PIDSubsystem {
     }
 
     protected double returnPIDInput() {
-        // Return your input value for the PID loop
-        // e.g. a sensor, like a potentiometer:
-        // yourPot.getAverageVoltage() / kYourMaxVoltage;
-        return 0.0;
+        return ArmAngle.get();
     }
 
     protected void usePIDOutput(double output) {
-        // Use output to drive your system, like a motor
-        // e.g. yourMotor.set(output);
+        Motor.pidWrite(output);
     }
 }
