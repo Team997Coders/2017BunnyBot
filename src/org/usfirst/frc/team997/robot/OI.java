@@ -1,6 +1,7 @@
 package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.AutomatedTest;
+import org.usfirst.frc.team997.robot.commands.HardwareTestCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -29,11 +30,14 @@ public class OI {
 		shiftUpButton = new JoystickButton(GamePad, RobotMap.Ports.shiftUpButton);
 		shiftDownButton = new JoystickButton(GamePad, RobotMap.Ports.shiftDownButton);
 		bunnyCollectorButton = new JoystickButton(GamePad, RobotMap.Ports.bunnyCollector);
-		bucketLifterButton = new JoystickButton(GamePad, RobotMap.Ports.bucketLifterButton);
+		bucketLifterButton = new JoystickButton(GamePad, RobotMap.Ports.bucketLifterButton); //TODO: uncomment
 		automatedTestButton = new JoystickButton(GamePad, 1);
 		automatedTestButton.whileHeld(new AutomatedTest());
 	}
 	
+	public double getLeftY() {
+		return GamePad.getRawAxis(1);
+	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
