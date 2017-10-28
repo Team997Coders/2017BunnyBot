@@ -19,20 +19,22 @@ public class OI {
 	shiftUpButton,
 	shiftDownButton,
 	bunnyCollectorButton,
-	bucketLifterButton,
-	automatedTestButton;
+	bucketLifterButton;
+	//automatedTestButton;
 	
 	public OI() {
 		//Joystick Init
 		GamePad = new Joystick(RobotMap.Ports.GamePadPort);
 		
 		//Buttons Init
+		
 		shiftUpButton = new JoystickButton(GamePad, RobotMap.Ports.shiftUpButton);
 		shiftDownButton = new JoystickButton(GamePad, RobotMap.Ports.shiftDownButton);
 		bunnyCollectorButton = new JoystickButton(GamePad, RobotMap.Ports.bunnyCollector);
 		bucketLifterButton = new JoystickButton(GamePad, RobotMap.Ports.bucketLifterButton); //TODO: uncomment
-		automatedTestButton = new JoystickButton(GamePad, 1);
-		automatedTestButton.whileHeld(new AutomatedTest());
+		//automatedTestButton = new JoystickButton(GamePad, 1);
+		//automatedTestButton.whileHeld(new AutomatedTest());
+		
 	}
 	
 	public double getLeftY() {

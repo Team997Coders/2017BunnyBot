@@ -24,7 +24,7 @@ public class HardwareTest extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	new HardwareTestCommand();
+    	//setDefaultCommand(new HardwareTestCommand());
     }
 }
 
