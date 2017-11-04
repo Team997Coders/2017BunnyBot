@@ -2,7 +2,7 @@ package org.usfirst.frc.team997.robot.subsystems;
 
 import org.usfirst.frc.team997.robot.commands.HardwareTestCommand;
 
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -10,15 +10,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class HardwareTest extends Subsystem {
 
-	public static Talon talon;
+	public static VictorSP mvictor;
 	
 	public HardwareTest(){
-		talon = new Talon(1);
+		//mvictor = new VictorSP(5);
 	}
     // here. Call these from Commands.
 
 	public void moveTalon(double voltage) {
-		talon.set(voltage);
+		mvictor.set(voltage);
 	}
 	
     public void initDefaultCommand() {

@@ -32,7 +32,7 @@ public class OI {
 		shiftDownButton = new JoystickButton(GamePad, RobotMap.Ports.shiftDownButton);
 		bunnyCollectorButton = new JoystickButton(GamePad, RobotMap.Ports.bunnyCollector);
 		bucketLifterButton = new JoystickButton(GamePad, RobotMap.Ports.bucketLifterButton); //TODO: uncomment
-		//automatedTestButton = new JoystickButton(GamePad, 1);
+		//automatedTestButton = new JoystickButton(GamePad, 1);	//LEAVE THIS COMMENTED OUT. DON'T HARDCODE VALUES!!!
 		//automatedTestButton.whileHeld(new AutomatedTest());
 		
 	}

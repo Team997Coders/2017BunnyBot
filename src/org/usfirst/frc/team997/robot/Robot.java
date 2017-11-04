@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	
 	public static DriveTrain driveTrain;
-	public static Claw claw = new Claw();
+	//public static Claw claw = new Claw();
 	public static HardwareTest hardwareTest = new HardwareTest();
 	public static OI oi;
 
@@ -48,9 +48,9 @@ public class Robot extends IterativeRobot {
 			e.printStackTrace();
 		}*/
 		
-		/*try {
+		//try {
 			hardwareTest = new HardwareTest();
-		} catch (Exception e) {
+		/*} catch (Exception e) {
 			e.printStackTrace();
 		}*/
 		oi = new OI();

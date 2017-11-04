@@ -24,7 +24,7 @@ public class DriveTrain extends Subsystem {
     public int gear; 
     
     public DriveTrain() {
-    	leftMotor = new VictorSP(RobotMap.Ports.leftMotorPort);
+    	//leftMotor = new VictorSP(RobotMap.Ports.leftMotorPort);
     	rightMotor = new VictorSP(RobotMap.Ports.rightMotorPort);
     	leftEncoder = new Encoder(RobotMap.Ports.leftEncoderFirstPort, RobotMap.Ports.leftEncoderSecondPort);
     	rightEncoder = new Encoder(RobotMap.Ports.rightEncoderFirstPort, RobotMap.Ports.rightEncoderSecondPort);
