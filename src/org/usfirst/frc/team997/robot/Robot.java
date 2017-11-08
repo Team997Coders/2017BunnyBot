@@ -3,7 +3,6 @@ package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.subsystems.Claw;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team997.robot.subsystems.HardwareTest;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,7 +22,6 @@ public class Robot extends IterativeRobot {
 	
 	public static DriveTrain driveTrain;
 	//public static Claw claw = new Claw();
-	public static HardwareTest hardwareTest = new HardwareTest();
 	public static OI oi;
 
 	Command autonomousCommand;
@@ -36,9 +34,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		
-		/*try {
+		//try {
 			driveTrain = new DriveTrain();
-		} catch (Exception e) {
+		/*} catch (Exception e) {
 			e.printStackTrace();
 		}*/
 		
@@ -48,11 +46,7 @@ public class Robot extends IterativeRobot {
 			e.printStackTrace();
 		}*/
 		
-		//try {
-			hardwareTest = new HardwareTest();
-		/*} catch (Exception e) {
-			e.printStackTrace();
-		}*/
+		
 		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);

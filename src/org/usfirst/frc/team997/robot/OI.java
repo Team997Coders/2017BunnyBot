@@ -1,7 +1,6 @@
 package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.AutomatedTest;
-import org.usfirst.frc.team997.robot.commands.HardwareTestCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;

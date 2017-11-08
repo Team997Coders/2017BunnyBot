@@ -13,7 +13,7 @@ public class RobotMap {
 		//NAME
 		
 		//PWM *TEMPORARY*
-		//leftMotorPort = 0,  //uncomment later plz
+		leftMotorPort = 0,  
 		rightMotorPort = 1,
 		bunnyCollector = 3,
 		bucketLifter = 4,

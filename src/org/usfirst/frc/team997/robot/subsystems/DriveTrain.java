@@ -24,17 +24,18 @@ public class DriveTrain extends Subsystem {
     public int gear; 
     
     public DriveTrain() {
-    	//leftMotor = new VictorSP(RobotMap.Ports.leftMotorPort);
+    	leftMotor = new VictorSP(RobotMap.Ports.leftMotorPort);
     	rightMotor = new VictorSP(RobotMap.Ports.rightMotorPort);
     	leftEncoder = new Encoder(RobotMap.Ports.leftEncoderFirstPort, RobotMap.Ports.leftEncoderSecondPort);
     	rightEncoder = new Encoder(RobotMap.Ports.rightEncoderFirstPort, RobotMap.Ports.rightEncoderSecondPort);
     	shiftSolenoid = new DoubleSolenoid(RobotMap.Ports.shifterSolenoidLow, RobotMap.Ports.shifterSolenoidHigh);
-    	
+    	    	
     	leftEncoder.reset();
     	rightEncoder.reset();
     	
     	gear = 0;
-    	this.shift(0);
+    	shiftSolenoid.set(DoubleSolenoid.Value.kForward);
+    	//this.shift(0);
     }
     
     // Gear 0 is low gear, gear 1 is high gear. -Timothy
@@ -77,12 +78,12 @@ public class DriveTrain extends Subsystem {
     public void SetVoltages(double LeftVolts, double RightVolts) {
     	leftMotor.set(LeftVolts);
     	rightMotor.set(-RightVolts);
-    	dash.setDefaultNumber("Left Voltage", LeftVolts);
-    	dash.setDefaultNumber("Right Voltage", RightVolts);
+    	//dash.setDefaultNumber("Left Voltage", LeftVolts);
+    	//dash.setDefaultNumber("Right Voltage", RightVolts);
     }
     
     public void StopVoltage() {
-	    dash.setDefaultNumber("Gear iN Use", gear);
+	    //dash.setDefaultNumber("Gear iN Use", gear);
     	leftMotor.set(0);
     	rightMotor.set(0);
     }

@@ -11,18 +11,18 @@ public class AutonomousClawThing extends Command {
 
     public AutonomousClawThing() {
         requires(Robot.driveTrain);
-        requires(Robot.claw);
+        //requires(Robot.claw); //uncomment these
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.claw.openClaw();
+    	//Robot.claw.openClaw();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//drive to the bucket
-    	Robot.claw.closeClaw();
+    	//Robot.claw.closeClaw();
     }
 
     // Make this return true when this Command no longer needs to run execute()
