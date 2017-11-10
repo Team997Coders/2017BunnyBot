@@ -23,6 +23,8 @@ public class RobotMap {
 		leftEncoderSecondPort = 1,
 		rightEncoderFirstPort = 2,
 		rightEncoderSecondPort = 3,
+		armEncoderFirstPort = 4,
+		armEncoderSecondPort = 5,
 		
 		//PNEUMATICS
 		shifterSolenoidLow = 0,
@@ -54,8 +56,21 @@ public class RobotMap {
 	public static class Values{
 		public static double
 		
+		//Speeds
 		highSpeed = 1,
-		lowSpeed = 0.5;
+		lowSpeed = 0.5,
+		
+		//*TEMPORARY* PID Values
+		pidP = 0.0,
+		pidI = 0.0,
+		pidD = 0.0,
+		pidMinimumInput = 0.0,
+		pidMaximumInput = 0.0,
+		
+		//Arm Position
+		armPosOne = 0,
+		armPosTwo = 1,
+		armPosThree = 2;
 		
 		
 		

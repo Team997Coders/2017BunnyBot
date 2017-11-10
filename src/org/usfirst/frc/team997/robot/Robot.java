@@ -1,9 +1,9 @@
-
 package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.subsystems.Claw;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.subsystems.TalonTest;
+import org.usfirst.frc.team997.robot.subsystems.ArmJoint;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -25,6 +25,7 @@ public class Robot extends IterativeRobot {
 	public static Claw claw;
 	public static OI oi;
 	public static TalonTest talonTest;
+  public static Armjoint armjoint;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -48,6 +49,7 @@ public class Robot extends IterativeRobot {
 			e.printStackTrace();
 		}*/
 		
+    armJoint = new ArmJoint();
 		
 		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
