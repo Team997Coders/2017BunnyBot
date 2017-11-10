@@ -29,8 +29,8 @@ public class RobotMap {
 		//PNEUMATICS
 		shifterSolenoidLow = 0,
 		shifterSolenoidHigh = 1,
-		armMoverSolenoidPort = 2,
-		armOpenerSolenoidPort = 3,
+		clawLeftSolenoidPort = 2,
+		clawRightSolenoidPort = 3,
 		trapdoorSolenoidPort = 5,
 		
 		//ANALOG
