@@ -57,6 +57,8 @@ public class RobotMap {
 		highSpeed = 1,
 		lowSpeed = 0.5;
 		
+		
+		
 	}
 	
 }

@@ -64,10 +64,10 @@ public class DriveTrain extends Subsystem {
     	}
     	if (Math.abs(RightVoltage - rightMotor.get()) > 0.4) {
     		double AHH = 0;
-    		if (LeftVoltage < leftMotor.get()) {
-    			AHH = leftMotor.get() - 0.4;
+    		if (LeftVoltage < rightMotor.get()) {
+    			AHH = rightMotor.get() - 0.4;
     		} else {
-    			AHH = leftMotor.get() + 0.4;
+    			AHH = rightMotor.get() + 0.4;
     		}
     		Volts[1] = AHH;
     	}
@@ -77,7 +77,7 @@ public class DriveTrain extends Subsystem {
     
     public void SetVoltages(double LeftVolts, double RightVolts) {
     	leftMotor.set(LeftVolts);
-    	rightMotor.set(-RightVolts);
+    	rightMotor.set(RightVolts);
     	//dash.setDefaultNumber("Left Voltage", LeftVolts);
     	//dash.setDefaultNumber("Right Voltage", RightVolts);
     }

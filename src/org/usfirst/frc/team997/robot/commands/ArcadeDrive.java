@@ -21,7 +21,7 @@ public class ArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double[] volts = getVoltages();
+    	double[] volts = this.getVoltages();
     	
     	volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
     	
@@ -47,7 +47,7 @@ public class ArcadeDrive extends Command {
     	}
     	
     	volts[0] = left;
-    	volts[1] = right;
+    	volts[1] = -right;
     	return volts;
     }
 

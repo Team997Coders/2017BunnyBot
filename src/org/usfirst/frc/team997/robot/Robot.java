@@ -3,6 +3,7 @@ package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.subsystems.Claw;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team997.robot.subsystems.TalonTest;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,6 +24,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static Claw claw;
 	public static OI oi;
+	public static TalonTest talonTest;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
