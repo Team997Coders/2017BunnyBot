@@ -25,7 +25,7 @@ public class Robot extends IterativeRobot {
 	public static Claw claw;
 	public static OI oi;
 	public static TalonTest talonTest;
-  public static Armjoint armjoint;
+  public static ArmJoint armJoint;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
