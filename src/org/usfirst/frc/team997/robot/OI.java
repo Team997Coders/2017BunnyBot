@@ -1,6 +1,7 @@
 package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.AutomatedTest;
+import org.usfirst.frc.team997.robot.commands.ClawButtonCommand;
 import org.usfirst.frc.team997.robot.commands.ShiftCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -18,8 +19,8 @@ public class OI {
 	
 	public final JoystickButton
 	shiftButton,
-	bunnyCollectorButton,
-	bucketLifterButton;
+	clawButton;
+	
 	//automatedTestButton;
 	
 	public OI() {
@@ -30,8 +31,9 @@ public class OI {
 		
 		shiftButton = new JoystickButton(GamePad, RobotMap.Ports.shiftButton);
 		shiftButton.whenPressed(new ShiftCommand());
-		bunnyCollectorButton = new JoystickButton(GamePad, RobotMap.Ports.bunnyCollector);
-		bucketLifterButton = new JoystickButton(GamePad, RobotMap.Ports.bucketLifterButton); //TODO: uncomment
+		clawButton = new JoystickButton(GamePad, RobotMap.Ports.clawButton);
+		clawButton.whenPressed(new ClawButtonCommand());
+		//TODO: uncomment
 		//automatedTestButton = new JoystickButton(GamePad, 1);	//LEAVE THIS COMMENTED OUT. DON'T HARDCODE VALUES!!!
 		//automatedTestButton.whileHeld(new AutomatedTest());
 		

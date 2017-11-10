@@ -42,8 +42,7 @@ public class RobotMap {
 		
 		//BUTTONS
 		shiftButton = 2,
-		bunnyCollectorButton = 3,
-		bucketLifterButton = 1,
+		clawButton = 3,
 		
 		//THE PLURAL TO AXIS *TEMPORARY*
 		leftXAxisPort = 0,
