@@ -7,27 +7,30 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AutonomousClawThing extends Command {
+public class ClawButtonCommand extends Command {
 
-    public AutonomousClawThing() {
-        requires(Robot.driveTrain);
-        //requires(Robot.claw); //uncomment these
+    public ClawButtonCommand() {
+    	requires(Robot.claw);
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Robot.claw.openClaw();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//drive to the bucket
-    	//Robot.claw.closeClaw();
+    	if(Robot.claw.clawOpen == true) {
+    		Robot.claw.closeClaw();
+    	} else if(Robot.claw.clawOpen == false) {
+    		Robot.claw.openClaw();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

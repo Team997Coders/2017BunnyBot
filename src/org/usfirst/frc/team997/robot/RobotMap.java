@@ -13,7 +13,7 @@ public class RobotMap {
 		//NAME
 		
 		//PWM *TEMPORARY*
-		leftMotorPort = 0,
+		leftMotorPort = 0,  
 		rightMotorPort = 1,
 		bunnyCollector = 3,
 		bucketLifter = 4,
@@ -43,10 +43,8 @@ public class RobotMap {
 		GamePadPort = 0,
 		
 		//BUTTONS
-		shiftDownButton = 0,
-		shiftUpButton = 2,
-		bunnyCollectorButton = 3,
-		bucketLifterButton = 1,
+		shiftButton = 2,
+		clawButton = 3,
 		
 		//THE PLURAL TO AXIS *TEMPORARY*
 		leftXAxisPort = 0,
@@ -73,6 +71,8 @@ public class RobotMap {
 		armPosOne = 0,
 		armPosTwo = 1,
 		armPosThree = 2;
+		
+		
 		
 	}
 	

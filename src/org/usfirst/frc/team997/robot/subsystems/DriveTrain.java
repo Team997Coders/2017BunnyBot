@@ -29,12 +29,13 @@ public class DriveTrain extends Subsystem {
     	leftEncoder = new Encoder(RobotMap.Ports.leftEncoderFirstPort, RobotMap.Ports.leftEncoderSecondPort);
     	rightEncoder = new Encoder(RobotMap.Ports.rightEncoderFirstPort, RobotMap.Ports.rightEncoderSecondPort);
     	shiftSolenoid = new DoubleSolenoid(RobotMap.Ports.shifterSolenoidLow, RobotMap.Ports.shifterSolenoidHigh);
-    	
+    	    	
     	leftEncoder.reset();
     	rightEncoder.reset();
     	
     	gear = 0;
-    	this.shift(0);
+    	shiftSolenoid.set(DoubleSolenoid.Value.kForward);
+    	//this.shift(0);
     }
     
     // Gear 0 is low gear, gear 1 is high gear. -Timothy
@@ -63,10 +64,10 @@ public class DriveTrain extends Subsystem {
     	}
     	if (Math.abs(RightVoltage - rightMotor.get()) > 0.4) {
     		double AHH = 0;
-    		if (LeftVoltage < leftMotor.get()) {
-    			AHH = leftMotor.get() - 0.4;
+    		if (LeftVoltage < rightMotor.get()) {
+    			AHH = rightMotor.get() - 0.4;
     		} else {
-    			AHH = leftMotor.get() + 0.4;
+    			AHH = rightMotor.get() + 0.4;
     		}
     		Volts[1] = AHH;
     	}
@@ -76,13 +77,13 @@ public class DriveTrain extends Subsystem {
     
     public void SetVoltages(double LeftVolts, double RightVolts) {
     	leftMotor.set(LeftVolts);
-    	rightMotor.set(-RightVolts);
-    	dash.setDefaultNumber("Left Voltage", LeftVolts);
-    	dash.setDefaultNumber("Right Voltage", RightVolts);
+    	rightMotor.set(RightVolts);
+    	//dash.setDefaultNumber("Left Voltage", LeftVolts);
+    	//dash.setDefaultNumber("Right Voltage", RightVolts);
     }
     
     public void StopVoltage() {
-	    dash.setDefaultNumber("Gear iN Use", gear);
+	    //dash.setDefaultNumber("Gear iN Use", gear);
     	leftMotor.set(0);
     	rightMotor.set(0);
     }

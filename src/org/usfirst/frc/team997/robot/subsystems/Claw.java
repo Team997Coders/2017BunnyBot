@@ -17,20 +17,25 @@ public class Claw extends Subsystem {
     
     public Claw() {
 		clawSolenoid = new DoubleSolenoid(RobotMap.Ports.clawLeftSolenoidPort,RobotMap.Ports.clawRightSolenoidPort);
+		
+		clawOpen = true;
+		clawSolenoid.set(DoubleSolenoid.Value.kForward);
 	
     }	
 	// Put methods for controlling this subsystem
     // here. Call these from Commands.
 
     public void openClaw() {
-    	if(clawOpen = false) {
+    	if(clawOpen == false) {
     		clawSolenoid.set(DoubleSolenoid.Value.kForward);
+    		clawOpen = true;
     	}
     }
     
     public void closeClaw() {
-    	if(clawOpen = true) {
+    	if(clawOpen == true) {
     		clawSolenoid.set(DoubleSolenoid.Value.kReverse);
+    		clawOpen = false;
     	}
     }
     

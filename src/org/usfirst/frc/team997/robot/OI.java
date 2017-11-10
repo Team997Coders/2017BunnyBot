@@ -1,9 +1,12 @@
 package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.AutomatedTest;
+import org.usfirst.frc.team997.robot.commands.ClawButtonCommand;
+import org.usfirst.frc.team997.robot.commands.ShiftCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,24 +18,32 @@ public class OI {
 	GamePad;
 	
 	public final JoystickButton
-	shiftUpButton,
-	shiftDownButton,
-	bunnyCollectorButton,
-	bucketLifterButton,
-	automatedTestButton;
+	shiftButton,
+	clawButton;
+	
+	//automatedTestButton;
 	
 	public OI() {
 		//Joystick Init
 		GamePad = new Joystick(RobotMap.Ports.GamePadPort);
 		
 		//Buttons Init
-		shiftUpButton = new JoystickButton(GamePad, RobotMap.Ports.shiftUpButton);
-		shiftDownButton = new JoystickButton(GamePad, RobotMap.Ports.shiftDownButton);
-		bunnyCollectorButton = new JoystickButton(GamePad, RobotMap.Ports.bunnyCollector);
-		bucketLifterButton = new JoystickButton(GamePad, RobotMap.Ports.bucketLifterButton);
-		automatedTestButton = new JoystickButton(GamePad, 1);
-		automatedTestButton.whileHeld(new AutomatedTest());
+		
+		shiftButton = new JoystickButton(GamePad, RobotMap.Ports.shiftButton);
+		shiftButton.whenPressed(new ShiftCommand());
+		clawButton = new JoystickButton(GamePad, RobotMap.Ports.clawButton);
+		clawButton.whenPressed(new ClawButtonCommand());
+		//TODO: uncomment
+		//automatedTestButton = new JoystickButton(GamePad, 1);	//LEAVE THIS COMMENTED OUT. DON'T HARDCODE VALUES!!!
+		//automatedTestButton.whileHeld(new AutomatedTest());
+		
 	}
+	
+	public double getLeftY() {
+		return GamePad.getRawAxis(1);
+	}
+	
+		
 	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

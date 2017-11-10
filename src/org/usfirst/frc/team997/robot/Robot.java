@@ -1,9 +1,9 @@
-
 package org.usfirst.frc.team997.robot;
 
-import org.usfirst.frc.team997.robot.subsystems.ArmJoint;
 import org.usfirst.frc.team997.robot.subsystems.Claw;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team997.robot.subsystems.TalonTest;
+import org.usfirst.frc.team997.robot.subsystems.ArmJoint;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -20,12 +20,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
-	public static final DriveTrain driveTrain = new DriveTrain();
-	public static final Claw claw = new Claw();
+	
+	public static DriveTrain driveTrain;
+	public static Claw claw;
 	public static OI oi;
-	public static ArmJoint armJoint;
+	public static TalonTest talonTest;
+  public static Armjoint armjoint;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -36,9 +36,22 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		
+		//try {
+			driveTrain = new DriveTrain();
+		/*} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+		
+		//try {
+			claw = new Claw();
+		/*} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+		
+    armJoint = new ArmJoint();
+		
 		oi = new OI();
-		armJoint = new ArmJoint();
-		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
