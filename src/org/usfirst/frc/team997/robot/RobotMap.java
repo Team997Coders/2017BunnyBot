@@ -41,8 +41,7 @@ public class RobotMap {
 		GamePadPort = 0,
 		
 		//BUTTONS
-		shiftDownButton = 0,
-		shiftUpButton = 2,
+		shiftButton = 2,
 		bunnyCollectorButton = 3,
 		bucketLifterButton = 1,
 		
