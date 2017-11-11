@@ -13,20 +13,21 @@ public class RobotMap {
 		//NAME
 		
 		//PWM *TEMPORARY*
-		leftMotorPort = 0,  
-		rightMotorPort = 1,
+		leftMotorPort = 1,  
+		rightMotorPort = 0,
 		bunnyCollector = 3,
 		bucketLifter = 4,
 		
 		//DIO *TEMPORARY*
-		leftEncoderFirstPort = 0,
-		leftEncoderSecondPort = 1,
-		rightEncoderFirstPort = 2,
-		rightEncoderSecondPort = 3,
+		leftEncoderFirstPort = 2,
+		leftEncoderSecondPort = 3,
+		rightEncoderFirstPort = 0,
+		rightEncoderSecondPort = 1,
 		armEncoderFirstPort = 4,
 		armEncoderSecondPort = 5,
 		
 		//PNEUMATICS
+		//Need to ask electrical to clarify on i/o map which "solenoid - big piston" is which
 		shifterSolenoidLow = 0,
 		shifterSolenoidHigh = 1,
 		clawLeftSolenoidPort = 2,
