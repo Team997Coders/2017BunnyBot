@@ -1,5 +1,6 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
+import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -17,10 +18,10 @@ public class ArmJoint extends PIDSubsystem {
 
     // Initialize your subsystem here
     public ArmJoint() {
-    	super("ArmJoint", RobotMap.Values.pidP, RobotMap.Values.pidI, RobotMap.Values.pidD);
+    	super("ArmJoint", RobotMap.Values.armPidP, RobotMap.Values.armPidI, RobotMap.Values.armPidD);
     	
     	getPIDController().setAbsoluteTolerance(absoluteTolerance);
-    	getPIDController().setInputRange(RobotMap.Values.pidMinimumInput, RobotMap.Values.pidMaximumInput);
+    	getPIDController().setInputRange(RobotMap.Values.armPidMinimumInput, RobotMap.Values.armPidMaximumInput);
     	//getPIDController().setOutputRange(-0.5, 0.75); //Set Values Constant
     	
     	Motor = new TalonSRX(RobotMap.Ports.bucketLifter);
@@ -41,23 +42,15 @@ public class ArmJoint extends PIDSubsystem {
     	double angle = ArmAngle.get();
     	NewAngle = Math.abs(NewAngle);
     	if (angle < 0) {
-    		setSetpoint(-Clamp(512, -512, NewAngle));
+    		setSetpoint(-Robot.Clamp(512, -512, NewAngle));
     	} else {
-    		setSetpoint(Clamp(512, -512, NewAngle));
+    		setSetpoint(Robot.Clamp(512, -512, NewAngle));
     	}
     	
     	enable();
     }
     
-    public double Clamp(double Max, double Min, double Val) {
-    	if (Val < Min) {
-    		return Min;
-    	} else if (Val > Max) {
-    		return Max;
-    	} else {
-    		return Val;
-    	}
-    }
+    
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
