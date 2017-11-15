@@ -23,7 +23,9 @@ public class ArcadeDrive extends Command {
     protected void execute() {
     	double[] volts = this.getVoltages();
     	
-    	volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
+    	if(Robot.oi.decellOn) {
+    		volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
+    	}
     	
     	Robot.driveTrain.SetVoltages(volts[0], volts[1]);
     }
@@ -50,7 +52,7 @@ public class ArcadeDrive extends Command {
     	volts[1] = -right;
     	return volts;
     }
-
+//comment!!!!!!
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;

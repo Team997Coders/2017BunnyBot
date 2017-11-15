@@ -2,6 +2,7 @@ package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.AutomatedTest;
 import org.usfirst.frc.team997.robot.commands.ClawButtonCommand;
+import org.usfirst.frc.team997.robot.commands.DecellToggle;
 import org.usfirst.frc.team997.robot.commands.ShiftCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -14,10 +15,13 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class OI {
 	
+	public boolean decellOn = false;
+	
 	public final Joystick
 	GamePad;
 	
 	public final JoystickButton
+	decellToggleButton,
 	shiftButton,
 	clawButton;
 	
@@ -29,6 +33,8 @@ public class OI {
 		
 		//Buttons Init
 		
+		decellToggleButton = new JoystickButton(GamePad, RobotMap.Ports.decellToggleButton);
+		decellToggleButton.whenPressed(new DecellToggle());
 		shiftButton = new JoystickButton(GamePad, RobotMap.Ports.shiftButton);
 		shiftButton.whenPressed(new ShiftCommand());
 		clawButton = new JoystickButton(GamePad, RobotMap.Ports.clawButton);

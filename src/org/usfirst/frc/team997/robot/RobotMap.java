@@ -44,6 +44,7 @@ public class RobotMap {
 		GamePadPort = 0,
 		
 		//BUTTONS
+		decellToggleButton = 1,
 		shiftButton = 2,
 		clawButton = 3,
 		
@@ -62,19 +63,21 @@ public class RobotMap {
 		lowSpeed = 0.5,
 		
 		//*TEMPORARY* PID Values
-		pidP = 0.0,
-		pidI = 0.0,
-		pidD = 0.0,
-		pidMinimumInput = 0.0,
-		pidMaximumInput = 0.0,
+		armPidP = 0.0,
+		armPidI = 0.0,
+		armPidD = 0.0,
+		armPidMinimumInput = 0.0,
+		armPidMaximumInput = 0.0,
 		
 		//Arm Position
 		armPosOne = 0,
 		armPosTwo = 1,
 		armPosThree = 2;
-		
-		
-		
-	}
 	
+	}
+		
+		
+		
+		
 }
+	

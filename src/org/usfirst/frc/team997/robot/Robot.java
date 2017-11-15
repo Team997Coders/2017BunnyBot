@@ -131,4 +131,14 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
+	
+	public static double Clamp(double Max, double Min, double Val) {
+    	if (Val < Min) {
+    		return Min;
+    	} else if (Val > Max) {
+    		return Max;
+    	} else {
+    		return Val;
+    	}
+    }
 }
