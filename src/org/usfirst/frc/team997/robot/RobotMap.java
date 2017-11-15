@@ -44,6 +44,7 @@ public class RobotMap {
 		GamePadPort = 0,
 		
 		//BUTTONS
+		decellToggleButton = 1,
 		shiftButton = 2,
 		clawButton = 3,
 		
@@ -72,9 +73,11 @@ public class RobotMap {
 		armPosOne = 0,
 		armPosTwo = 1,
 		armPosThree = 2;
-		
-		
-		
-	}
 	
+	}
+		
+		
+		
+		
 }
+	
