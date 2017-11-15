@@ -46,6 +46,7 @@ public class RobotMap {
 		//BUTTONS
 		shiftButton = 2,
 		clawButton = 3,
+		reverseToggButton = 4,
 		
 		//THE PLURAL TO AXIS *TEMPORARY*
 		leftXAxisPort = 0,
@@ -72,7 +73,6 @@ public class RobotMap {
 		armPosOne = 0,
 		armPosTwo = 1,
 		armPosThree = 2;
-		
 		
 		
 	}

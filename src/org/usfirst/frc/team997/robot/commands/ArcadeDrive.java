@@ -1,6 +1,7 @@
 package org.usfirst.frc.team997.robot.commands;
 
 import org.usfirst.frc.team997.robot.Robot;
+import org.usfirst.frc.team997.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -24,8 +25,11 @@ public class ArcadeDrive extends Command {
     	double[] volts = this.getVoltages();
     	
     	volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
-    	
-    	Robot.driveTrain.SetVoltages(volts[0], volts[1]);
+    	if (Robot.oi.reverseBool) {
+    		Robot.driveTrain.setReverseVoltages(volts[0], volts[1]); 			
+    	} else {
+    		Robot.driveTrain.SetVoltages(volts[0], volts[1]);
+    	} 
     }
     
     public double[] getVoltages() {

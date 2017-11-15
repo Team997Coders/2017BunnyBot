@@ -75,6 +75,12 @@ public class DriveTrain extends Subsystem {
     	return Volts;
     }
     
+    public void setReverseVoltages(double LeftVolts, double RightVolts) {
+    	leftMotor.set(-LeftVolts);
+    	rightMotor.set(-RightVolts);
+    	
+    }
+    
     public void SetVoltages(double LeftVolts, double RightVolts) {
     	leftMotor.set(LeftVolts);
     	rightMotor.set(RightVolts);

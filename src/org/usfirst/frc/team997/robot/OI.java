@@ -2,6 +2,7 @@ package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.AutomatedTest;
 import org.usfirst.frc.team997.robot.commands.ClawButtonCommand;
+import org.usfirst.frc.team997.robot.commands.ReverseToggle;
 import org.usfirst.frc.team997.robot.commands.ShiftCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -13,13 +14,14 @@ import edu.wpi.first.wpilibj.command.Command;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	
+	public boolean reverseBool = false;
 	public final Joystick
 	GamePad;
 	
 	public final JoystickButton
 	shiftButton,
-	clawButton;
+	clawButton,
+	reverseButton;
 	
 	//automatedTestButton;
 	
@@ -33,6 +35,8 @@ public class OI {
 		shiftButton.whenPressed(new ShiftCommand());
 		clawButton = new JoystickButton(GamePad, RobotMap.Ports.clawButton);
 		clawButton.whenPressed(new ClawButtonCommand());
+		reverseButton = new JoystickButton(GamePad, RobotMap.Ports.reverseToggButton);
+		reverseButton.whenPressed(new ReverseToggle());
 		//TODO: uncomment
 		//automatedTestButton = new JoystickButton(GamePad, 1);	//LEAVE THIS COMMENTED OUT. DON'T HARDCODE VALUES!!!
 		//automatedTestButton.whileHeld(new AutomatedTest());
