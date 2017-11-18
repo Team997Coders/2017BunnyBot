@@ -1,5 +1,6 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
+import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 import org.usfirst.frc.team997.robot.commands.ArcadeDrive;
 
@@ -82,8 +83,9 @@ public class DriveTrain extends Subsystem {
     }
     
     public void SetVoltages(double LeftVolts, double RightVolts) {
-    	leftMotor.set(LeftVolts);
-    	rightMotor.set(RightVolts);
+    	leftMotor.set(Robot.Clamp(1, -1, LeftVolts));
+    	rightMotor.set(Robot.Clamp(1, -1, RightVolts));
+    	//Clamp is being a voltage limiter here, in case you wanted to know.
     	//dash.setDefaultNumber("Left Voltage", LeftVolts);
     	//dash.setDefaultNumber("Right Voltage", RightVolts);
     }
