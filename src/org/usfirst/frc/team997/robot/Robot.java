@@ -141,4 +141,12 @@ public class Robot extends IterativeRobot {
     		return Val;
     	}
     }
+	
+	public static double JoystickDeadband(double x) {
+		if(Math.abs(x) < 0.05) {
+			return 0;
+		}
+		
+		return x;
+	}
 }

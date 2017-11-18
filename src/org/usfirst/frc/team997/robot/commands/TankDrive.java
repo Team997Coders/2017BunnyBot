@@ -34,8 +34,8 @@ public class TankDrive extends Command {
     }
     public double[] getVolts() {
     	double[] volts = new double[2];
-    	double leftMotorSpeed = Robot.oi.GamePad.getRawAxis(1);
-    	double rightMotorSpeed = Robot.oi.GamePad.getRawAxis(5);
+    	double leftMotorSpeed = Robot.JoystickDeadband(Robot.oi.GamePad.getRawAxis(1));
+    	double rightMotorSpeed = Robot.JoystickDeadband(Robot.oi.GamePad.getRawAxis(5));
     	
     	volts[0] = leftMotorSpeed;
     	volts[1] = rightMotorSpeed;
