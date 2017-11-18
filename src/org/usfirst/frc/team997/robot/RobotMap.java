@@ -47,14 +47,14 @@ public class RobotMap {
 		
 		/*Button|number|command called
 		        |      |
-		 * A    |1	   |decell toggle	
-		 * B    |2     |shift gear
-		 * X    |3     |open/close claw
-		 * Y    |4     |reverse drivetrain
-		 * Lb   |5     |
-		 * Rb   |6     |
-		 * Back |7     |
-		 * Start|8     |
+		   A    |1	   |decell toggle	
+		   B    |2     |shift gear
+		   X    |3     |open/close claw
+		   Y    |4     |reverse drivetrain
+		   Lb   |5     |
+		   Rb   |6     |
+		   Back |7     |
+		   Start|8     |
 		 */
 		
 		decellToggleButton = 1,
