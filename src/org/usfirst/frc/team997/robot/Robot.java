@@ -25,7 +25,7 @@ public class Robot extends IterativeRobot {
 	public static Claw claw;
 	public static OI oi;
 	public static TalonTest talonTest;
-  public static ArmJoint armJoint;
+    public static ArmJoint armJoint;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -49,7 +49,14 @@ public class Robot extends IterativeRobot {
 			e.printStackTrace();
 		}*/
 		
-    armJoint = new ArmJoint();
+		//try {
+		armJoint = new ArmJoint();
+		/*} catch (Exception e) {
+			e.printStackTrace();
+		 }*/
+		
+		
+		
 		
 		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());

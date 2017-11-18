@@ -44,26 +44,35 @@ public class RobotMap {
 		GamePadPort = 0,
 		
 		//BUTTONS
+		
+		/*Button|number|command called
+		        |      |
+		 * A    |1	   |decell toggle	
+		 * B    |2     |shift gear
+		 * X    |3     |open/close claw
+		 * Y    |4     |reverse drivetrain
+		 * Lb   |5     |
+		 * Rb   |6     |
+		 * Back |7     |
+		 * Start|8     |
+		 */
+		
 		decellToggleButton = 1,
 		shiftButton = 2,
 		clawButton = 3,
 		reverseToggButton = 4,
 		
-		//THE PLURAL TO AXIS *TEMPORARY*
+		//THE PLURAL TO AXIS 
 		leftXAxisPort = 0,
 		leftYAxisPort = 1,
-		rightXAxisPort = 2,
-		rightYAxisPort = 3;
+		rightXAxisPort = 4,
+		rightYAxisPort = 5;
 	}
 	
 	public static class Values{
 		public static double
 		
-		//Speeds
-		highSpeed = 1,
-		lowSpeed = 0.5,
-		
-		//*TEMPORARY* PID Values
+		//PID Values
 		armPidP = 0.0,
 		armPidI = 0.0,
 		armPidD = 0.0,

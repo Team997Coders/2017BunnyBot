@@ -42,8 +42,8 @@ public class ArcadeDrive extends Command {
     	double left = 0;
     	double right = 0;
     	
-    	double valueForward = Robot.JoystickDeadband(Robot.oi.GamePad.getRawAxis(1));
-    	double valueSide = Robot.JoystickDeadband(Robot.oi.GamePad.getRawAxis(4));
+    	double valueForward = Robot.JoystickDeadband(Robot.oi.GamePad.getRawAxis(RobotMap.Ports.leftYAxisPort));
+    	double valueSide = Robot.JoystickDeadband(Robot.oi.GamePad.getRawAxis(RobotMap.Ports.rightXAxisPort));
     	
     	left = valueForward;
     	right = valueForward;
