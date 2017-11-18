@@ -28,7 +28,7 @@ public class DriveTo extends Command implements PIDOutput {
     	requires(Robot.driveTrain);
     	SetPoint = distance;
     	
-    	controller = new PIDController(0, 0, 0, source,);
+    	controller = new PIDController(RobotMap.Values.driveDistanceP, RobotMap.Values.driveDistanceI, RobotMap.Values.driveDistanceD, source, this);
     }
 
     // Called just before this Command runs the first time

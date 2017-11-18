@@ -64,7 +64,22 @@ public class RobotMap {
 		
 		highSpeed = 1,
 		lowSpeed = 0.5,
-		driveMult = -0.05;
+		driveMult = -0.05,
+		autoDriveDistance = 360,
+		
+		//Drive Distance PID
+		
+		driveDistanceP = 0,
+		driveDistanceI = 0,
+		driveDistanceD = 0,
+		
+		//Drive Angle PID
+		
+		driveAngleP = 0,
+		driveAngleI = 0,
+		driveAngleD = 0;
+		
+		
 		
 	}
 	

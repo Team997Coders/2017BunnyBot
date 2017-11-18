@@ -22,7 +22,7 @@ public class DriveTrain extends Subsystem {
     public AHRS ahrs;
     
     public SmartDashboard dash;
-    
+   
     //variables here
     public int gear; 
     
