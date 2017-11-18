@@ -16,7 +16,7 @@ public class DriveToAngle extends Command implements PIDOutput {
 	private double pidRate;
 	public double setPoint;
 	
-	public DriveToAngle(double angle) {this(angle, Robot.driveTrain.ahrs)} 
+	public DriveToAngle(double angle) {this(angle, Robot.driveTrain.ahrs);} 
 	
     public DriveToAngle(double angle, PIDSource source) {
     	requires(Robot.driveTrain);

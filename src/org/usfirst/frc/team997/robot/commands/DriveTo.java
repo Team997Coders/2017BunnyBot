@@ -20,7 +20,7 @@ public class DriveTo extends Command implements PIDOutput {
 	private double initAngle;
 	
     public DriveTo(double distance) {
-    	this(distance, new PIDSource(Robot.driveTrain.leftEncoder));
+    	this(distance, Robot.driveTrain.leftEncoder);
     	}
     
     public DriveTo(double distance, PIDSource source) {
