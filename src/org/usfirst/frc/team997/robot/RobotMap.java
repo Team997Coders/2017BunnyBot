@@ -57,8 +57,22 @@ public class RobotMap {
 		public static double
 		
 		highSpeed = 1,
-		lowSpeed = 0.5;
+		lowSpeed = 0.5,
 		
+		//*TEMPORARY* PID Values
+				armPidP = 0.0,
+				armPidI = 0.0,
+				armPidD = 0.0,
+				armPidF = 0.0,
+				armPidNominalOutput = 0.0,
+				armPidPeakOutput = 6.0,
+				
+				//Arm Values
+				maxArmSpeed = 0.3,
+				//Arm Position
+				armPosOne = 0,
+				armPosTwo = 1,
+				armPosThree = 2;
 	}
 	
 }

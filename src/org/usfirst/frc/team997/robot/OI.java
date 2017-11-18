@@ -4,6 +4,7 @@ import org.usfirst.frc.team997.robot.commands.AutomatedTest;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -32,6 +33,12 @@ public class OI {
 		bucketLifterButton = new JoystickButton(GamePad, RobotMap.Ports.bucketLifterButton);
 		automatedTestButton = new JoystickButton(GamePad, 1);
 		automatedTestButton.whileHeld(new AutomatedTest());
+	}
+	
+	public int get_pov() {
+		int val = GamePad.getPOV();
+		SmartDashboard.putNumber("POV = ", val);
+		return val;
 	}
 	
 	//// CREATING BUTTONS
