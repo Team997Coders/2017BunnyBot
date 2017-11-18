@@ -42,8 +42,8 @@ public class ArcadeDrive extends Command {
     	double left = 0;
     	double right = 0;
     	
-    	double valueForward = Robot.oi.GamePad.getRawAxis(1);
-    	double valueSide = Robot.oi.GamePad.getRawAxis(4);
+    	double valueForward = Robot.JoystickDeadband(Robot.oi.GamePad.getRawAxis(RobotMap.Ports.leftYAxisPort));
+    	double valueSide = Robot.JoystickDeadband(Robot.oi.GamePad.getRawAxis(RobotMap.Ports.rightXAxisPort));
     	
     	left = valueForward;
     	right = valueForward;
@@ -59,7 +59,7 @@ public class ArcadeDrive extends Command {
     	volts[1] = -right;
     	return volts;
     }
-//comment!!!!!!
+
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;

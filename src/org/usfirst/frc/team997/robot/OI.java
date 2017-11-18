@@ -47,14 +47,11 @@ public class OI {
 		clawButton.whenPressed(new ClawButtonCommand());
 		reverseButton = new JoystickButton(GamePad, RobotMap.Ports.reverseToggButton);
 		reverseButton.whenPressed(new ReverseToggle());
-		//TODO: uncomment
-		//automatedTestButton = new JoystickButton(GamePad, 1);	//LEAVE THIS COMMENTED OUT. DON'T HARDCODE VALUES!!!
-		//automatedTestButton.whileHeld(new AutomatedTest());
 		
 	}
 	
 	public double getLeftY() {
-		return GamePad.getRawAxis(1);
+		return GamePad.getRawAxis(RobotMap.Ports.leftYAxisPort);
 	}
 	
 		
