@@ -1,6 +1,7 @@
 package org.usfirst.frc.team997.robot.commands;
 
 import org.usfirst.frc.team997.robot.Robot;
+import org.usfirst.frc.team997.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -20,13 +21,21 @@ public class TankDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double[] volts = getVolts();
-    	volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
-    	Robot.driveTrain.SetVoltages(volts[0], volts[1]);
+    	
+    	if (Robot.oi.reverseBool) {
+    		Robot.driveTrain.setReverseVoltages(volts[0], volts[1]);
+    	} else {
+            if (Robot.oi.decellOn) {
+                volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
+            } else {
+                Robot.driveTrain.SetVoltages(volts[0], volts[1]);
+            }
+    	}
     }
     public double[] getVolts() {
     	double[] volts = new double[2];
-    	double leftMotorSpeed = Robot.oi.GamePad.getRawAxis(1);
-    	double rightMotorSpeed = Robot.oi.GamePad.getRawAxis(1);
+    	double leftMotorSpeed = Robot.JoystickDeadband(Robot.oi.GamePad.getRawAxis(RobotMap.Ports.leftYAxisPort));
+    	double rightMotorSpeed = Robot.JoystickDeadband(Robot.oi.GamePad.getRawAxis(RobotMap.Ports.rightYAxisPort));
     	
     	volts[0] = leftMotorSpeed;
     	volts[1] = rightMotorSpeed;

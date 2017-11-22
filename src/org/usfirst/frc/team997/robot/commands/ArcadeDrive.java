@@ -1,6 +1,7 @@
 package org.usfirst.frc.team997.robot.commands;
 
 import org.usfirst.frc.team997.robot.Robot;
+import org.usfirst.frc.team997.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -21,11 +22,19 @@ public class ArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double[] volts = getVoltages();
-    	
+    	double[] volts = this.getVoltages();
+    
     	volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
-    	
-    	Robot.driveTrain.SetVoltages(volts[0], volts[1]);
+      
+    	if (Robot.oi.reverseBool) {
+    		Robot.driveTrain.setReverseVoltages(volts[0], volts[1]); 			
+    	} else {
+          if(Robot.oi.decellOn) {
+    		    volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
+    	  }  else {
+          Robot.driveTrain.SetVoltages(volts[0], volts[1]);
+        }
+    	} 
     }
     
     public double[] getVoltages() {
@@ -33,8 +42,8 @@ public class ArcadeDrive extends Command {
     	double left = 0;
     	double right = 0;
     	
-    	double valueForward = Robot.oi.GamePad.getRawAxis(1);
-    	double valueSide = Robot.oi.GamePad.getRawAxis(4);
+    	double valueForward = Robot.JoystickDeadband(Robot.oi.GamePad.getRawAxis(RobotMap.Ports.leftYAxisPort));
+    	double valueSide = Robot.JoystickDeadband(Robot.oi.GamePad.getRawAxis(RobotMap.Ports.rightXAxisPort));
     	
     	left = valueForward;
     	right = valueForward;
@@ -47,7 +56,7 @@ public class ArcadeDrive extends Command {
     	}
     	
     	volts[0] = left;
-    	volts[1] = right;
+    	volts[1] = -right;
     	return volts;
     }
 

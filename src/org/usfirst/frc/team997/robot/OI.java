@@ -1,38 +1,60 @@
 package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.AutomatedTest;
+import org.usfirst.frc.team997.robot.commands.ClawButtonCommand;
+
+import org.usfirst.frc.team997.robot.commands.ReverseToggle;
+
+import org.usfirst.frc.team997.robot.commands.DecellToggle;
+
+import org.usfirst.frc.team997.robot.commands.ShiftCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	
+
+	public boolean reverseBool = false;
+	public boolean decellOn = false;
+  
 	public final Joystick
 	GamePad;
 	
 	public final JoystickButton
-	shiftUpButton,
-	shiftDownButton,
-	bunnyCollectorButton,
-	bucketLifterButton,
-	automatedTestButton;
+	decellToggleButton,
+	shiftButton,
+	clawButton,
+	reverseButton;
+	
+	//automatedTestButton;
 	
 	public OI() {
 		//Joystick Init
 		GamePad = new Joystick(RobotMap.Ports.GamePadPort);
 		
 		//Buttons Init
-		shiftUpButton = new JoystickButton(GamePad, RobotMap.Ports.shiftUpButton);
-		shiftDownButton = new JoystickButton(GamePad, RobotMap.Ports.shiftDownButton);
-		bunnyCollectorButton = new JoystickButton(GamePad, RobotMap.Ports.bunnyCollector);
-		bucketLifterButton = new JoystickButton(GamePad, RobotMap.Ports.bucketLifterButton);
-		automatedTestButton = new JoystickButton(GamePad, 1);
-		automatedTestButton.whileHeld(new AutomatedTest());
+		
+		decellToggleButton = new JoystickButton(GamePad, RobotMap.Ports.decellToggleButton);
+		decellToggleButton.whenPressed(new DecellToggle());
+		shiftButton = new JoystickButton(GamePad, RobotMap.Ports.shiftButton);
+		shiftButton.whenPressed(new ShiftCommand());
+		clawButton = new JoystickButton(GamePad, RobotMap.Ports.clawButton);
+		clawButton.whenPressed(new ClawButtonCommand());
+		reverseButton = new JoystickButton(GamePad, RobotMap.Ports.reverseToggButton);
+		reverseButton.whenPressed(new ReverseToggle());
+		
 	}
+	
+	public double getLeftY() {
+		return GamePad.getRawAxis(RobotMap.Ports.leftYAxisPort);
+	}
+	
+		
 	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

@@ -15,22 +15,25 @@ public class RobotMap {
 		//NAME
 		
 		//PWM *TEMPORARY*
-		leftMotorPort = 0,
-		rightMotorPort = 1,
+		leftMotorPort = 1,  
+		rightMotorPort = 0,
 		bunnyCollector = 3,
 		bucketLifter = 4,
 		
 		//DIO *TEMPORARY*
-		leftEncoderFirstPort = 0,
-		leftEncoderSecondPort = 1,
-		rightEncoderFirstPort = 2,
-		rightEncoderSecondPort = 3,
+		leftEncoderFirstPort = 2,
+		leftEncoderSecondPort = 3,
+		rightEncoderFirstPort = 0,
+		rightEncoderSecondPort = 1,
+		armEncoderFirstPort = 4,
+		armEncoderSecondPort = 5,
 		
 		//PNEUMATICS
+		//Need to ask electrical to clarify on i/o map which "solenoid - big piston" is which
 		shifterSolenoidLow = 0,
 		shifterSolenoidHigh = 1,
-		armMoverSolenoidPort = 2,
-		armOpenerSolenoidPort = 3,
+		clawLeftSolenoidPort = 2,
+		clawRightSolenoidPort = 3,
 		trapdoorSolenoidPort = 5,
 		
 		//ANALOG
@@ -43,17 +46,30 @@ public class RobotMap {
 		GamePadPort = 0,
 		
 		//BUTTONS
-		shiftDownButton = 0,
-		shiftUpButton = 2,
-		bunnyCollectorButton = 3,
-		bucketLifterButton = 1,
 		
-		//THE PLURAL TO AXIS *TEMPORARY*
+		/*Button|number|command called
+		        |      |
+		   A    |1	   |decell toggle	
+		   B    |2     |shift gear
+		   X    |3     |open/close claw
+		   Y    |4     |reverse drivetrain
+		   Lb   |5     |
+		   Rb   |6     |
+		   Back |7     |
+		   Start|8     |
+		 */
+		
+		decellToggleButton = 1,
+		shiftButton = 2,
+		clawButton = 3,
+		reverseToggButton = 4,
+		
+		//THE PLURAL TO AXIS 
 		leftXAxisPort = 0,
 		leftYAxisPort = 1,
-		rightXAxisPort = 2,
-		rightYAxisPort = 3;
-		
+		rightXAxisPort = 4,
+		rightYAxisPort = 5,
+    
 		//GYRO
 		public static final SerialPort.Port AHRS = SerialPort.Port.kUSB;
 		
@@ -79,8 +95,19 @@ public class RobotMap {
 		driveAngleI = 0,
 		driveAngleD = 0;
 		
+		//PID Values
+		armPidP = 0.0,
+		armPidI = 0.0,
+		armPidD = 0.0,
+		armPidMinimumInput = 0.0,
+		armPidMaximumInput = 0.0,
 		
-		
-	}
+		//Arm Position
+		armPosOne = 0,
+		armPosTwo = 1,
+		armPosThree = 2;
 	
+	}
+		
 }
+	
