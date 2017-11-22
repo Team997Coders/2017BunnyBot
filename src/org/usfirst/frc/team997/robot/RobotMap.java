@@ -1,5 +1,7 @@
 package org.usfirst.frc.team997.robot;
 
+import edu.wpi.first.wpilibj.SerialPort;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -66,11 +68,32 @@ public class RobotMap {
 		leftXAxisPort = 0,
 		leftYAxisPort = 1,
 		rightXAxisPort = 4,
-		rightYAxisPort = 5;
+		rightYAxisPort = 5,
+    
+		//GYRO
+		public static final SerialPort.Port AHRS = SerialPort.Port.kUSB;
+		
 	}
 	
 	public static class Values{
 		public static double
+		
+		highSpeed = 1,
+		lowSpeed = 0.5,
+		driveMult = -0.05,
+		autoDriveDistance = 360,
+		
+		//Drive Distance PID
+		
+		driveDistanceP = 0,
+		driveDistanceI = 0,
+		driveDistanceD = 0,
+		
+		//Drive Angle PID
+		
+		driveAngleP = 0,
+		driveAngleI = 0,
+		driveAngleD = 0;
 		
 		//PID Values
 		armPidP = 0.0,

@@ -4,6 +4,8 @@ import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 import org.usfirst.frc.team997.robot.commands.ArcadeDrive;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -18,9 +20,10 @@ public class DriveTrain extends Subsystem {
     public VictorSP leftMotor, rightMotor;
     public Encoder leftEncoder, rightEncoder;
     public DoubleSolenoid shiftSolenoid;
+    public AHRS ahrs;
     
     public SmartDashboard dash;
-    
+   
     //variables here
     public int gear; 
     
@@ -30,7 +33,8 @@ public class DriveTrain extends Subsystem {
     	leftEncoder = new Encoder(RobotMap.Ports.leftEncoderFirstPort, RobotMap.Ports.leftEncoderSecondPort);
     	rightEncoder = new Encoder(RobotMap.Ports.rightEncoderFirstPort, RobotMap.Ports.rightEncoderSecondPort);
     	shiftSolenoid = new DoubleSolenoid(RobotMap.Ports.shifterSolenoidLow, RobotMap.Ports.shifterSolenoidHigh);
-    	    	
+    	ahrs = new AHRS(RobotMap.Ports.AHRS);
+    	
     	leftEncoder.reset();
     	rightEncoder.reset();
     	
