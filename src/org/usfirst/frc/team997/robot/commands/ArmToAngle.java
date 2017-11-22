@@ -25,18 +25,19 @@ public class ArmToAngle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.armJoint.setSetpoint(angle);
-    	Robot.armJoint.enable();
+    	//Robot.armJoint.setSetpoint(angle);
+    	//Robot.armJoint.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.armJoint.setSetpoint(angle);
+    	//Robot.armJoint.setSetpoint(angle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.armJoint.onTarget();
+       // return Robot.armJoint.onTarget();
+    	return true;
     }
 
     // Called once after isFinished returns true

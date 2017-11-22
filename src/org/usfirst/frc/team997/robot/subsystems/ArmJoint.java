@@ -3,28 +3,31 @@ package org.usfirst.frc.team997.robot.subsystems;
 import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 
+import com.ctre.CANTalon;
+import com.ctre.CANTalon.TalonControlMode;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class ArmJoint extends PIDSubsystem {
+public class ArmJoint extends Subsystem {
 	
-	public TalonSRX Motor;
+	public CANTalon Motor;
 	public Encoder ArmAngle;
 	public static final double absoluteTolerance = 0.01;
 
     // Initialize your subsystem here
     public ArmJoint() {
-    	super("ArmJoint", RobotMap.Values.armPidP, RobotMap.Values.armPidI, RobotMap.Values.armPidD);
     	
-    	getPIDController().setAbsoluteTolerance(absoluteTolerance);
-    	getPIDController().setInputRange(RobotMap.Values.armPidMinimumInput, RobotMap.Values.armPidMaximumInput);
-    	//getPIDController().setOutputRange(-0.5, 0.75); //Set Values Constant
-    	
-    	Motor = new TalonSRX(RobotMap.Ports.bucketLifter);
+    	Motor = new CANTalon(RobotMap.Ports.bucketLifter);
+    	Motor.clearStickyFaults();
+    	Motor.changeControlMode(TalonControlMode.PercentVbus);
+    	Motor.setSafetyEnabled(false);
+    	Motor.reset();
     	ArmAngle = new Encoder(RobotMap.Ports.armEncoderFirstPort, RobotMap.Ports.armEncoderSecondPort);
     	
         // Use these to get going:
@@ -40,14 +43,7 @@ public class ArmJoint extends PIDSubsystem {
     
     public void SetPosition(double NewAngle) {
     	double angle = ArmAngle.get();
-    	NewAngle = Math.abs(NewAngle);
-    	if (angle < 0) {
-    		setSetpoint(-Robot.Clamp(512, -512, NewAngle));
-    	} else {
-    		setSetpoint(Robot.Clamp(512, -512, NewAngle));
-    	}
     	
-    	enable();
     }
     
     

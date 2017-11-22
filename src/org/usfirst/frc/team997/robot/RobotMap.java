@@ -17,8 +17,7 @@ public class RobotMap {
 		//PWM *TEMPORARY*
 		leftMotorPort = 1,  
 		rightMotorPort = 0,
-		bunnyCollector = 3,
-		bucketLifter = 4,
+		bucketLifter = 1,
 		
 		//DIO *TEMPORARY*
 		leftEncoderFirstPort = 2,
@@ -68,7 +67,7 @@ public class RobotMap {
 		leftXAxisPort = 0,
 		leftYAxisPort = 1,
 		rightXAxisPort = 4,
-		rightYAxisPort = 5,
+		rightYAxisPort = 5;
     
 		//GYRO
 		public static final SerialPort.Port AHRS = SerialPort.Port.kUSB;
@@ -93,7 +92,7 @@ public class RobotMap {
 		
 		driveAngleP = 0,
 		driveAngleI = 0,
-		driveAngleD = 0;
+		driveAngleD = 0,
 		
 		//PID Values
 		armPidP = 0.0,

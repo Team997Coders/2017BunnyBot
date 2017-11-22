@@ -3,11 +3,13 @@ package org.usfirst.frc.team997.robot.subsystems;
 import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 import org.usfirst.frc.team997.robot.commands.ArcadeDrive;
+import org.usfirst.frc.team997.robot.commands.TankDrive;
 
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,6 +28,7 @@ public class DriveTrain extends Subsystem {
    
     //variables here
     public int gear; 
+    public boolean gyroPresent = true;
     
     public DriveTrain() {
     	leftMotor = new VictorSP(RobotMap.Ports.leftMotorPort);
@@ -33,8 +36,15 @@ public class DriveTrain extends Subsystem {
     	leftEncoder = new Encoder(RobotMap.Ports.leftEncoderFirstPort, RobotMap.Ports.leftEncoderSecondPort);
     	rightEncoder = new Encoder(RobotMap.Ports.rightEncoderFirstPort, RobotMap.Ports.rightEncoderSecondPort);
     	shiftSolenoid = new DoubleSolenoid(RobotMap.Ports.shifterSolenoidLow, RobotMap.Ports.shifterSolenoidHigh);
-    	ahrs = new AHRS(RobotMap.Ports.AHRS);
     	
+    	try {
+    		ahrs = new AHRS(RobotMap.Ports.AHRS);
+    	} catch(RuntimeException e) {
+    		System.out.println("Error with ahrs");
+    	}
+    	
+    	gyroPresent = waitforgyro();
+    	ahrs.reset();
     	leftEncoder.reset();
     	rightEncoder.reset();
     	
@@ -54,6 +64,26 @@ public class DriveTrain extends Subsystem {
     		gear = 1;
     			}
     }
+    
+    public boolean waitforgyro() {
+    	int count = 0;
+    	if (ahrs.isConnected()) {
+    		while (ahrs.isCalibrating()) {
+    			Timer.delay(0.2);
+        		count +=1;
+    		}
+    		if (count > 20) {
+        		return false;
+        	}
+    		return true;
+        	}
+    	//return false;
+    	return true;
+    	//so, it is reading as though the ahrs is not connected...
+    	}
+    	
+    	
+    	
    
     public double[] DecellCheck(double LeftVoltage, double RightVoltage) {
     	double[] Volts = new double[2];
@@ -87,8 +117,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void SetVoltages(double LeftVolts, double RightVolts) {
-    	leftMotor.set(Robot.Clamp(1, -1, LeftVolts));
-    	rightMotor.set(Robot.Clamp(1, -1, RightVolts));
+    	leftMotor.set(Robot.clamp(1, -1, LeftVolts));
+    	rightMotor.set(Robot.clamp(1, -1, RightVolts));
     	//Clamp is being a voltage limiter here, in case you wanted to know.
     	//dash.setDefaultNumber("Left Voltage", LeftVolts);
     	//dash.setDefaultNumber("Right Voltage", RightVolts);
@@ -102,6 +132,7 @@ public class DriveTrain extends Subsystem {
     
     public void initDefaultCommand() {
     	setDefaultCommand(new ArcadeDrive());
+    	//setDefaultCommand(new TankDrive());
     }
 }
 

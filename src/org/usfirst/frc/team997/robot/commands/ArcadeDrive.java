@@ -24,8 +24,6 @@ public class ArcadeDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double[] volts = this.getVoltages();
-    
-    	volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
       
     	if (Robot.oi.reverseBool) {
     		Robot.driveTrain.setReverseVoltages(volts[0], volts[1]); 			
@@ -33,12 +31,14 @@ public class ArcadeDrive extends Command {
           if(Robot.oi.decellOn) {
     		    volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
     	  }  else {
-          Robot.driveTrain.SetVoltages(volts[0], volts[1]);
-        }
+    		  Robot.driveTrain.SetVoltages(volts[0], volts[1]);
+    	  }
     	}
     	
     	SmartDashboard.putNumber("Left encoder value", Robot.driveTrain.leftEncoder.get());
     	SmartDashboard.putNumber("Right encoder value", Robot.driveTrain.rightEncoder.get());
+    	SmartDashboard.putNumber("NavX angle", Robot.driveTrain.ahrs.getAngle());
+    	SmartDashboard.putBoolean("gyroPresent", Robot.driveTrain.gyroPresent);
     
     }
     

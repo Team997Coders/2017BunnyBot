@@ -140,7 +140,7 @@ public class Robot extends IterativeRobot {
 		LiveWindow.run();
 	}
 	
-	public static double Clamp(double Max, double Min, double Val) {
+	public static double clamp(double Max, double Min, double Val) {
     	if (Val < Min) {
     		return Min;
     	} else if (Val > Max) {

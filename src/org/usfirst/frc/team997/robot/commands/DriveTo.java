@@ -51,7 +51,7 @@ public class DriveTo extends Command implements PIDOutput {
     	}
     	
     	double mult = RobotMap.Values.driveMult; //-.05
-    	Robot.driveTrain.SetVoltages(Robot.clamp(pidRate + angleOffset * mult), Robot.clamp(pidRate - angleOffset * mult));
+    	Robot.driveTrain.SetVoltages(Robot.clamp(1, -1, (pidRate + angleOffset * mult)), Robot.clamp(1, -1, (pidRate - angleOffset * mult)));
 
     }
     	
