@@ -4,6 +4,7 @@ import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -34,7 +35,11 @@ public class ArcadeDrive extends Command {
     	  }  else {
           Robot.driveTrain.SetVoltages(volts[0], volts[1]);
         }
-    	} 
+    	}
+    	
+    	SmartDashboard.putNumber("Left encoder value", Robot.driveTrain.leftEncoder.get());
+    	SmartDashboard.putNumber("Right encoder value", Robot.driveTrain.rightEncoder.get());
+    
     }
     
     public double[] getVoltages() {
@@ -60,6 +65,7 @@ public class ArcadeDrive extends Command {
     	return volts;
     }
 
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
