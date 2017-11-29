@@ -24,6 +24,8 @@ public class DriveTrain extends Subsystem {
     public DoubleSolenoid shiftSolenoid;
     public AHRS ahrs;
     
+    public double PrevLeftV, PrevRightV;
+    
     public SmartDashboard dash;
    
     //variables here
@@ -84,31 +86,31 @@ public class DriveTrain extends Subsystem {
     	
     	
     	
-   
-    public double[] DecellCheck(double LeftVoltage, double RightVoltage) {
-    	double[] Volts = new double[2];
+    private double deccelIterate(double v, double prevV) {
+    	/*if (disableDeccel == 1) {
+    		return v;
+    	}*/
     	
-    	if (Math.abs(LeftVoltage - leftMotor.get()) > 0.4) {
-    		double AHH = 0;
-    		if (LeftVoltage < leftMotor.get()) {
-    			AHH = leftMotor.get() - 0.4;
+    	if ((v >= prevV && prevV >= 0) || (v <= prevV && prevV <= 0)) {
+    		prevV = v;
+    	} else {
+    		if(Math.abs(prevV) <= RobotMap.Values.DeccelSpeed) {
+    			prevV = v;
     		} else {
-    			AHH = leftMotor.get() + 0.4;
+    			prevV = prevV / RobotMap.Values.DeccelDivider;
     		}
-    		Volts[0] = AHH;
     	}
-    	if (Math.abs(RightVoltage - rightMotor.get()) > 0.4) {
-    		double AHH = 0;
-    		if (LeftVoltage < rightMotor.get()) {
-    			AHH = rightMotor.get() - 0.4;
-    		} else {
-    			AHH = rightMotor.get() + 0.4;
-    		}
-    		Volts[1] = AHH;
-    	}
-    	
-    	return Volts;
+    	return prevV;
     }
+    
+    public void driveDeccel(double leftv, double rightv) {
+    	PrevLeftV = deccelIterate(leftv, PrevLeftV);
+    	leftMotor.set(PrevLeftV*RobotMap.Values.DriveSpeedMod);
+    	
+    	PrevRightV = deccelIterate(rightv, PrevRightV);
+    	rightMotor.set(PrevRightV*RobotMap.Values.DriveSpeedMod);
+    }
+    
     
     public void setReverseVoltages(double LeftVolts, double RightVolts) {
     	leftMotor.set(-LeftVolts);
@@ -131,8 +133,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void initDefaultCommand() {
-    	setDefaultCommand(new ArcadeDrive());
-    	//setDefaultCommand(new TankDrive());
+    	//setDefaultCommand(new ArcadeDrive());
+    	setDefaultCommand(new TankDrive());
     }
 }
 

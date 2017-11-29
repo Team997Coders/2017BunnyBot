@@ -27,7 +27,7 @@ public class TankDrive extends Command {
     		Robot.driveTrain.setReverseVoltages(volts[0], volts[1]);
     	} else {
             if (Robot.oi.decellOn) {
-                volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
+                Robot.driveTrain.driveDeccel(volts[0], volts[1]);
             } else {
                 Robot.driveTrain.SetVoltages(volts[0], volts[1]);
             }

@@ -23,17 +23,17 @@ public class ArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double[] volts = this.getVoltages();
-      
-    	if (Robot.oi.reverseBool) {
-    		Robot.driveTrain.setReverseVoltages(volts[0], volts[1]); 			
-    	} else {
-          if(Robot.oi.decellOn) {
-    		    volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
-    	  }  else {
-    		  Robot.driveTrain.SetVoltages(volts[0], volts[1]);
-    	  }
-    	}
+    	double getArcadeLeftSpeed = deadBand(Robot.oi.getLeftY() - Robot.oi.getRightX());
+    	double getArcadeRightSpeed = deadBand(Robot.oi.getLeftY() + Robot.oi.getRightX());
+
+    	 SmartDashboard.putNumber("Arcade Left", getArcadeLeftSpeed);
+    	 SmartDashboard.putNumber("Arcade Right", getArcadeRightSpeed);
+    	 
+    	 if (Robot.oi.decellOn) {
+    	Robot.driveTrain.driveDeccel(getArcadeLeftSpeed, getArcadeRightSpeed);
+    	 } else {
+    		 Robot.driveTrain.SetVoltages(getArcadeLeftSpeed, getArcadeRightSpeed);
+    	 }
     	
     	SmartDashboard.putNumber("Left encoder value", Robot.driveTrain.leftEncoder.get());
     	SmartDashboard.putNumber("Right encoder value", Robot.driveTrain.rightEncoder.get());
@@ -42,7 +42,15 @@ public class ArcadeDrive extends Command {
     
     }
     
-    public double[] getVoltages() {
+    private double deadBand(double a) {
+    	if(Math.abs(a) > 0.15) {
+    		return a;
+    	} else {
+    		return 0;
+    	}
+    }
+    
+    /*public double[] getVoltages() {
     	double[] volts = new double[2];
     	double left = 0;
     	double right = 0;
@@ -63,7 +71,7 @@ public class ArcadeDrive extends Command {
     	volts[0] = left;
     	volts[1] = -right;
     	return volts;
-    }
+    }*/
 
     
     // Make this return true when this Command no longer needs to run execute()

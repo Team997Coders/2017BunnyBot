@@ -104,7 +104,12 @@ public class RobotMap {
 		//Arm Position
 		armPosOne = 0,
 		armPosTwo = 1,
-		armPosThree = 2;
+		armPosThree = 2,
+		
+		//Deccel
+		DeccelSpeed = 0.2,
+		DeccelDivider = 1.2,
+		DriveSpeedMod = 1;
 	
 	}
 		

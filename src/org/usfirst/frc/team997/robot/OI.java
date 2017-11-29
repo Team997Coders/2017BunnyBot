@@ -54,6 +54,10 @@ public class OI {
 		return GamePad.getRawAxis(RobotMap.Ports.leftYAxisPort);
 	}
 	
+	public double getRightX() {
+		return GamePad.getRawAxis(RobotMap.Ports.rightXAxisPort);
+	}
+	
 		
 	
 	//// CREATING BUTTONS
