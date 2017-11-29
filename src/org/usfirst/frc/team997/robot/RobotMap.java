@@ -72,7 +72,15 @@ public class RobotMap {
 				//Arm Position
 				armPosOne = 0,
 				armPosTwo = 1,
-				armPosThree = 2;
+				armPosThree = 2,
+				
+				//Decell
+				DecellSpeed = 0.15,
+				DecellDivider = 1.2,
+				DriveSpeedMod = 1;
+		
+		public static String 
+			reverseMotor = "right";
 	}
 	
 }

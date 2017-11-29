@@ -20,8 +20,7 @@ public class TankDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double[] volts = getVolts();
-    	volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
-    	Robot.driveTrain.SetVoltages(volts[0], volts[1]);
+    	Robot.driveTrain.driveDeccel(volts[0], volts[1]);
     }
     public double[] getVolts() {
     	double[] volts = new double[2];

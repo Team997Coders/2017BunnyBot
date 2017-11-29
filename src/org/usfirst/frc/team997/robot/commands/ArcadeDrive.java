@@ -23,9 +23,7 @@ public class ArcadeDrive extends Command {
     protected void execute() {
     	double[] volts = getVoltages();
     	
-    	volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
-    	
-    	Robot.driveTrain.SetVoltages(volts[0], volts[1]);
+    	Robot.driveTrain.driveDeccel(volts[0], volts[1]);
     }
     
     public double[] getVoltages() {

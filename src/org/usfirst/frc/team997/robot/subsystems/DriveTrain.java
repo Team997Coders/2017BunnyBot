@@ -23,6 +23,8 @@ public class DriveTrain extends Subsystem {
     //variables here
     public int gear; 
     
+    public double PrevLeftV, PrevRightV;
+    
     public DriveTrain() {
     	leftMotor = new VictorSP(RobotMap.Ports.leftMotorPort);
     	rightMotor = new VictorSP(RobotMap.Ports.rightMotorPort);
@@ -46,10 +48,10 @@ public class DriveTrain extends Subsystem {
     	} else if (gear != g) {
     		shiftSolenoid.set(DoubleSolenoid.Value.kReverse);
     		gear = 1;
-    			}
+    	}
     }
    
-    public double[] DecellCheck(double LeftVoltage, double RightVoltage) {
+    /*public double[] DecellCheck(double LeftVoltage, double RightVoltage) {
     	double[] Volts = new double[2];
     	
     	if (Math.abs(LeftVoltage - leftMotor.get()) > 0.4) {
@@ -72,6 +74,64 @@ public class DriveTrain extends Subsystem {
     	}
     	
     	return Volts;
+    }*/
+    
+    /*public double[] DecellCheck(double LV, double RV, String reverseMotor) {
+    	double[] Vs = new double[2];
+    	
+    	int LMod = 1, RMod = -1;
+    	
+    	if (reverseMotor.toLowerCase() == "left") {
+    		LMod = -1;
+    		RMod = 1;
+    	}
+    	
+    	if (Math.abs((leftMotor.get() * LMod) - (LV * LMod)) > 0.15) {
+    		if (leftMotor.get() * LMod < LV * LMod) {
+    			Vs[0] = leftMotor.get() * LMod + 0.15;
+    		} else {
+    			Vs[0] = leftMotor.get() * LMod - 0.15;
+    		}
+    	} else {
+    		Vs[0] = LV;
+    	}
+    	
+    	if (Math.abs((rightMotor.get() * RMod) - (RV * RMod)) > 0.15) {
+    		if (rightMotor.get() * RMod < RV * RMod) {
+    			Vs[1] = rightMotor.get() * RMod - 0.15;
+    		} else {
+    			Vs[1] = rightMotor.get() * RMod + 0.15;
+    		}
+    	} else {
+    		Vs[1] = RV;
+    	}
+    	
+    	return Vs;
+    }*/
+
+    private double deccelIterate(double v, double prevV) {
+    	/*if (disableDeccel == 1) {
+    		return v;
+    	}*/
+    	
+    	if ((v >= prevV && prevV >= 0) || (v <= prevV && prevV <= 0)) {
+    		prevV = v;
+    	} else {
+    		if(Math.abs(prevV) <= RobotMap.Values.DecellSpeed) {
+    			prevV = v;
+    		} else {
+    			prevV = prevV / RobotMap.Values.DecellDivider;
+    		}
+    	}
+    	return prevV;
+    }
+    
+    public void driveDeccel(double leftv, double rightv) {
+    	PrevLeftV = deccelIterate(leftv, PrevLeftV);
+    	leftMotor.set(PrevLeftV*RobotMap.Values.DriveSpeedMod);
+    	
+    	PrevRightV = deccelIterate(rightv, PrevRightV);
+    	rightMotor.set(PrevRightV*RobotMap.Values.DriveSpeedMod);
     }
     
     public void SetVoltages(double LeftVolts, double RightVolts) {
