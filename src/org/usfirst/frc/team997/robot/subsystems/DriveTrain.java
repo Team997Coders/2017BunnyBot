@@ -105,7 +105,7 @@ public class DriveTrain extends Subsystem {
     
     public void driveDeccel(double leftv, double rightv) {
     	PrevLeftV = deccelIterate(leftv, PrevLeftV);
-    	leftMotor.set(PrevLeftV*RobotMap.Values.DriveSpeedMod);
+    	leftMotor.set(-PrevLeftV*RobotMap.Values.DriveSpeedMod);
     	
     	PrevRightV = deccelIterate(rightv, PrevRightV);
     	rightMotor.set(PrevRightV*RobotMap.Values.DriveSpeedMod);
@@ -119,7 +119,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void SetVoltages(double LeftVolts, double RightVolts) {
-    	leftMotor.set(Robot.clamp(1, -1, LeftVolts));
+    	leftMotor.set(-Robot.clamp(1, -1, LeftVolts));
     	rightMotor.set(Robot.clamp(1, -1, RightVolts));
     	//Clamp is being a voltage limiter here, in case you wanted to know.
     	//dash.setDefaultNumber("Left Voltage", LeftVolts);
@@ -133,8 +133,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void initDefaultCommand() {
-    	setDefaultCommand(new ArcadeDrive());
-    	//setDefaultCommand(new TankDrive());
+    	//setDefaultCommand(new ArcadeDrive());
+    	setDefaultCommand(new TankDrive());
     }
 }
 
