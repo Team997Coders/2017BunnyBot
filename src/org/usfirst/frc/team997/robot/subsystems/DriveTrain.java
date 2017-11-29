@@ -133,8 +133,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void initDefaultCommand() {
-    	//setDefaultCommand(new ArcadeDrive());
-    	setDefaultCommand(new TankDrive());
+    	setDefaultCommand(new ArcadeDrive());
+    	//setDefaultCommand(new TankDrive());
     }
 }
 

@@ -23,8 +23,12 @@ public class ArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double getArcadeLeftSpeed = deadBand(Robot.oi.getLeftY() - Robot.oi.getRightX());
-    	double getArcadeRightSpeed = deadBand(Robot.oi.getLeftY() + Robot.oi.getRightX());
+    	//double getArcadeLeftSpeed = deadBand(Robot.oi.getLeftY() - Robot.oi.getRightX());
+    	double getArcadeLeftSpeed, getArcadeRightSpeed;
+    	//double getArcadeRightSpeed = deadBand(Robot.oi.getLeftY() + Robot.oi.getRightX());
+    	double[] a = getVoltages();
+    	getArcadeLeftSpeed = a[0];
+    	getArcadeRightSpeed = a[1];
 
     	 SmartDashboard.putNumber("Arcade Left", getArcadeLeftSpeed);
     	 SmartDashboard.putNumber("Arcade Right", getArcadeRightSpeed);
@@ -42,15 +46,15 @@ public class ArcadeDrive extends Command {
     
     }
     
-    private double deadBand(double a) {
+    /*private double deadBand(double a) {
     	if(Math.abs(a) > 0.15) {
     		return a;
     	} else {
     		return 0;
     	}
-    }
+    }*/
     
-    /*public double[] getVoltages() {
+    public double[] getVoltages() {
     	double[] volts = new double[2];
     	double left = 0;
     	double right = 0;
@@ -69,9 +73,9 @@ public class ArcadeDrive extends Command {
     	}
     	
     	volts[0] = left;
-    	volts[1] = -right;
+    	volts[1] = right;
     	return volts;
-    }*/
+    }
 
     
     // Make this return true when this Command no longer needs to run execute()
