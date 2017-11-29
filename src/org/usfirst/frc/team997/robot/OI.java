@@ -1,5 +1,6 @@
 package org.usfirst.frc.team997.robot;
 
+import org.usfirst.frc.team997.robot.commands.ArmJointToAngle;
 import org.usfirst.frc.team997.robot.commands.AutomatedTest;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -13,18 +14,25 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OI {
 	
 	public final Joystick
-	GamePad;
+	GamePad,
+	GamePad2;
 	
 	public final JoystickButton
 	shiftUpButton,
 	shiftDownButton,
 	bunnyCollectorButton,
 	bucketLifterButton,
-	automatedTestButton;
+	automatedTestButton,
+	ArmPosOne,
+	ArmPosTwo,
+	ArmPosThree,
+	ArmPosFour/*,
+	ArmPosFive*/;
 	
 	public OI() {
 		//Joystick Init
 		GamePad = new Joystick(RobotMap.Ports.GamePadPort);
+		GamePad2 = new Joystick(RobotMap.Ports.GamePad2Port);
 		
 		//Buttons Init
 		shiftUpButton = new JoystickButton(GamePad, RobotMap.Ports.shiftUpButton);
@@ -33,6 +41,16 @@ public class OI {
 		bucketLifterButton = new JoystickButton(GamePad, RobotMap.Ports.bucketLifterButton);
 		automatedTestButton = new JoystickButton(GamePad, 1);
 		automatedTestButton.whileHeld(new AutomatedTest());
+		ArmPosThree = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton3);
+		ArmPosOne = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton1);
+		ArmPosTwo = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton2);
+		ArmPosFour = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton4);
+		
+		ArmPosOne.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos1));
+		ArmPosTwo.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos2));
+		ArmPosThree.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos3));
+		ArmPosFour.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos4));
+		//ArmPosFive.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos5));
 	}
 	
 	public int get_pov() {

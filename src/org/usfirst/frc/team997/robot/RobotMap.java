@@ -39,12 +39,18 @@ public class RobotMap {
 		
 		//JOYSTICKS *TEMPORARY*
 		GamePadPort = 0,
+		GamePad2Port = 1,
 		
 		//BUTTONS
 		shiftDownButton = 0,
 		shiftUpButton = 2,
 		bunnyCollectorButton = 3,
 		bucketLifterButton = 1,
+		ArmPosButton1 = 0,
+		ArmPosButton2 = 1,
+		ArmPosButton3 = 2,
+		ArmPosButton4 = 3,
+		//ArmPosButton5 = ?
 		
 		//THE PLURAL TO AXIS *TEMPORARY*
 		leftXAxisPort = 0,
@@ -77,7 +83,13 @@ public class RobotMap {
 				//Decell
 				DecellSpeed = 0.15,
 				DecellDivider = 1.2,
-				DriveSpeedMod = 1;
+				DriveSpeedMod = 1,
+		
+				ArmPos1 = 0,
+				ArmPos2 = 45,
+				ArmPos3 = 90,
+				ArmPos4 = 135,
+				ArmPos5 = 180;
 		
 		public static String 
 			reverseMotor = "right";
