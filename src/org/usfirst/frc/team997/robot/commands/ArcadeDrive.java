@@ -23,12 +23,12 @@ public class ArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//double getArcadeLeftSpeed = deadBand(Robot.oi.getLeftY() - Robot.oi.getRightX());
-    	double getArcadeLeftSpeed, getArcadeRightSpeed;
-    	//double getArcadeRightSpeed = deadBand(Robot.oi.getLeftY() + Robot.oi.getRightX());
-    	double[] a = getVoltages();
-    	getArcadeLeftSpeed = a[0];
-    	getArcadeRightSpeed = a[1];
+    	double getArcadeLeftSpeed = Robot.JoystickDeadband(Robot.oi.getLeftY() - Robot.oi.getRightX());
+    	//double getArcadeLeftSpeed, getArcadeRightSpeed;
+    	double getArcadeRightSpeed = Robot.JoystickDeadband(Robot.oi.getLeftY() + Robot.oi.getRightX());
+    	//double[] a = getVoltages();
+    	//getArcadeLeftSpeed = a[0];
+    	//getArcadeRightSpeed = a[1];
 
     	 if (Robot.oi.decellOn) {
     	Robot.driveTrain.driveDeccel(getArcadeLeftSpeed, getArcadeRightSpeed);
@@ -37,14 +37,6 @@ public class ArcadeDrive extends Command {
     	 }
     	
     }
-    
-    /*private double deadBand(double a) {
-    	if(Math.abs(a) > 0.15) {
-    		return a;
-    	} else {
-    		return 0;
-    	}
-    }*/
     
     public double[] getVoltages() {
     	double[] volts = new double[2];

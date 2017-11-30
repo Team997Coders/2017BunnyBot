@@ -12,6 +12,7 @@ import org.usfirst.frc.team997.robot.commands.ShiftCommand;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -58,7 +59,9 @@ public class OI {
 		return GamePad.getRawAxis(RobotMap.Ports.rightXAxisPort);
 	}
 	
-		
+	public void updateDashboard() {
+		SmartDashboard.putBoolean("Decel on/off", decellOn);
+	}
 	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

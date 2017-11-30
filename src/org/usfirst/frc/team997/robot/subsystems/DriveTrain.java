@@ -112,7 +112,7 @@ public class DriveTrain extends Subsystem {
     
     
     public void setReverseVoltages(double LeftVolts, double RightVolts) {
-    	leftMotor.set(-LeftVolts);
+    	leftMotor.set(LeftVolts);
     	rightMotor.set(-RightVolts);
     	
     }
@@ -130,8 +130,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void initDefaultCommand() {
-    	//setDefaultCommand(new ArcadeDrive());
-    	setDefaultCommand(new TankDrive());
+    	setDefaultCommand(new ArcadeDrive());
+    	//setDefaultCommand(new TankDrive());
     }
     
     public void updateSmartDashboard() {
@@ -142,8 +142,7 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("Right encoder value", rightEncoder.get());
     	SmartDashboard.putNumber("NavX angle", ahrs.getAngle());
     	SmartDashboard.putBoolean("gyroPresent", gyroPresent);
-    	
-    	
+    	SmartDashboard.putBoolean("Decell (drivetrain)", Robot.oi.decellOn);
     }
 }
 
