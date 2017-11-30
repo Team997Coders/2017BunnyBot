@@ -30,20 +30,12 @@ public class ArcadeDrive extends Command {
     	getArcadeLeftSpeed = a[0];
     	getArcadeRightSpeed = a[1];
 
-    	 SmartDashboard.putNumber("Arcade Left", getArcadeLeftSpeed);
-    	 SmartDashboard.putNumber("Arcade Right", getArcadeRightSpeed);
-    	 
     	 if (Robot.oi.decellOn) {
     	Robot.driveTrain.driveDeccel(getArcadeLeftSpeed, getArcadeRightSpeed);
     	 } else {
     		 Robot.driveTrain.SetVoltages(getArcadeLeftSpeed, getArcadeRightSpeed);
     	 }
     	
-    	SmartDashboard.putNumber("Left encoder value", Robot.driveTrain.leftEncoder.get());
-    	SmartDashboard.putNumber("Right encoder value", Robot.driveTrain.rightEncoder.get());
-    	SmartDashboard.putNumber("NavX angle", Robot.driveTrain.ahrs.getAngle());
-    	SmartDashboard.putBoolean("gyroPresent", Robot.driveTrain.gyroPresent);
-    
     }
     
     /*private double deadBand(double a) {

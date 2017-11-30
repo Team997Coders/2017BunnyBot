@@ -33,10 +33,6 @@ public class TankDrive extends Command {
             }
     	}
     	
-    	SmartDashboard.putNumber("Left encoder value", Robot.driveTrain.leftEncoder.get());
-    	SmartDashboard.putNumber("Right encoder value", Robot.driveTrain.rightEncoder.get());
-    	SmartDashboard.putNumber("NavX angle", Robot.driveTrain.ahrs.getAngle());
-    	SmartDashboard.putBoolean("gyroPresent", Robot.driveTrain.gyroPresent);
     	
     }
     public double[] getVolts() {
@@ -46,8 +42,6 @@ public class TankDrive extends Command {
     	
     	volts[0] = leftMotorSpeed;
     	volts[1] = rightMotorSpeed;
-    	SmartDashboard.putNumber("Left moter speed", volts[0]);
-    	SmartDashboard.putNumber("Right motor speed", volts[1]);
     	return volts;
     }
 
