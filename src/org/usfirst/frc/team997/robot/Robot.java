@@ -1,6 +1,9 @@
 
 package org.usfirst.frc.team997.robot;
 
+
+import org.usfirst.frc.team997.robot.commands.ExampleCommand;
+import org.usfirst.frc.team997.robot.subsystems.Arm;
 import org.usfirst.frc.team997.robot.subsystems.Claw;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.subsystems.TalonTest;
@@ -21,6 +24,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
+
+	public static Arm arm;
 	
 	public static DriveTrain driveTrain;
 	public static Claw claw;
@@ -56,8 +61,11 @@ public class Robot extends IterativeRobot {
 			e.printStackTrace();
 		 }*/
 		
-		
-		
+    //try {
+		arm = new Arm();
+		  /*} catch (Exception e) {
+          e.printStackTrace();
+      }*/
 		
 		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());

@@ -31,13 +31,19 @@ public class OI {
 	decellToggleButton,
 	shiftButton,
 	clawButton,
-	reverseButton;
+	reverseButton
+   ArmPosOne,
+	ArmPosTwo,
+	ArmPosThree,
+	ArmPosFour/*,
+	ArmPosFive*/;
 	
 	//automatedTestButton;
 	
 	public OI() {
 		//Joystick Init
 		GamePad = new Joystick(RobotMap.Ports.GamePadPort);
+    GamePad2 = new Joystick(RobotMap.Ports.GamePad2Port);
 		
 		//Buttons Init
 		
@@ -49,6 +55,17 @@ public class OI {
 		clawButton.whenPressed(new ClawButtonCommand());
 		reverseButton = new JoystickButton(GamePad, RobotMap.Ports.reverseToggButton);
 		reverseButton.whenPressed(new ReverseToggle());
+    
+    ArmPosThree = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton3);
+		ArmPosOne = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton1);
+		ArmPosTwo = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton2);
+		ArmPosFour = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton4);
+		
+		ArmPosOne.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos1));
+		ArmPosTwo.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos2));
+		ArmPosThree.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos3));
+		ArmPosFour.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos4));
+		//ArmPosFive.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos5));
 		
 	}
 	
@@ -58,6 +75,12 @@ public class OI {
 	
 	public double getRightX() {
 		return GamePad.getRawAxis(RobotMap.Ports.rightXAxisPort);
+	}
+  
+  public int get_pov() {
+		int val = GamePad.getPOV();
+		SmartDashboard.putNumber("POV = ", val);
+		return val;
 	}
 	
 	public void updateDashboard() {
@@ -91,4 +114,4 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
-}
+

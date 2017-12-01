@@ -31,6 +31,8 @@ public class DriveTrain extends Subsystem {
     public int gear; 
     public boolean gyroPresent = true;
     
+    public double PrevLeftV, PrevRightV;
+    
     public DriveTrain() {
     	leftMotor = new VictorSP(RobotMap.Ports.leftMotorPort);
     	rightMotor = new VictorSP(RobotMap.Ports.rightMotorPort);
@@ -63,9 +65,9 @@ public class DriveTrain extends Subsystem {
     	} else if (gear != g) {
     		shiftSolenoid.set(DoubleSolenoid.Value.kReverse);
     		gear = 1;
-    			}
+    	}
     }
-    
+
     public boolean waitforgyro() {
     	int count = 0;
     	if (ahrs.isConnected()) {

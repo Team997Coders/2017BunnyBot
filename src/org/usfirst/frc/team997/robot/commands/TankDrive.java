@@ -22,7 +22,7 @@ public class TankDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double[] volts = getVolts();
-    	
+
     	if (Robot.oi.reverseBool) {
     		Robot.driveTrain.setReverseVoltages(volts[0], volts[1]);
     	} else {
@@ -32,8 +32,7 @@ public class TankDrive extends Command {
                 Robot.driveTrain.SetVoltages(volts[0], volts[1]);
             }
     	}
-    	
-    	
+  
     }
     public double[] getVolts() {
     	double[] volts = new double[2];

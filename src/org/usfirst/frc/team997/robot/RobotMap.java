@@ -44,8 +44,7 @@ public class RobotMap {
 		
 		//JOYSTICKS *TEMPORARY*
 		GamePadPort = 0,
-		
-		//BUTTONS
+		GamePad2Port = 1,
 		
 		/*Button|number|command called
 		        |      |
@@ -59,6 +58,18 @@ public class RobotMap {
 		   Start|8     |
 		 */
 		
+    //BUTTONS
+		shiftDownButton = 0,
+		shiftUpButton = 2,
+		bunnyCollectorButton = 3,
+		bucketLifterButton = 1,
+    
+		ArmPosButton1 = 0,
+		ArmPosButton2 = 1,
+		ArmPosButton3 = 2,
+		ArmPosButton4 = 3,
+		//ArmPosButton5 = ?
+    
 		decellToggleButton = 1,
 		shiftButton = 2,
 		clawButton = 3,
@@ -80,6 +91,7 @@ public class RobotMap {
 		
 		highSpeed = 1,
 		lowSpeed = 0.5,
+
 		driveMult = -0.05,
 		autoDriveDistance = 360,
 		
@@ -95,17 +107,29 @@ public class RobotMap {
 		driveAngleI = 0,
 		driveAngleD = 0,
 		
-		//PID Values
-		armPidP = 0.0,
-		armPidI = 0.0,
-		armPidD = 0.0,
-		armPidMinimumInput = 0.0,
-		armPidMaximumInput = 0.0,
+		//*TEMPORARY* PID Values
+				armPidP = 0.0,
+				armPidI = 0.0,
+				armPidD = 0.0,
+				armPidF = 0.0,
+				armPidNominalOutput = 0.0,
+				armPidPeakOutput = 6.0,
+				
+				//Arm Values
+				maxArmSpeed = 0.3,
+				//Arm Position
+				armPosOne = 0,
+				armPosTwo = 1,
+				armPosThree = 2,
+			
+				ArmPos1 = 0,
+				ArmPos2 = 45,
+				ArmPos3 = 90,
+				ArmPos4 = 135,
+				ArmPos5 = 180;
 		
-		//Arm Position
-		armPosOne = 0,
-		armPosTwo = 1,
-		armPosThree = 2,
+		public static String 
+			reverseMotor = "right";
 		
 		//Deccel
 		DeccelSpeed = 0.2,

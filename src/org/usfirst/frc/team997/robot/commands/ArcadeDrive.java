@@ -23,6 +23,7 @@ public class ArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+
     	double getArcadeLeftSpeed = Robot.JoystickDeadband(Robot.oi.getLeftY() - Robot.oi.getRightX());
     	//double getArcadeLeftSpeed, getArcadeRightSpeed;
     	double getArcadeRightSpeed = Robot.JoystickDeadband(Robot.oi.getLeftY() + Robot.oi.getRightX());
