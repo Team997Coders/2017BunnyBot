@@ -46,6 +46,7 @@ public class RobotMap {
 		GamePadPort = 0,
 		GamePad2Port = 1,
 		
+		//Gamepad 1:
 		/*Button|number|command called
 		        |      |
 		   A    |1	   |decell toggle	
@@ -57,17 +58,25 @@ public class RobotMap {
 		   Back |7     |
 		   Start|8     |
 		 */
+		//Gamepad 2:
+		/*Button|number|command called
+		        |      |
+		   A    |1	   |armPos1
+		   B    |2     |armPos2
+		   X    |3     |armPos3
+		   Y    |4     |armPos4
+		   Lb   |5     |
+		   Rb   |6     |
+		   Back |7     |
+		   Start|8     |
+		 */
 		
     //BUTTONS
-		shiftDownButton = 0,
-		shiftUpButton = 2,
-		bunnyCollectorButton = 3,
-		bucketLifterButton = 1,
-    
-		ArmPosButton1 = 0,
-		ArmPosButton2 = 1,
-		ArmPosButton3 = 2,
-		ArmPosButton4 = 3,
+		
+		ArmPosButton1 = 1,
+		ArmPosButton2 = 2,
+		ArmPosButton3 = 3,
+		ArmPosButton4 = 4,
 		//ArmPosButton5 = ?
     
 		decellToggleButton = 1,

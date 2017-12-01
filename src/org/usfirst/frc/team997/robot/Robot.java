@@ -1,8 +1,6 @@
 
 package org.usfirst.frc.team997.robot;
 
-
-import org.usfirst.frc.team997.robot.commands.ExampleCommand;
 import org.usfirst.frc.team997.robot.subsystems.Arm;
 import org.usfirst.frc.team997.robot.subsystems.Claw;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
@@ -31,7 +29,7 @@ public class Robot extends IterativeRobot {
 	public static Claw claw;
 	public static OI oi;
 	public static TalonTest talonTest;
-    public static ArmJoint armJoint;
+   // public static ArmJoint armJoint;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -56,7 +54,7 @@ public class Robot extends IterativeRobot {
 		}*/
 		
 		//try {
-		armJoint = new ArmJoint();
+		//armJoint = new ArmJoint();
 		/*} catch (Exception e) {
 			e.printStackTrace();
 		 }*/
