@@ -130,8 +130,12 @@ public class DriveTrain extends Subsystem {
     }
     
     public void initDefaultCommand() {
-    	setDefaultCommand(new ArcadeDrive());
-    	//setDefaultCommand(new TankDrive());
+    	if(Robot.oi.arcadeDrive) {
+    		setDefaultCommand(new ArcadeDrive());
+    	} else {
+    		setDefaultCommand(new TankDrive());
+    	}
+    	
     }
     
     public void updateSmartDashboard() {
@@ -143,6 +147,8 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("NavX angle", ahrs.getAngle());
     	SmartDashboard.putBoolean("gyroPresent", gyroPresent);
     	SmartDashboard.putBoolean("Decell (drivetrain)", Robot.oi.decellOn);
+    	SmartDashboard.putNumber("Gear", gear);
+    	SmartDashboard.putBoolean("Arcadedrive (drivetrain)", Robot.oi.arcadeDrive);
     }
 }
 

@@ -22,6 +22,7 @@ public class OI {
 
 	public boolean reverseBool = false;
 	public boolean decellOn = false;
+	public boolean arcadeDrive = true;
   
 	public final Joystick
 	GamePad;
