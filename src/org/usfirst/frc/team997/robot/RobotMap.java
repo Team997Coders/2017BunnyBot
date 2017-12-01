@@ -1,4 +1,7 @@
+
 package org.usfirst.frc.team997.robot;
+
+import edu.wpi.first.wpilibj.SerialPort;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -13,18 +16,20 @@ public class RobotMap {
 		//NAME
 		
 		//PWM *TEMPORARY*
-		leftMotorPort = 0,
-		rightMotorPort = 1,
-		bunnyCollector = 3,
-		bucketLifter = 4,
+		leftMotorPort = 1,  
+		rightMotorPort = 0,
+		bucketLifter = 1,
 		
 		//DIO *TEMPORARY*
-		leftEncoderFirstPort = 0,
-		leftEncoderSecondPort = 1,
-		rightEncoderFirstPort = 2,
-		rightEncoderSecondPort = 3,
+		leftEncoderFirstPort = 2,
+		leftEncoderSecondPort = 3,
+		rightEncoderFirstPort = 0,
+		rightEncoderSecondPort = 1,
+		armEncoderFirstPort = 4,
+		armEncoderSecondPort = 5,
 		
 		//PNEUMATICS
+		//Need to ask electrical to clarify on i/o map which "solenoid - big piston" is which
 		shifterSolenoidLow = 0,
 		shifterSolenoidHigh = 1,
 		clawLeftSolenoidPort = 2,
@@ -41,22 +46,44 @@ public class RobotMap {
 		GamePadPort = 0,
 		GamePad2Port = 1,
 		
-		//BUTTONS
+		/*Button|number|command called
+		        |      |
+		   A    |1	   |decell toggle	
+		   B    |2     |shift gear
+		   X    |3     |open/close claw
+		   Y    |4     |reverse drivetrain
+		   Lb   |5     |
+		   Rb   |6     |
+		   Back |7     |
+		   Start|8     |
+		 */
+		
+    //BUTTONS
 		shiftDownButton = 0,
 		shiftUpButton = 2,
 		bunnyCollectorButton = 3,
 		bucketLifterButton = 1,
+    
 		ArmPosButton1 = 0,
 		ArmPosButton2 = 1,
 		ArmPosButton3 = 2,
 		ArmPosButton4 = 3,
 		//ArmPosButton5 = ?
+    
+		decellToggleButton = 1,
+		shiftButton = 2,
+		clawButton = 3,
+		reverseToggButton = 4,
 		
-		//THE PLURAL TO AXIS *TEMPORARY*
+		//THE PLURAL TO AXIS 
 		leftXAxisPort = 0,
 		leftYAxisPort = 1,
-		rightXAxisPort = 2,
-		rightYAxisPort = 3;
+		rightXAxisPort = 4,
+		rightYAxisPort = 5;
+    
+		//GYRO
+		public static final SerialPort.Port AHRS = SerialPort.Port.kUSB;
+		
 	}
 	
 	public static class Values{
@@ -64,6 +91,21 @@ public class RobotMap {
 		
 		highSpeed = 1,
 		lowSpeed = 0.5,
+
+		driveMult = -0.05,
+		autoDriveDistance = 360,
+		
+		//Drive Distance PID
+		
+		driveDistanceP = 0,
+		driveDistanceI = 0,
+		driveDistanceD = 0,
+		
+		//Drive Angle PID
+		
+		driveAngleP = 0,
+		driveAngleI = 0,
+		driveAngleD = 0,
 		
 		//*TEMPORARY* PID Values
 				armPidP = 0.0,
@@ -79,12 +121,7 @@ public class RobotMap {
 				armPosOne = 0,
 				armPosTwo = 1,
 				armPosThree = 2,
-				
-				//Decell
-				DecellSpeed = 0.15,
-				DecellDivider = 1.2,
-				DriveSpeedMod = 1,
-		
+			
 				ArmPos1 = 0,
 				ArmPos2 = 45,
 				ArmPos3 = 90,
@@ -93,6 +130,13 @@ public class RobotMap {
 		
 		public static String 
 			reverseMotor = "right";
-	}
+		
+		//Deccel
+		DeccelSpeed = 0.2,
+		DeccelDivider = 1.2,
+		DriveSpeedMod = 1;
 	
+	}
+		
 }
+	

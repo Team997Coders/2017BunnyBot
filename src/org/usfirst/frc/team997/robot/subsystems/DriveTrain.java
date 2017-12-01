@@ -1,10 +1,15 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
+import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 import org.usfirst.frc.team997.robot.commands.ArcadeDrive;
+import org.usfirst.frc.team997.robot.commands.TankDrive;
+
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,11 +22,14 @@ public class DriveTrain extends Subsystem {
     public VictorSP leftMotor, rightMotor;
     public Encoder leftEncoder, rightEncoder;
     public DoubleSolenoid shiftSolenoid;
+    public AHRS ahrs;
     
-    public SmartDashboard dash;
+    public double PrevLeftV, PrevRightV;
     
+   
     //variables here
     public int gear; 
+    public boolean gyroPresent = true;
     
     public double PrevLeftV, PrevRightV;
     
@@ -32,11 +40,20 @@ public class DriveTrain extends Subsystem {
     	rightEncoder = new Encoder(RobotMap.Ports.rightEncoderFirstPort, RobotMap.Ports.rightEncoderSecondPort);
     	shiftSolenoid = new DoubleSolenoid(RobotMap.Ports.shifterSolenoidLow, RobotMap.Ports.shifterSolenoidHigh);
     	
+    	try {
+    		ahrs = new AHRS(RobotMap.Ports.AHRS);
+    	} catch(RuntimeException e) {
+    		System.out.println("Error with ahrs");
+    	}
+    	
+    	gyroPresent = waitforgyro();
+    	ahrs.reset();
     	leftEncoder.reset();
     	rightEncoder.reset();
     	
     	gear = 0;
-    	this.shift(0);
+    	shiftSolenoid.set(DoubleSolenoid.Value.kForward);
+    	//this.shift(0);
     }
     
     // Gear 0 is low gear, gear 1 is high gear. -Timothy
@@ -50,65 +67,26 @@ public class DriveTrain extends Subsystem {
     		gear = 1;
     	}
     }
-   
-    /*public double[] DecellCheck(double LeftVoltage, double RightVoltage) {
-    	double[] Volts = new double[2];
-    	
-    	if (Math.abs(LeftVoltage - leftMotor.get()) > 0.4) {
-    		double AHH = 0;
-    		if (LeftVoltage < leftMotor.get()) {
-    			AHH = leftMotor.get() - 0.4;
-    		} else {
-    			AHH = leftMotor.get() + 0.4;
-    		}
-    		Volts[0] = AHH;
-    	}
-    	if (Math.abs(RightVoltage - rightMotor.get()) > 0.4) {
-    		double AHH = 0;
-    		if (LeftVoltage < leftMotor.get()) {
-    			AHH = leftMotor.get() - 0.4;
-    		} else {
-    			AHH = leftMotor.get() + 0.4;
-    		}
-    		Volts[1] = AHH;
-    	}
-    	
-    	return Volts;
-    }*/
-    
-    /*public double[] DecellCheck(double LV, double RV, String reverseMotor) {
-    	double[] Vs = new double[2];
-    	
-    	int LMod = 1, RMod = -1;
-    	
-    	if (reverseMotor.toLowerCase() == "left") {
-    		LMod = -1;
-    		RMod = 1;
-    	}
-    	
-    	if (Math.abs((leftMotor.get() * LMod) - (LV * LMod)) > 0.15) {
-    		if (leftMotor.get() * LMod < LV * LMod) {
-    			Vs[0] = leftMotor.get() * LMod + 0.15;
-    		} else {
-    			Vs[0] = leftMotor.get() * LMod - 0.15;
-    		}
-    	} else {
-    		Vs[0] = LV;
-    	}
-    	
-    	if (Math.abs((rightMotor.get() * RMod) - (RV * RMod)) > 0.15) {
-    		if (rightMotor.get() * RMod < RV * RMod) {
-    			Vs[1] = rightMotor.get() * RMod - 0.15;
-    		} else {
-    			Vs[1] = rightMotor.get() * RMod + 0.15;
-    		}
-    	} else {
-    		Vs[1] = RV;
-    	}
-    	
-    	return Vs;
-    }*/
 
+    public boolean waitforgyro() {
+    	int count = 0;
+    	if (ahrs.isConnected()) {
+    		while (ahrs.isCalibrating()) {
+    			Timer.delay(0.2);
+        		count +=1;
+    		}
+    		if (count > 20) {
+        		return false;
+        	}
+    		return true;
+        	}
+    	//return false;
+    	return true;
+    	//so, it is reading as though the ahrs is not connected...
+    	}
+    	
+    	
+    	
     private double deccelIterate(double v, double prevV) {
     	/*if (disableDeccel == 1) {
     		return v;
@@ -117,10 +95,10 @@ public class DriveTrain extends Subsystem {
     	if ((v >= prevV && prevV >= 0) || (v <= prevV && prevV <= 0)) {
     		prevV = v;
     	} else {
-    		if(Math.abs(prevV) <= RobotMap.Values.DecellSpeed) {
+    		if(Math.abs(prevV) <= RobotMap.Values.DeccelSpeed) {
     			prevV = v;
     		} else {
-    			prevV = prevV / RobotMap.Values.DecellDivider;
+    			prevV = prevV / RobotMap.Values.DeccelDivider;
     		}
     	}
     	return prevV;
@@ -128,27 +106,51 @@ public class DriveTrain extends Subsystem {
     
     public void driveDeccel(double leftv, double rightv) {
     	PrevLeftV = deccelIterate(leftv, PrevLeftV);
-    	leftMotor.set(PrevLeftV*RobotMap.Values.DriveSpeedMod);
+    	leftMotor.set(-PrevLeftV*RobotMap.Values.DriveSpeedMod);
     	
     	PrevRightV = deccelIterate(rightv, PrevRightV);
     	rightMotor.set(PrevRightV*RobotMap.Values.DriveSpeedMod);
     }
     
-    public void SetVoltages(double LeftVolts, double RightVolts) {
+    
+    public void setReverseVoltages(double LeftVolts, double RightVolts) {
     	leftMotor.set(LeftVolts);
     	rightMotor.set(-RightVolts);
-    	dash.setDefaultNumber("Left Voltage", LeftVolts);
-    	dash.setDefaultNumber("Right Voltage", RightVolts);
+    	
+    }
+    
+    public void SetVoltages(double LeftVolts, double RightVolts) {
+    	leftMotor.set(-Robot.clamp(1, -1, LeftVolts));
+    	rightMotor.set(Robot.clamp(1, -1, RightVolts));
+    	//Clamp is being a voltage limiter here, in case you wanted to know.
+    	
     }
     
     public void StopVoltage() {
-	    dash.setDefaultNumber("Gear iN Use", gear);
-    	leftMotor.set(0);
+	    leftMotor.set(0);
     	rightMotor.set(0);
     }
     
     public void initDefaultCommand() {
-    	setDefaultCommand(new ArcadeDrive());
+    	if(Robot.oi.arcadeDrive) {
+    		setDefaultCommand(new ArcadeDrive());
+    	} else {
+    		setDefaultCommand(new TankDrive());
+    	}
+    	
+    }
+    
+    public void updateSmartDashboard() {
+    	//dash.setDefaultNumber("Gear iN Use", gear);
+    	//dash.setDefaultNumber("Left Voltage", LeftVolts);
+    	//dash.setDefaultNumber("Right Voltage", RightVolts);
+    	SmartDashboard.putNumber("Left encoder value", leftEncoder.get());
+    	SmartDashboard.putNumber("Right encoder value", rightEncoder.get());
+    	SmartDashboard.putNumber("NavX angle", ahrs.getAngle());
+    	SmartDashboard.putBoolean("gyroPresent", gyroPresent);
+    	SmartDashboard.putBoolean("Decell (drivetrain)", Robot.oi.decellOn);
+    	SmartDashboard.putNumber("Gear", gear);
+    	SmartDashboard.putBoolean("Arcadedrive (drivetrain)", Robot.oi.arcadeDrive);
     }
 }
 

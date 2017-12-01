@@ -4,6 +4,7 @@ import org.usfirst.frc.team997.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -17,20 +18,25 @@ public class Claw extends Subsystem {
     
     public Claw() {
 		clawSolenoid = new DoubleSolenoid(RobotMap.Ports.clawLeftSolenoidPort,RobotMap.Ports.clawRightSolenoidPort);
+		
+		clawOpen = true;
+		clawSolenoid.set(DoubleSolenoid.Value.kForward);
 	
     }	
 	// Put methods for controlling this subsystem
     // here. Call these from Commands.
 
     public void openClaw() {
-    	if(clawOpen = false) {
+    	if(clawOpen == false) {
     		clawSolenoid.set(DoubleSolenoid.Value.kForward);
+    		clawOpen = true;
     	}
     }
     
     public void closeClaw() {
-    	if(clawOpen = true) {
+    	if(clawOpen == true) {
     		clawSolenoid.set(DoubleSolenoid.Value.kReverse);
+    		clawOpen = false;
     	}
     }
     
@@ -42,6 +48,10 @@ public class Claw extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    }
+    
+    public void clawSmartDashboard() {
+    	SmartDashboard.putBoolean("ClawOpen?", clawOpen);
     }
 }
 

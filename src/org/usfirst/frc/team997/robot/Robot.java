@@ -1,11 +1,13 @@
 
 package org.usfirst.frc.team997.robot;
 
+
 import org.usfirst.frc.team997.robot.commands.ExampleCommand;
 import org.usfirst.frc.team997.robot.subsystems.Arm;
 import org.usfirst.frc.team997.robot.subsystems.Claw;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team997.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team997.robot.subsystems.TalonTest;
+import org.usfirst.frc.team997.robot.subsystems.ArmJoint;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,11 +25,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
-	public static final DriveTrain driveTrain = new DriveTrain();
-	public static final Claw claw = new Claw();
-	public static final Arm arm = new Arm();
+	public static Arm arm;
+	
+	public static DriveTrain driveTrain;
+	public static Claw claw;
 	public static OI oi;
+	public static TalonTest talonTest;
+    public static ArmJoint armJoint;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -38,8 +42,32 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		
+		//try {
+			driveTrain = new DriveTrain();
+		/*} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+		
+		//try {
+			claw = new Claw();
+		/*} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+		
+		//try {
+		armJoint = new ArmJoint();
+		/*} catch (Exception e) {
+			e.printStackTrace();
+		 }*/
+		
+    //try {
+		arm = new Arm();
+		  /*} catch (Exception e) {
+          e.printStackTrace();
+      }*/
+		
 		oi = new OI();
-		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
@@ -57,6 +85,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		driveTrain.updateSmartDashboard();
+		oi.updateDashboard();
 	}
 
 	/**
@@ -92,6 +122,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		driveTrain.updateSmartDashboard();
+		oi.updateDashboard();
 	}
 
 	@Override
@@ -110,6 +142,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		driveTrain.updateSmartDashboard();
+		oi.updateDashboard();
 	}
 
 	/**
@@ -119,4 +153,23 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
+	
+	public static double clamp(double Max, double Min, double Val) {
+    	if (Val < Min) {
+    		return Min;
+    	} else if (Val > Max) {
+    		return Max;
+    	} else {
+    		return Val;
+    	}
+    }
+	
+	public static double JoystickDeadband(double x) {
+		if(Math.abs(x) < 0.05) {
+			return 0;
+		}
+		
+		return x;
+	}
 }
+

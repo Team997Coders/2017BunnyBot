@@ -1,10 +1,17 @@
 package org.usfirst.frc.team997.robot;
 
-import org.usfirst.frc.team997.robot.commands.ArmJointToAngle;
 import org.usfirst.frc.team997.robot.commands.AutomatedTest;
+import org.usfirst.frc.team997.robot.commands.ClawButtonCommand;
+
+import org.usfirst.frc.team997.robot.commands.ReverseToggle;
+
+import org.usfirst.frc.team997.robot.commands.DecellToggle;
+
+import org.usfirst.frc.team997.robot.commands.ShiftCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -12,36 +19,44 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	
+
+	public boolean reverseBool = false;
+	public boolean decellOn = false;
+	public boolean arcadeDrive = true;
+  
 	public final Joystick
-	GamePad,
-	GamePad2;
+	GamePad;
 	
 	public final JoystickButton
-	shiftUpButton,
-	shiftDownButton,
-	bunnyCollectorButton,
-	bucketLifterButton,
-	automatedTestButton,
-	ArmPosOne,
+	decellToggleButton,
+	shiftButton,
+	clawButton,
+	reverseButton
+   ArmPosOne,
 	ArmPosTwo,
 	ArmPosThree,
 	ArmPosFour/*,
 	ArmPosFive*/;
 	
+	//automatedTestButton;
+	
 	public OI() {
 		//Joystick Init
 		GamePad = new Joystick(RobotMap.Ports.GamePadPort);
-		GamePad2 = new Joystick(RobotMap.Ports.GamePad2Port);
+    GamePad2 = new Joystick(RobotMap.Ports.GamePad2Port);
 		
 		//Buttons Init
-		shiftUpButton = new JoystickButton(GamePad, RobotMap.Ports.shiftUpButton);
-		shiftDownButton = new JoystickButton(GamePad, RobotMap.Ports.shiftDownButton);
-		bunnyCollectorButton = new JoystickButton(GamePad, RobotMap.Ports.bunnyCollector);
-		bucketLifterButton = new JoystickButton(GamePad, RobotMap.Ports.bucketLifterButton);
-		automatedTestButton = new JoystickButton(GamePad, 1);
-		automatedTestButton.whileHeld(new AutomatedTest());
-		ArmPosThree = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton3);
+		
+		decellToggleButton = new JoystickButton(GamePad, RobotMap.Ports.decellToggleButton);
+		decellToggleButton.whenPressed(new DecellToggle());
+		shiftButton = new JoystickButton(GamePad, RobotMap.Ports.shiftButton);
+		shiftButton.whenPressed(new ShiftCommand());
+		clawButton = new JoystickButton(GamePad, RobotMap.Ports.clawButton);
+		clawButton.whenPressed(new ClawButtonCommand());
+		reverseButton = new JoystickButton(GamePad, RobotMap.Ports.reverseToggButton);
+		reverseButton.whenPressed(new ReverseToggle());
+    
+    ArmPosThree = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton3);
 		ArmPosOne = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton1);
 		ArmPosTwo = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton2);
 		ArmPosFour = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton4);
@@ -51,12 +66,25 @@ public class OI {
 		ArmPosThree.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos3));
 		ArmPosFour.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos4));
 		//ArmPosFive.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos5));
+		
 	}
 	
-	public int get_pov() {
+	public double getLeftY() {
+		return GamePad.getRawAxis(RobotMap.Ports.leftYAxisPort);
+	}
+	
+	public double getRightX() {
+		return GamePad.getRawAxis(RobotMap.Ports.rightXAxisPort);
+	}
+  
+  public int get_pov() {
 		int val = GamePad.getPOV();
 		SmartDashboard.putNumber("POV = ", val);
 		return val;
+	}
+	
+	public void updateDashboard() {
+		SmartDashboard.putBoolean("Decel on/off", decellOn);
 	}
 	
 	//// CREATING BUTTONS
@@ -86,4 +114,4 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
-}
+
