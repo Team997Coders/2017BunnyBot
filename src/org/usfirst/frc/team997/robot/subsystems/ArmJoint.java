@@ -3,6 +3,7 @@ package org.usfirst.frc.team997.robot.subsystems;
 import org.usfirst.frc.team997.robot.RobotMap;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -22,14 +23,15 @@ public class ArmJoint extends Subsystem {
     	
     	Motor = new CANTalon(RobotMap.Ports.bucketLifter);
     	Motor.reset();
+    	Motor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 
     	Motor.clearStickyFaults();
-    	Motor.changeControlMode(TalonControlMode.PercentVbus);
     	Motor.setSafetyEnabled(false);
-    	Motor.enableLimitSwitch(true, true);
-    	Motor.enableBrakeMode(false);
-    	Motor.enable();
-
+    	//Motor.enableLimitSwitch(true, true);
+    	//Motor.enableBrakeMode(false);
+    	//Motor.enable();
+    	Motor.changeControlMode(TalonControlMode.PercentVbus);
+    	Motor.set(0);
     	
     	LiveWindow.addActuator("ArmJoint", 1, (CANTalon) Motor);
         // Use these to get going:
