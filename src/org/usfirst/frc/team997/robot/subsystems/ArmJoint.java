@@ -1,5 +1,6 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
+import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 
 import com.ctre.CANTalon;
@@ -17,20 +18,26 @@ public class ArmJoint extends Subsystem {
 	
 	public CANTalon Motor;
 	public static final double absoluteTolerance = 0.01;
+	public boolean isZeroed = false;
 
     // Initialize your subsystem here
     public ArmJoint() {
     	
     	Motor = new CANTalon(RobotMap.Ports.bucketLifter);
-    	Motor.reset();
     	Motor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-
+    	Motor.setPID(RobotMap.Values.armPidP, RobotMap.Values.armPidI, RobotMap.Values.armPidD);
     	Motor.clearStickyFaults();
     	Motor.setSafetyEnabled(false);
+    	Motor.configNominalOutputVoltage(0, 0);
+    	Motor.configPeakOutputVoltage(6, -6);
+    	Motor.setAllowableClosedLoopErr(0);
+    	Motor.setProfile(0);
+    	//Motor.configEncoderCodesPerRev(1);
     	//Motor.enableLimitSwitch(true, true);
     	//Motor.enableBrakeMode(false);
     	//Motor.enable();
-    	Motor.changeControlMode(TalonControlMode.PercentVbus);
+    	//Motor.changeControlMode(TalonControlMode.PercentVbus);
+    	Motor.enableZeroSensorPositionOnReverseLimit(true);
     	Motor.set(0);
     	
     	LiveWindow.addActuator("ArmJoint", 1, (CANTalon) Motor);
@@ -56,7 +63,7 @@ public class ArmJoint extends Subsystem {
 
     public void stop() {
     	//System.out.println("Stop Arm");
-    	//Motor.changeControlMode(TalonControlMode.PercentVbus);
+    	Motor.changeControlMode(TalonControlMode.PercentVbus);
     	Motor.set(0.0);
     }
     
@@ -69,9 +76,13 @@ public class ArmJoint extends Subsystem {
     }    
     
     public void updateSmartDashboard() {
+    	SmartDashboard.putNumber("TalonSRX Mode", Motor.getControlMode().value);
     	SmartDashboard.putNumber("ArmJoint Encoder", Motor.getEncPosition());
     	SmartDashboard.putNumber("Arm Voltage", Motor.getOutputVoltage());
     	SmartDashboard.putBoolean("Holo1", Motor.isFwdLimitSwitchClosed());
     	SmartDashboard.putBoolean("Holo2", Motor.isRevLimitSwitchClosed());
+    	SmartDashboard.putBoolean("ArmZeroed", Robot.armJoint.isZeroed);
+    	SmartDashboard.putNumber("ArmPIDError", Motor.getError());
+    	SmartDashboard.putNumber("Another Position ", Motor.getPosition());
     }
 }

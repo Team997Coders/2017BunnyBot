@@ -1,5 +1,6 @@
 package org.usfirst.frc.team997.robot;
 
+import org.usfirst.frc.team997.robot.commands.ArmToAngle;
 import org.usfirst.frc.team997.robot.commands.AutomatedTest;
 import org.usfirst.frc.team997.robot.commands.ClawButtonCommand;
 
@@ -8,6 +9,7 @@ import org.usfirst.frc.team997.robot.commands.ReverseToggle;
 import org.usfirst.frc.team997.robot.commands.DecellToggle;
 import org.usfirst.frc.team997.robot.commands.MoveArm;
 import org.usfirst.frc.team997.robot.commands.ShiftCommand;
+import org.usfirst.frc.team997.robot.commands.ZeroArmJoint;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -37,6 +39,8 @@ public class OI {
 	ArmPosThree,
 	MoveArmFwdButton,
 	MoveArmRevButton,
+	ZeroArmButton,
+	GoToVerticalButton,
 	ArmPosFour/*,
 	ArmPosFive*/;
 	
@@ -63,11 +67,16 @@ public class OI {
 		
 		MoveArmRevButton = new JoystickButton(GamePad, RobotMap.Ports.ArmBwdButton);
 		MoveArmRevButton.whileHeld(new MoveArm(-0.25));
-    
+		ZeroArmButton = new JoystickButton(GamePad, RobotMap.Ports.ZeroArm);
+		ZeroArmButton.whenPressed(new ZeroArmJoint());
 		ArmPosThree = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton3);
 		ArmPosOne = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton1);
 		ArmPosTwo = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton2);
 		ArmPosFour = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton4);
+		GoToVerticalButton = new JoystickButton(GamePad, RobotMap.Ports.GoToVertical);
+		//GoToVerticalButton.whenPressed(new ArmToAngle(15792));
+		GoToVerticalButton.whenPressed(new ArmToAngle(3.81));
+
 		
 		//ArmPosOne.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos1));
 		//ArmPosTwo.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos2));

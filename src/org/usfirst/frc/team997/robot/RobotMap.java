@@ -82,6 +82,8 @@ public class RobotMap {
 		//ArmPosButton5 = ?
 		ArmFwdButton = 5,
 		ArmBwdButton = 6,
+		ZeroArm = 7,
+		GoToVertical = 8,
     
 		decellToggleButton = 1,
 		shiftButton = 2,
@@ -121,7 +123,7 @@ public class RobotMap {
 		driveAngleD = 0,
 		
 		//*TEMPORARY* PID Values
-				armPidP = 0.0,
+				armPidP = 0.5,
 				armPidI = 0.0,
 				armPidD = 0.0,
 				armPidF = 0.0,

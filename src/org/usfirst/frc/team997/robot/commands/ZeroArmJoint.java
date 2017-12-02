@@ -7,38 +7,46 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ArmJointToAngle extends Command {
-	
-	double angle;
+public class ZeroArmJoint extends Command {
 
-    public ArmJointToAngle(double _angle) {
+    public ZeroArmJoint() {
+    	requires(Robot.armJoint);
         // Use requires() here to declare subsystem dependencies
-    	angle = _angle;
-        requires(Robot.armJoint);
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.armJoint.setArmSetpoint(angle);
+    	System.out.println("Arm 0");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
+    	if (Robot.armJoint.isZeroed == false) {
+    		if (Robot.armJoint.Motor.isRevLimitSwitchClosed()) {
+    			Robot.armJoint.isZeroed = true;
+    		}
+    		else {
+    			Robot.armJoint.setVoltage(-0.25);
+
+    		}
+    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+		return Robot.armJoint.Motor.isRevLimitSwitchClosed();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.armJoint.stop();
+    	Robot.armJoint.isZeroed = true;
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

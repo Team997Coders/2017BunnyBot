@@ -3,6 +3,8 @@ package org.usfirst.frc.team997.robot.commands;
 import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 
+import com.ctre.CANTalon.TalonControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -25,23 +27,38 @@ public class ArmToAngle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	if (!Robot.armJoint.isZeroed) {
+    		System.out.println("Not zeroed!");
+    		end();
+    		cancel();
+    	}
+    	System.out.println("setting arm to angle " + angle);
+    	Robot.armJoint.Motor.changeControlMode(TalonControlMode.Position);
+    	Robot.armJoint.Motor.set(angle);
+    	
     	//Robot.armJoint.setSetpoint(angle);
     	//Robot.armJoint.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
+    	Robot.armJoint.Motor.enable();
     	//Robot.armJoint.setSetpoint(angle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	System.out.println("in arm2angle isfinished: " + Robot.armJoint.Motor.getClosedLoopError());
+    	System.out.println("   ... output voltage " + Robot.armJoint.Motor.getOutputVoltage());
        // return Robot.armJoint.onTarget();
-    	return true;
+    	return !Robot.armJoint.isZeroed || (Math.abs(Robot.armJoint.Motor.getClosedLoopError()) < 100);
+    	//return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.armJoint.stop();
     }
 
     // Called when another command which requires one or more of the same
