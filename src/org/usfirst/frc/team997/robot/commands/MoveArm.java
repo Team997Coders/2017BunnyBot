@@ -7,23 +7,24 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ArmJointToAngle extends Command {
+public class MoveArm extends Command {
+	public double value;
 	
-	double angle;
-
-    public ArmJointToAngle(double _angle) {
+    public MoveArm(double _value) {
         // Use requires() here to declare subsystem dependencies
-    	angle = _angle;
-        requires(Robot.armJoint);
+        // eg. requires(chassis);
+    	requires(Robot.armJoint);
+    	this.value = _value;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.armJoint.setArmSetpoint(angle);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("Holding MoveArm ");
+    	Robot.armJoint.setVoltage(value);
     }
 
     // Make this return true when this Command no longer needs to run execute()

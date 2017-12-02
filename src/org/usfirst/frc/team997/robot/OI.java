@@ -6,7 +6,7 @@ import org.usfirst.frc.team997.robot.commands.ClawButtonCommand;
 import org.usfirst.frc.team997.robot.commands.ReverseToggle;
 
 import org.usfirst.frc.team997.robot.commands.DecellToggle;
-
+import org.usfirst.frc.team997.robot.commands.MoveArm;
 import org.usfirst.frc.team997.robot.commands.ShiftCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -25,16 +25,18 @@ public class OI {
 	public boolean arcadeDrive = true;
   
 	public final Joystick
-	GamePad;
+	GamePad2, GamePad;
 	
 	public final JoystickButton
 	decellToggleButton,
 	shiftButton,
 	clawButton,
-	reverseButton
+	reverseButton,
    ArmPosOne,
 	ArmPosTwo,
 	ArmPosThree,
+	MoveArmFwdButton,
+	MoveArmRevButton,
 	ArmPosFour/*,
 	ArmPosFive*/;
 	
@@ -55,18 +57,23 @@ public class OI {
 		clawButton.whenPressed(new ClawButtonCommand());
 		reverseButton = new JoystickButton(GamePad, RobotMap.Ports.reverseToggButton);
 		reverseButton.whenPressed(new ReverseToggle());
+		
+		MoveArmFwdButton = new JoystickButton(GamePad, RobotMap.Ports.ArmFwdButton);
+		MoveArmFwdButton.whileHeld(new MoveArm(0.25));
+		
+		MoveArmRevButton = new JoystickButton(GamePad, RobotMap.Ports.ArmBwdButton);
+		MoveArmRevButton.whileHeld(new MoveArm(-0.25));
     
-    ArmPosThree = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton3);
+		ArmPosThree = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton3);
 		ArmPosOne = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton1);
 		ArmPosTwo = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton2);
 		ArmPosFour = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton4);
 		
-		ArmPosOne.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos1));
-		ArmPosTwo.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos2));
-		ArmPosThree.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos3));
-		ArmPosFour.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos4));
+		//ArmPosOne.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos1));
+		//ArmPosTwo.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos2));
+		//ArmPosThree.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos3));
+		//ArmPosFour.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos4));
 		//ArmPosFive.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos5));
-		
 	}
 	
 	public double getLeftY() {
@@ -85,8 +92,11 @@ public class OI {
 	
 	public void updateDashboard() {
 		SmartDashboard.putBoolean("Decel on/off", decellOn);
+		SmartDashboard.putBoolean("LB", GamePad.getRawButton(RobotMap.Ports.ArmFwdButton));
+		SmartDashboard.putBoolean("RB", GamePad.getRawButton(RobotMap.Ports.ArmBwdButton));
 	}
 	
+}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.

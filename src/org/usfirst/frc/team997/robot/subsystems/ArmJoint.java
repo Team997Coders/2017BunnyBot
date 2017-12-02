@@ -1,15 +1,13 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
-import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.TalonSRX;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -17,19 +15,23 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ArmJoint extends Subsystem {
 	
 	public CANTalon Motor;
-	public Encoder ArmAngle;
 	public static final double absoluteTolerance = 0.01;
 
     // Initialize your subsystem here
     public ArmJoint() {
     	
     	Motor = new CANTalon(RobotMap.Ports.bucketLifter);
+    	Motor.reset();
+
     	Motor.clearStickyFaults();
     	Motor.changeControlMode(TalonControlMode.PercentVbus);
     	Motor.setSafetyEnabled(false);
-    	Motor.reset();
-    	ArmAngle = new Encoder(RobotMap.Ports.armEncoderFirstPort, RobotMap.Ports.armEncoderSecondPort);
+    	Motor.enableLimitSwitch(true, true);
+    	Motor.enableBrakeMode(false);
+    	Motor.enable();
+
     	
+    	LiveWindow.addActuator("ArmJoint", 1, (CANTalon) Motor);
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to
@@ -42,22 +44,32 @@ public class ArmJoint extends Subsystem {
     }
     
     public void SetPosition(double NewAngle) {
-    	double angle = ArmAngle.get();
-    	
+    	double angle = Motor.getEncPosition();
     }
     
-    
-
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
 
-    protected double returnPIDInput() {
-        return ArmAngle.get();
+    public void stop() {
+    	//System.out.println("Stop Arm");
+    	//Motor.changeControlMode(TalonControlMode.PercentVbus);
+    	Motor.set(0.0);
     }
-
-    protected void usePIDOutput(double output) {
-        Motor.pidWrite(output);
+    
+    public void setVoltage(double volts) {
+    	//Motor.changeControlMode(TalonControlMode.PercentVbus);
+    	Motor.set(volts);
+    }
+    
+    public void setArmSetpoint(double angle) {
+    }    
+    
+    public void updateSmartDashboard() {
+    	SmartDashboard.putNumber("ArmJoint Encoder", Motor.getEncPosition());
+    	SmartDashboard.putNumber("Arm Voltage", Motor.getOutputVoltage());
+    	SmartDashboard.putBoolean("Holo1", Motor.isFwdLimitSwitchClosed());
+    	SmartDashboard.putBoolean("Holo2", Motor.isRevLimitSwitchClosed());
     }
 }

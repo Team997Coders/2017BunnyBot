@@ -18,13 +18,15 @@ public class RobotMap {
 		//PWM *TEMPORARY*
 		leftMotorPort = 1,  
 		rightMotorPort = 0,
+		
+		//CAN ID - bucket lifter
 		bucketLifter = 1,
 		
 		//DIO *TEMPORARY*
-		leftEncoderFirstPort = 2,
-		leftEncoderSecondPort = 3,
-		rightEncoderFirstPort = 0,
-		rightEncoderSecondPort = 1,
+		leftEncoderFirstPort = 8,
+		leftEncoderSecondPort = 9,
+		rightEncoderFirstPort = 6,
+		rightEncoderSecondPort = 7,
 		armEncoderFirstPort = 4,
 		armEncoderSecondPort = 5,
 		
@@ -78,6 +80,8 @@ public class RobotMap {
 		ArmPosButton3 = 3,
 		ArmPosButton4 = 4,
 		//ArmPosButton5 = ?
+		ArmFwdButton = 5,
+		ArmBwdButton = 6,
     
 		decellToggleButton = 1,
 		shiftButton = 2,
@@ -135,15 +139,17 @@ public class RobotMap {
 				ArmPos2 = 45,
 				ArmPos3 = 90,
 				ArmPos4 = 135,
-				ArmPos5 = 180;
-		
-		public static String 
-			reverseMotor = "right";
+				ArmPos5 = 180,
 		
 		//Deccel
 		DeccelSpeed = 0.2,
 		DeccelDivider = 1.2,
 		DriveSpeedMod = 1;
+		
+		public static String 
+		reverseMotor = "right";
+	
+
 	
 	}
 		

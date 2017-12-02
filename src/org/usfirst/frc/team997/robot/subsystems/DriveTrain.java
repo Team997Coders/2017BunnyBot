@@ -23,9 +23,6 @@ public class DriveTrain extends Subsystem {
     public Encoder leftEncoder, rightEncoder;
     public DoubleSolenoid shiftSolenoid;
     public AHRS ahrs;
-    
-    public double PrevLeftV, PrevRightV;
-    
    
     //variables here
     public int gear; 
