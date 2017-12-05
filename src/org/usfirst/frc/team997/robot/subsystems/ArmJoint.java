@@ -29,7 +29,7 @@ public class ArmJoint extends Subsystem {
     	Motor.clearStickyFaults();
     	Motor.setSafetyEnabled(false);
     	Motor.configNominalOutputVoltage(0, 0);
-    	Motor.configPeakOutputVoltage(6, -6);
+    	Motor.configPeakOutputVoltage(9, -9);
     	Motor.setAllowableClosedLoopErr(0);
     	Motor.setProfile(0);
     	//Motor.configEncoderCodesPerRev(1);
@@ -82,7 +82,7 @@ public class ArmJoint extends Subsystem {
     	SmartDashboard.putBoolean("Holo1", Motor.isFwdLimitSwitchClosed());
     	SmartDashboard.putBoolean("Holo2", Motor.isRevLimitSwitchClosed());
     	SmartDashboard.putBoolean("ArmZeroed", Robot.armJoint.isZeroed);
-    	SmartDashboard.putNumber("ArmPIDError", Motor.getError());
+    	SmartDashboard.putNumber("ArmPIDError", Motor.getClosedLoopError());
     	SmartDashboard.putNumber("Another Position ", Motor.getPosition());
     }
 }

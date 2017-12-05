@@ -15,9 +15,9 @@ public class ArmToAngle extends Command {
 	private final double angle;
 	
 	//Preset Levels
-	public static ArmToAngle low() { return new ArmToAngle(RobotMap.Values.armPosOne); }
-	public static ArmToAngle medium() { return new ArmToAngle(RobotMap.Values.armPosTwo); }
-	public static ArmToAngle high() { return new ArmToAngle(RobotMap.Values.armPosThree); }
+	//public static ArmToAngle low() { return new ArmToAngle(RobotMap.Values.armPosOne); }
+	//public static ArmToAngle medium() { return new ArmToAngle(RobotMap.Values.armPosTwo); }
+	//public static ArmToAngle high() { return new ArmToAngle(RobotMap.Values.armPosThree); }
 
     public ArmToAngle(double angle) {
         // Use requires() here to declare subsystem dependencies
@@ -34,7 +34,6 @@ public class ArmToAngle extends Command {
     	}
     	System.out.println("setting arm to angle " + angle);
     	Robot.armJoint.Motor.changeControlMode(TalonControlMode.Position);
-    	Robot.armJoint.Motor.set(angle);
     	
     	//Robot.armJoint.setSetpoint(angle);
     	//Robot.armJoint.enable();
@@ -43,6 +42,7 @@ public class ArmToAngle extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
+    	Robot.armJoint.Motor.set(angle);
     	Robot.armJoint.Motor.enable();
     	//Robot.armJoint.setSetpoint(angle);
     }
@@ -52,7 +52,7 @@ public class ArmToAngle extends Command {
     	System.out.println("in arm2angle isfinished: " + Robot.armJoint.Motor.getClosedLoopError());
     	System.out.println("   ... output voltage " + Robot.armJoint.Motor.getOutputVoltage());
        // return Robot.armJoint.onTarget();
-    	return !Robot.armJoint.isZeroed || (Math.abs(Robot.armJoint.Motor.getClosedLoopError()) < 100);
+    	return !Robot.armJoint.isZeroed || (Math.abs(Robot.armJoint.Motor.getClosedLoopError()) < 10);
     	//return true;
     }
 

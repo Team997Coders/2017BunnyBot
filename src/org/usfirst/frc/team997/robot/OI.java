@@ -34,15 +34,15 @@ public class OI {
 	shiftButton,
 	clawButton,
 	reverseButton,
-   ArmPosOne,
-	ArmPosTwo,
-	ArmPosThree,
 	MoveArmFwdButton,
 	MoveArmRevButton,
 	ZeroArmButton,
 	GoToVerticalButton,
-	ArmPosFour/*,
-	ArmPosFive*/;
+	ArmVerticalButton,
+	ArmLevelForwardButton,
+	ArmLevelBackwardButton,
+	ArmFloorForwardButton,
+	ArmFloorBackwardButton;
 	
 	//automatedTestButton;
 	
@@ -63,26 +63,27 @@ public class OI {
 		reverseButton.whenPressed(new ReverseToggle());
 		
 		MoveArmFwdButton = new JoystickButton(GamePad, RobotMap.Ports.ArmFwdButton);
-		MoveArmFwdButton.whileHeld(new MoveArm(0.25));
+		MoveArmFwdButton.whileHeld(new MoveArm(0.5));
 		
 		MoveArmRevButton = new JoystickButton(GamePad, RobotMap.Ports.ArmBwdButton);
-		MoveArmRevButton.whileHeld(new MoveArm(-0.25));
+		MoveArmRevButton.whileHeld(new MoveArm(-0.5));
 		ZeroArmButton = new JoystickButton(GamePad, RobotMap.Ports.ZeroArm);
 		ZeroArmButton.whenPressed(new ZeroArmJoint());
-		ArmPosThree = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton3);
-		ArmPosOne = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton1);
-		ArmPosTwo = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton2);
-		ArmPosFour = new JoystickButton(GamePad2, RobotMap.Ports.ArmPosButton4);
+		ArmVerticalButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionVertical);
+		ArmLevelForwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionForwardLevel);
+		ArmLevelBackwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionBackwardLevel);
+		ArmFloorForwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionForwardFloor);
+		ArmFloorBackwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionBackwardFloor);
 		GoToVerticalButton = new JoystickButton(GamePad, RobotMap.Ports.GoToVertical);
 		//GoToVerticalButton.whenPressed(new ArmToAngle(15792));
 		GoToVerticalButton.whenPressed(new ArmToAngle(3.81));
 
 		
-		//ArmPosOne.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos1));
-		//ArmPosTwo.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos2));
-		//ArmPosThree.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos3));
-		//ArmPosFour.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos4));
-		//ArmPosFive.whenPressed(new ArmJointToAngle(RobotMap.Values.ArmPos5));
+		ArmVerticalButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionVertical));
+		ArmLevelForwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionForwardLevel));
+		ArmLevelBackwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionBackwardLevel));
+		ArmFloorForwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionForwardFloor));
+		ArmFloorBackwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionBackwardFloor));
 	}
 	
 	public double getLeftY() {

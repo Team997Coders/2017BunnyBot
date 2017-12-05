@@ -74,12 +74,6 @@ public class RobotMap {
 		 */
 		
     //BUTTONS
-		
-		ArmPosButton1 = 1,
-		ArmPosButton2 = 2,
-		ArmPosButton3 = 3,
-		ArmPosButton4 = 4,
-		//ArmPosButton5 = ?
 		ArmFwdButton = 5,
 		ArmBwdButton = 6,
 		ZeroArm = 7,
@@ -94,7 +88,14 @@ public class RobotMap {
 		leftXAxisPort = 0,
 		leftYAxisPort = 1,
 		rightXAxisPort = 4,
-		rightYAxisPort = 5;
+		rightYAxisPort = 5,
+		
+		//GAMEPAD2 ARM POSITIONS
+		armPositionVertical = 1,
+		armPositionForwardLevel = 4,
+		armPositionForwardFloor = 5,
+		armPositionBackwardLevel = 2,
+		armPositionBackwardFloor = 6;
     
 		//GYRO
 		public static final SerialPort.Port AHRS = SerialPort.Port.kUSB;
@@ -121,9 +122,17 @@ public class RobotMap {
 		driveAngleP = 0,
 		driveAngleI = 0,
 		driveAngleD = 0,
+
+		// Constants to define arm position for encoder
+		armPositionVertical = 3.8,
+		armPositionForwardLevel = 5,
+		armPositionForwardFloor = 6.6,
+		armPositionBackwardLevel = 1,
+		armPositionBackwardFloor = 0,
+		
 		
 		//*TEMPORARY* PID Values
-				armPidP = 0.5,
+				armPidP = 0.6,
 				armPidI = 0.0,
 				armPidD = 0.0,
 				armPidF = 0.0,
