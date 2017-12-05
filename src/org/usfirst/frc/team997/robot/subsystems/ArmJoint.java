@@ -25,13 +25,17 @@ public class ArmJoint extends Subsystem {
     	
     	Motor = new CANTalon(RobotMap.Ports.bucketLifter);
     	Motor.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-    	Motor.setPID(RobotMap.Values.armPidP, RobotMap.Values.armPidI, RobotMap.Values.armPidD);
     	Motor.clearStickyFaults();
     	Motor.setSafetyEnabled(false);
     	Motor.configNominalOutputVoltage(0, 0);
     	Motor.configPeakOutputVoltage(9, -9);
-    	Motor.setAllowableClosedLoopErr(0);
+    	Motor.setAllowableClosedLoopErr(10);
     	Motor.setProfile(0);
+    	Motor.setP(RobotMap.Values.armPidP);
+    	Motor.setI(RobotMap.Values.armPidI);
+    	Motor.setD(RobotMap.Values.armPidD);
+    	Motor.setF(0);
+
     	//Motor.configEncoderCodesPerRev(1);
     	//Motor.enableLimitSwitch(true, true);
     	//Motor.enableBrakeMode(false);
@@ -52,7 +56,7 @@ public class ArmJoint extends Subsystem {
     	return countPerDegree * angle;
     }
     
-    public void SetPosition(double NewAngle) {
+    public void getPosition(double NewAngle) {
     	double angle = Motor.getEncPosition();
     }
     
@@ -77,12 +81,11 @@ public class ArmJoint extends Subsystem {
     
     public void updateSmartDashboard() {
     	SmartDashboard.putNumber("TalonSRX Mode", Motor.getControlMode().value);
-    	SmartDashboard.putNumber("ArmJoint Encoder", Motor.getEncPosition());
     	SmartDashboard.putNumber("Arm Voltage", Motor.getOutputVoltage());
     	SmartDashboard.putBoolean("Holo1", Motor.isFwdLimitSwitchClosed());
     	SmartDashboard.putBoolean("Holo2", Motor.isRevLimitSwitchClosed());
     	SmartDashboard.putBoolean("ArmZeroed", Robot.armJoint.isZeroed);
     	SmartDashboard.putNumber("ArmPIDError", Motor.getClosedLoopError());
-    	SmartDashboard.putNumber("Another Position ", Motor.getPosition());
+    	SmartDashboard.putNumber("Arm Position ", Motor.getPosition());
     }
 }

@@ -125,14 +125,14 @@ public class RobotMap {
 
 		// Constants to define arm position for encoder
 		armPositionVertical = 3.8,
-		armPositionForwardLevel = 5,
-		armPositionForwardFloor = 6.6,
+		armPositionForwardLevel = 7.0,
+		armPositionForwardFloor = 7.6,
 		armPositionBackwardLevel = 1,
 		armPositionBackwardFloor = 0,
 		
 		
 		//*TEMPORARY* PID Values
-				armPidP = 0.6,
+				armPidP = 0.7,
 				armPidI = 0.0,
 				armPidD = 0.0,
 				armPidF = 0.0,
@@ -159,9 +159,6 @@ public class RobotMap {
 		
 		public static String 
 		reverseMotor = "right";
-	
-
-	
 	}
 		
 }

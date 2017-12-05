@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ArmToAngle extends Command {
 	
+	public static boolean locked;
 	private final double angle;
 	
 	//Preset Levels
@@ -58,7 +59,7 @@ public class ArmToAngle extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.armJoint.stop();
+    	//Robot.armJoint.stop();
     }
 
     // Called when another command which requires one or more of the same
