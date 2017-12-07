@@ -1,0 +1,34 @@
+Code for 2017 Bynnybot competition
+
+This is the code leveraged from previous year's code and new development
+to control the robot Luminere.
+
+The basic game is 'Hide and Seek'.  There are 20 5gal buckets on each half
+of the 56ft field.  In half of these are placeda small stuffed toy rabbit.
+The goal is to find the rabbits and place them on the floor on your side of the field.
+
+1 - Autonomous
+    a - do nothing (standard)
+    b - PID drive straight to distance with gyro compensation
+    c - grouped commands to drive straight and try to grab a bucket.
+    
+2 - Teleop
+    a - standard manual drive
+    b - PID Velocity control
+    
+There are also four drive modifiers to affect both auto and teleop:
+
+1 - Deceleration Control (with decel factor on dashboard)
+2 - Acceleration Control (with accel factor on dashboard)
+3 - Drive Type (Arcade/Tank) - Effects manual driving only
+4 - Drive Direction (Forward/Reverse)
+
+There are also 2 control buttons that switch modes as well
+A - Climb control (standard)
+B - Auto Move forward N inches (set on dashboard, but default will be 48in)
+    (this can be used either from a stand-still - V.0 = 0, or from a running start - V.0 = Vstart)
+
+These modes will allow significant testing of the drive train and to understand the best way to control our motion.
+
+Determine max velocity, max acceleration (static friction, wheel limited)   
+
