@@ -28,7 +28,7 @@ public class ArmJoint extends Subsystem {
     	Motor.clearStickyFaults();
     	Motor.setSafetyEnabled(false);
     	Motor.configNominalOutputVoltage(0, 0);
-    	Motor.configPeakOutputVoltage(9, -9);
+    	Motor.configPeakOutputVoltage(12, -12);
     	Motor.setAllowableClosedLoopErr(10);
     	Motor.setProfile(0);
     	Motor.setP(RobotMap.Values.armPidP);
@@ -54,6 +54,13 @@ public class ArmJoint extends Subsystem {
     public double AngleToEncoderTick(double angle) {
     	double countPerDegree = 1024 / 360;
     	return countPerDegree * angle;
+    }
+    
+    public void autozero() {
+    	if (Motor.isRevLimitSwitchClosed() && !isZeroed) {
+    		isZeroed = true;
+    		
+    	}
     }
     
     public void getPosition(double NewAngle) {

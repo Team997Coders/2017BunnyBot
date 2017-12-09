@@ -53,7 +53,7 @@ public class ArmToAngle extends Command {
     	System.out.println("in arm2angle isfinished: " + Robot.armJoint.Motor.getClosedLoopError());
     	System.out.println("   ... output voltage " + Robot.armJoint.Motor.getOutputVoltage());
        // return Robot.armJoint.onTarget();
-    	return !Robot.armJoint.isZeroed || (Math.abs(Robot.armJoint.Motor.getClosedLoopError()) < 10);
+    	return !Robot.armJoint.isZeroed || (Math.abs(Robot.armJoint.Motor.getClosedLoopError()) < 60);
     	//return true;
     }
 

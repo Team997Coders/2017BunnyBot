@@ -30,9 +30,10 @@ public class OI {
 	GamePad2, GamePad;
 	
 	public final JoystickButton
-	decellToggleButton,
+	//decellToggleButton,
 	shiftButton,
 	clawButton,
+	clawButton2,
 	reverseButton,
 	MoveArmFwdButton,
 	MoveArmRevButton,
@@ -42,48 +43,67 @@ public class OI {
 	ArmLevelForwardButton,
 	ArmLevelBackwardButton,
 	ArmFloorForwardButton,
-	ArmFloorBackwardButton;
-	
-	//automatedTestButton;
+	ArmFloorBackwardButton,
+	ArmMidForwardButton,
+	ArmMidBackwardButton;
 	
 	public OI() {
 		//Joystick Init
 		GamePad = new Joystick(RobotMap.Ports.GamePadPort);
-    GamePad2 = new Joystick(RobotMap.Ports.GamePad2Port);
+		GamePad2 = new Joystick(RobotMap.Ports.GamePad2Port);
 		
-		//Buttons Init
-		
-		decellToggleButton = new JoystickButton(GamePad, RobotMap.Ports.decellToggleButton);
-		decellToggleButton.whenPressed(new DecellToggle());
-		shiftButton = new JoystickButton(GamePad, RobotMap.Ports.shiftButton);
-		shiftButton.whenPressed(new ShiftCommand());
-		clawButton = new JoystickButton(GamePad, RobotMap.Ports.clawButton);
+		//ARM CONTROL BUTTONS
+		clawButton = new JoystickButton(GamePad, RobotMap.Ports.clawButton2);
 		clawButton.whenPressed(new ClawButtonCommand());
-		reverseButton = new JoystickButton(GamePad, RobotMap.Ports.reverseToggButton);
-		reverseButton.whenPressed(new ReverseToggle());
+		
+		clawButton2 = new JoystickButton(GamePad2, RobotMap.Ports.clawButton);
+		clawButton2.whenPressed(new ClawButtonCommand());
 		
 		MoveArmFwdButton = new JoystickButton(GamePad, RobotMap.Ports.ArmFwdButton);
 		MoveArmFwdButton.whileHeld(new MoveArm(0.5));
 		
 		MoveArmRevButton = new JoystickButton(GamePad, RobotMap.Ports.ArmBwdButton);
 		MoveArmRevButton.whileHeld(new MoveArm(-0.5));
+		
 		ZeroArmButton = new JoystickButton(GamePad, RobotMap.Ports.ZeroArm);
 		ZeroArmButton.whenPressed(new ZeroArmJoint());
-		ArmVerticalButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionVertical);
-		ArmLevelForwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionForwardLevel);
-		ArmLevelBackwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionBackwardLevel);
-		ArmFloorForwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionForwardFloor);
-		ArmFloorBackwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionBackwardFloor);
-		GoToVerticalButton = new JoystickButton(GamePad, RobotMap.Ports.GoToVertical);
-		//GoToVerticalButton.whenPressed(new ArmToAngle(15792));
-		GoToVerticalButton.whenPressed(new ArmToAngle(3.81));
-
 		
+		//ARM POS BUTTONS
+		ArmVerticalButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionVertical);
 		ArmVerticalButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionVertical));
+		
+		ArmLevelForwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionForwardLevel);
 		ArmLevelForwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionForwardLevel));
+		
+		ArmLevelBackwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionBackwardLevel);
 		ArmLevelBackwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionBackwardLevel));
+		
+		ArmFloorForwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionForwardFloor);
 		ArmFloorForwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionForwardFloor));
+		
+		ArmFloorBackwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionBackwardFloor);
 		ArmFloorBackwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionBackwardFloor));
+		
+		ArmMidForwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionForwardMid);
+		ArmMidForwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionMidForward));
+		
+		ArmMidBackwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionBackwardMid);
+		ArmMidBackwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionMidBackward));
+		
+		GoToVerticalButton = new JoystickButton(GamePad, RobotMap.Ports.GoToVertical);
+		GoToVerticalButton.whenPressed(new ArmToAngle(3.81));
+		//GoToVerticalButton.whenPressed(new ArmToAngle(15792));
+		
+		//DRIVETRAIN BUTTONS
+		shiftButton = new JoystickButton(GamePad, RobotMap.Ports.shiftButton);
+		shiftButton.whenPressed(new ShiftCommand());
+		
+		reverseButton = new JoystickButton(GamePad, RobotMap.Ports.reverseToggButton);
+		reverseButton.whenPressed(new ReverseToggle());
+		
+		//decellToggleButton = new JoystickButton(GamePad, RobotMap.Ports.decellToggleButton);
+		//decellToggleButton.whenPressed(new DecellToggle());
+	
 	}
 	
 	public double getLeftY() {
@@ -107,31 +127,4 @@ public class OI {
 	}
 	
 }
-	//// CREATING BUTTONS
-	// One type of button is a joystick button which is any button on a
-	//// joystick.
-	// You create one by telling it which joystick it's on and which button
-	// number it is.
-	// Joystick stick = new Joystick(port);
-	// Button button = new JoystickButton(stick, buttonNumber);
-
-	// There are a few additional built in buttons you can use. Additionally,
-	// by subclassing Button you can create custom triggers and bind those to
-	// commands the same as any other Button.
-
-	//// TRIGGERING COMMANDS WITH BUTTONS
-	// Once you have a button, it's trivial to bind it to a button in one of
-	// three ways:
-
-	// Start the command when the button is pressed and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenPressed(new ExampleCommand());
-
-	// Run the command while the button is being held down and interrupt it once
-	// the button is released.
-	// button.whileHeld(new ExampleCommand());
-
-	// Start the command when the button is released and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
-
+	

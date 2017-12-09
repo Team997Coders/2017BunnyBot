@@ -52,36 +52,37 @@ public class RobotMap {
 		/*Button|number|command called
 		        |      |
 		   A    |1	   |decell toggle	
-		   B    |2     |shift gear
-		   X    |3     |open/close claw
+		   B    |2     |
+		   X    |3     |
 		   Y    |4     |reverse drivetrain
-		   Lb   |5     |
-		   Rb   |6     |
-		   Back |7     |
+		   Lb   |5     |Shift Gear
+		   Rb   |6     |Open/Close Claw
+		   Back |7     |Zero Claw
 		   Start|8     |
 		 */
 		//Gamepad 2:
 		/*Button|number|command called
 		        |      |
-		   A    |1	   |armPos1
-		   B    |2     |armPos2
-		   X    |3     |armPos3
-		   Y    |4     |armPos4
-		   Lb   |5     |
-		   Rb   |6     |
-		   Back |7     |
-		   Start|8     |
+		   A    |1	   |ForwardMid
+		   B    |2     |Open/Close Claw
+		   X    |3     |BackwardMid
+		   Y    |4     |Vertical
+		   Lb   |5     |ForwardLevel
+		   Rb   |6     |BackwardLevel
+		   Back |7     |ForwardFloor
+		   Start|8     |BackwardFloor
 		 */
 		
     //BUTTONS
-		ArmFwdButton = 5,
-		ArmBwdButton = 6,
+		ArmFwdButton = 1,
+		ArmBwdButton = 2,
 		ZeroArm = 7,
 		GoToVertical = 8,
     
-		decellToggleButton = 1,
-		shiftButton = 2,
-		clawButton = 3,
+		//decellToggleButton = 0,
+		shiftButton = 5,
+		clawButton = 2,
+		clawButton2 = 6,
 		reverseToggButton = 4,
 		
 		//THE PLURAL TO AXIS 
@@ -91,11 +92,13 @@ public class RobotMap {
 		rightYAxisPort = 5,
 		
 		//GAMEPAD2 ARM POSITIONS
-		armPositionVertical = 1,
-		armPositionForwardLevel = 4,
-		armPositionForwardFloor = 5,
-		armPositionBackwardLevel = 2,
-		armPositionBackwardFloor = 6;
+		armPositionVertical = 4,
+		armPositionForwardLevel = 5,
+		armPositionForwardFloor = 7,
+		armPositionBackwardLevel = 6,
+		armPositionBackwardFloor = 8,
+		armPositionBackwardMid = 3,
+		armPositionForwardMid = 1;
     
 		//GYRO
 		public static final SerialPort.Port AHRS = SerialPort.Port.kUSB;
@@ -113,7 +116,7 @@ public class RobotMap {
 		
 		//Drive Distance PID
 		
-		driveDistanceP = 0,
+		driveDistanceP = 0.5,
 		driveDistanceI = 0,
 		driveDistanceD = 0,
 		
@@ -127,8 +130,10 @@ public class RobotMap {
 		armPositionVertical = 3.8,
 		armPositionForwardLevel = 7.0,
 		armPositionForwardFloor = 7.6,
-		armPositionBackwardLevel = 1,
+		armPositionBackwardLevel = 0.6,
 		armPositionBackwardFloor = 0,
+		armPositionMidForward = 5.4,
+		armPositionMidBackward = 2.2,
 		
 		
 		//*TEMPORARY* PID Values

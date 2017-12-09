@@ -35,6 +35,8 @@ public class DriveTrain extends Subsystem {
     	rightMotor = new VictorSP(RobotMap.Ports.rightMotorPort);
     	leftEncoder = new Encoder(RobotMap.Ports.leftEncoderFirstPort, RobotMap.Ports.leftEncoderSecondPort);
     	rightEncoder = new Encoder(RobotMap.Ports.rightEncoderFirstPort, RobotMap.Ports.rightEncoderSecondPort);
+    	rightEncoder.setReverseDirection(true);
+    	rightEncoder.setDistancePerPulse(1/2873); //2873 ticks/foot
     	shiftSolenoid = new DoubleSolenoid(RobotMap.Ports.shifterSolenoidLow, RobotMap.Ports.shifterSolenoidHigh);
     	
     	try {
@@ -119,6 +121,8 @@ public class DriveTrain extends Subsystem {
     public void SetVoltages(double LeftVolts, double RightVolts) {
     	leftMotor.set(-Robot.clamp(1, -1, LeftVolts));
     	rightMotor.set(Robot.clamp(1, -1, RightVolts));
+    	SmartDashboard.putNumber("leftvoltage", -Robot.clamp(1, -1, LeftVolts));
+    	SmartDashboard.putNumber("rightvoltage", Robot.clamp(1, -1, RightVolts));
     	//Clamp is being a voltage limiter here, in case you wanted to know.
     	
     }
@@ -143,6 +147,7 @@ public class DriveTrain extends Subsystem {
     	//dash.setDefaultNumber("Right Voltage", RightVolts);
     	SmartDashboard.putNumber("Left encoder value", leftEncoder.get());
     	SmartDashboard.putNumber("Right encoder value", rightEncoder.get());
+    	SmartDashboard.putNumber("right encoder distance", rightEncoder.getDistance());
     	SmartDashboard.putNumber("NavX angle", ahrs.getAngle());
     	SmartDashboard.putBoolean("gyroPresent", gyroPresent);
     	SmartDashboard.putBoolean("Decell (drivetrain)", Robot.oi.decellOn);

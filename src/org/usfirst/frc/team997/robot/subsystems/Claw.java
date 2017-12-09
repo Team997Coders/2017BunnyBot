@@ -27,17 +27,17 @@ public class Claw extends Subsystem {
     // here. Call these from Commands.
 
     public void openClaw() {
-    	if(clawOpen == false) {
-    		clawSolenoid.set(DoubleSolenoid.Value.kForward);
+    	
+    		clawSolenoid.set(DoubleSolenoid.Value.kReverse);
     		clawOpen = true;
-    	}
+    	
     }
     
     public void closeClaw() {
-    	if(clawOpen == true) {
-    		clawSolenoid.set(DoubleSolenoid.Value.kReverse);
+    
+    		clawSolenoid.set(DoubleSolenoid.Value.kForward);
     		clawOpen = false;
-    	}
+    	
     }
     
     public void stopClaw() {

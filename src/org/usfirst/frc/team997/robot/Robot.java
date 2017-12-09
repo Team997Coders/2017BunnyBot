@@ -3,6 +3,11 @@ package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.subsystems.Claw;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team997.robot.commands.AutoBucket;
+import org.usfirst.frc.team997.robot.commands.DoNothing;
+import org.usfirst.frc.team997.robot.commands.DriveTo;
+import org.usfirst.frc.team997.robot.commands.DriveToDistance;
+import org.usfirst.frc.team997.robot.commands.Timercommand;
 import org.usfirst.frc.team997.robot.subsystems.ArmJoint;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -55,8 +60,12 @@ public class Robot extends IterativeRobot {
 		 }*/
 		
 		oi = new OI();
-		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		chooser.addObject("AutoBucket", new AutoBucket());	//drive forward, does arm+claw stuff
+		//chooser.addObject("Drive forward", new DriveTo(36));	//doesn't work
+		chooser.addObject("Timertest", new Timercommand(2));	//drive forward _ seconds
+		chooser.addDefault("Do nothing", new DoNothing());
+		//chooser.addObject("Test driveToDistance", new DriveToDistance(2872));	//doesn't work
 	}
 
 	/**
@@ -73,6 +82,7 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		updateSmartDashboard();
+		armJoint.autozero();
 	}
 
 	/**
