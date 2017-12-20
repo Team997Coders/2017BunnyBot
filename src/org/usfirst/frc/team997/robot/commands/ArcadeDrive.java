@@ -4,6 +4,7 @@ import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -22,19 +23,20 @@ public class ArcadeDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double[] volts = this.getVoltages();
-    
-    	volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
-      
-    	if (Robot.oi.reverseBool) {
-    		Robot.driveTrain.setReverseVoltages(volts[0], volts[1]); 			
-    	} else {
-          if(Robot.oi.decellOn) {
-    		    volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
-    	  }  else {
-          Robot.driveTrain.SetVoltages(volts[0], volts[1]);
-        }
-    	} 
+
+    	double getArcadeLeftSpeed = Robot.JoystickDeadband(Robot.oi.getLeftY() - Robot.oi.getRightX());
+    	//double getArcadeLeftSpeed, getArcadeRightSpeed;
+    	double getArcadeRightSpeed = Robot.JoystickDeadband(Robot.oi.getLeftY() + Robot.oi.getRightX());
+    	//double[] a = getVoltages();
+    	//getArcadeLeftSpeed = a[0];
+    	//getArcadeRightSpeed = a[1];
+
+    	 if (Robot.oi.decellOn) {
+    	Robot.driveTrain.driveDeccel(getArcadeLeftSpeed, getArcadeRightSpeed);
+    	 } else {
+    		 Robot.driveTrain.SetVoltages(getArcadeLeftSpeed, getArcadeRightSpeed);
+    	 }
+    	
     }
     
     public double[] getVoltages() {
@@ -56,10 +58,11 @@ public class ArcadeDrive extends Command {
     	}
     	
     	volts[0] = left;
-    	volts[1] = -right;
+    	volts[1] = right;
     	return volts;
     }
 
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;

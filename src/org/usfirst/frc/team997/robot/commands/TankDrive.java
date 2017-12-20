@@ -4,6 +4,7 @@ import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -21,16 +22,17 @@ public class TankDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double[] volts = getVolts();
-    	
+
     	if (Robot.oi.reverseBool) {
     		Robot.driveTrain.setReverseVoltages(volts[0], volts[1]);
     	} else {
             if (Robot.oi.decellOn) {
-                volts = Robot.driveTrain.DecellCheck(volts[0], volts[1]);
+                Robot.driveTrain.driveDeccel(volts[0], volts[1]);
             } else {
                 Robot.driveTrain.SetVoltages(volts[0], volts[1]);
             }
     	}
+  
     }
     public double[] getVolts() {
     	double[] volts = new double[2];

@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -20,7 +21,7 @@ public class DriveTo extends Command implements PIDOutput {
 	private double initAngle;
 	
     public DriveTo(double distance) {
-    	this(distance, Robot.driveTrain.leftEncoder);
+    	this(distance, Robot.driveTrain.rightEncoder);
     	}
     
     public DriveTo(double distance, PIDSource source) {
@@ -33,15 +34,16 @@ public class DriveTo extends Command implements PIDOutput {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	controller.setSetpoint(SetPoint + Robot.driveTrain.leftEncoder.getDistance());
+    	controller.setSetpoint(SetPoint + Robot.driveTrain.rightEncoder.getDistance());
     	controller.enable();
+    	controller.setAbsoluteTolerance(3);
     	initAngle = Robot.driveTrain.ahrs.getAngle();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     
-    	Robot.driveTrain.SetVoltages(pidRate, 0.06*Robot.driveTrain.ahrs.getAngle());
+    	//Robot.driveTrain.SetVoltages(-pidRate, -0.06*Robot.driveTrain.ahrs.getAngle());
     	double angleOffset = (Robot.driveTrain.ahrs.getAngle() - initAngle);
     
     	if(angleOffset > 180) {
@@ -51,8 +53,11 @@ public class DriveTo extends Command implements PIDOutput {
     	}
     	
     	double mult = RobotMap.Values.driveMult; //-.05
-    	Robot.driveTrain.SetVoltages(Robot.clamp(pidRate + angleOffset * mult), Robot.clamp(pidRate - angleOffset * mult));
-
+    	//Robot.driveTrain.SetVoltages(-Robot.clamp(1, -1, (pidRate + angleOffset * mult)), -Robot.clamp(1, -1, (pidRate - angleOffset * mult)));
+    	
+    	/*Current state of affairs:
+    	 * Robot turns 90 degrees to the right
+    	 */
     }
     	
 
@@ -75,6 +80,10 @@ public class DriveTo extends Command implements PIDOutput {
     
     public void pidWrite(double output) {
     	pidRate = output;
+    	Robot.driveTrain.SetVoltages(-output, -output);
+    	SmartDashboard.putBoolean("PID enabled", controller.isEnabled());
+    	SmartDashboard.putBoolean("PID on target", controller.onTarget());
+    	SmartDashboard.putNumber("Setpoint", SetPoint);
 	}
 }
 
