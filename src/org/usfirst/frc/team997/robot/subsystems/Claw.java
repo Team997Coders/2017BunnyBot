@@ -13,13 +13,16 @@ public class Claw extends Subsystem {
 
     public DoubleSolenoid clawSolenoid;
     
+    public final boolean openState = true;
+    public final boolean closeState = false;
+    
     //variables go here plz
     public boolean clawOpen; //true if claw is open, false if closed.
     
     public Claw() {
 		clawSolenoid = new DoubleSolenoid(RobotMap.Ports.clawLeftSolenoidPort,RobotMap.Ports.clawRightSolenoidPort);
 		
-		clawOpen = true;
+		clawOpen = this.openState;
 		clawSolenoid.set(DoubleSolenoid.Value.kForward);
 	
     }	
@@ -29,14 +32,14 @@ public class Claw extends Subsystem {
     public void openClaw() {
     	
     		clawSolenoid.set(DoubleSolenoid.Value.kReverse);
-    		clawOpen = true;
+    		clawOpen = this.openState;
     	
     }
     
     public void closeClaw() {
     
     		clawSolenoid.set(DoubleSolenoid.Value.kForward);
-    		clawOpen = false;
+    		clawOpen = this.closeState;
     	
     }
     

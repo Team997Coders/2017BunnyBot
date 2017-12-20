@@ -8,9 +8,16 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ClawButtonCommand extends Command {
+	private boolean state;
+
+    public ClawButtonCommand(boolean _state){
+    	requires(Robot.claw);
+    	this.state = _state;
+    }
 
     public ClawButtonCommand() {
     	requires(Robot.claw);
+    	this.state = !Robot.claw.clawOpen;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -21,9 +28,9 @@ public class ClawButtonCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.claw.clawOpen == true) {
+    	if(state) {
     		Robot.claw.closeClaw();
-    	} else if(Robot.claw.clawOpen == false) {
+    	} else {
     		Robot.claw.openClaw();
     	}
     }
