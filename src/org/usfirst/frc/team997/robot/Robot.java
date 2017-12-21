@@ -5,7 +5,6 @@ import org.usfirst.frc.team997.robot.subsystems.Claw;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.commands.AutoBucket;
 import org.usfirst.frc.team997.robot.commands.DoNothing;
-import org.usfirst.frc.team997.robot.commands.DriveTo;
 import org.usfirst.frc.team997.robot.commands.DriveToDistance;
 import org.usfirst.frc.team997.robot.commands.Timercommand;
 import org.usfirst.frc.team997.robot.subsystems.ArmJoint;

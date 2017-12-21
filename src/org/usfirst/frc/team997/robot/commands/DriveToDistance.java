@@ -1,9 +1,6 @@
 package org.usfirst.frc.team997.robot.commands;
 
 import org.usfirst.frc.team997.robot.Robot;
-import org.usfirst.frc.team997.robot.RobotMap;
-
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 
 /**
@@ -22,12 +19,7 @@ public class DriveToDistance extends PIDCommand {
     }
     
     protected double returnPIDInput() {
-    	return Robot.driveTrain.rightEncoder.pidGet();
-    }
-    
-    protected void usePIDOutput(double output) {
-    	Robot.driveTrain.leftMotor.pidWrite(output);
-    	Robot.driveTrain.rightMotor.pidWrite(output);
+    	return Robot.driveTrain.getPidEncoder();
     }
 
     // Called just before this Command runs the first time
@@ -53,4 +45,9 @@ public class DriveToDistance extends PIDCommand {
     protected void interrupted() {
     	end();
     }
+
+	@Override
+	protected void usePIDOutput(double output) {
+		Robot.driveTrain.pidWrite(output);
+	}
 }

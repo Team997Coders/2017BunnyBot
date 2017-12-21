@@ -19,9 +19,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTrain extends Subsystem {
     //arbitrary motor names
-    public VictorSP leftMotor, rightMotor;
-    public Encoder leftEncoder, rightEncoder;
-    public DoubleSolenoid shiftSolenoid;
+    private VictorSP leftMotor, rightMotor;
+    private Encoder leftEncoder, rightEncoder;
+    private DoubleSolenoid shiftSolenoid;
     public AHRS ahrs;
    
     //variables here
@@ -82,9 +82,7 @@ public class DriveTrain extends Subsystem {
     	//return false;
     	return true;
     	//so, it is reading as though the ahrs is not connected...
-    	}
-    	
-    	
+    }
     	
     private double deccelIterate(double v, double prevV) {
     	/*if (disableDeccel == 1) {
@@ -127,6 +125,11 @@ public class DriveTrain extends Subsystem {
     	
     }
     
+    public void pidWrite(double output) {
+    	leftMotor.pidWrite(output);
+    	rightMotor.pidWrite(output);
+    }
+    
     public void StopVoltage() {
 	    leftMotor.set(0);
     	rightMotor.set(0);
@@ -140,6 +143,28 @@ public class DriveTrain extends Subsystem {
     	}
     	
     }
+    
+    public void resetEncoders() {
+    	leftEncoder.reset();
+    	rightEncoder.reset();
+    }
+    
+    public void resetGyro() {
+    	ahrs.reset();
+    }
+    
+    public double getPidEncoder() {
+    	return leftEncoder.pidGet();
+    }
+    
+    public double getEncoderRate() {
+    	return leftEncoder.getRate();
+    }
+    
+    public double getEncoderDistance() {
+    	return leftEncoder.getDistance();
+    }
+
     
     public void updateSmartDashboard() {
     	//dash.setDefaultNumber("Gear iN Use", gear);

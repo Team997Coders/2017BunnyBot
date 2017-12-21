@@ -10,8 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoDriveForward extends CommandGroup {
 
     public AutoDriveForward() {
-    	addSequential(new DriveTo(RobotMap.Values.autoDriveDistance));
+    	addSequential(new DriveToDistance(RobotMap.Values.autoDriveDistance));
     	//Makes the robot travel thirty feet to cross half of the arena (and then some).
-
     }
 }

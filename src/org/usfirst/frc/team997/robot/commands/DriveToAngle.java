@@ -14,9 +14,11 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveToAngle extends Command implements PIDOutput {
 	public PIDController controller;
 	private double pidRate;
-	public double setPoint;
+	private double setPoint;
 	
-	public DriveToAngle(double angle) {this(angle, Robot.driveTrain.ahrs);} 
+	public DriveToAngle(double angle) {
+		this(angle, Robot.driveTrain.ahrs);
+	} 
 	
     public DriveToAngle(double angle, PIDSource source) {
     	requires(Robot.driveTrain);
@@ -54,11 +56,8 @@ public class DriveToAngle extends Command implements PIDOutput {
 
     // Called once after isFinished returns true
     protected void end() {
-    	
     	controller.disable();
     	Robot.driveTrain.SetVoltages(0, 0);
-    	
-    	
     }
 
     // Called when another command which requires one or more of the same

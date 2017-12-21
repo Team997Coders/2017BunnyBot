@@ -1,19 +1,13 @@
 package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.ArmToAngle;
-import org.usfirst.frc.team997.robot.commands.AutomatedTest;
 import org.usfirst.frc.team997.robot.commands.ClawButtonCommand;
-
 import org.usfirst.frc.team997.robot.commands.ReverseToggle;
-
-import org.usfirst.frc.team997.robot.commands.DecellToggle;
 import org.usfirst.frc.team997.robot.commands.MoveArm;
 import org.usfirst.frc.team997.robot.commands.ShiftCommand;
 import org.usfirst.frc.team997.robot.commands.ZeroArmJoint;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**

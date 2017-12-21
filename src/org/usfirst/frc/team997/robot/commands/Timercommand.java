@@ -23,8 +23,7 @@ public class Timercommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	timer.reset();
-    	Robot.driveTrain.rightEncoder.reset();
-    	Robot.driveTrain.leftEncoder.reset();
+    	Robot.driveTrain.resetEncoders();
     	timer.start();
     	
     }
