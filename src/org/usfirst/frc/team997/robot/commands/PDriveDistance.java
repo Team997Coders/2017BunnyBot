@@ -17,17 +17,30 @@ public class PDriveDistance extends Command {
 	private double lastTime = 0;
 	private double lastVoltage = 0;
 	private double deltaT = 0;
+	private double speed = 0.5;
+	private double initYaw = -999;
+	private double Ktheta = 0.2;
 
+    public PDriveDistance(double _speed, double _dist) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	requires(Robot.driveTrain);
+    	distSetpoint = _dist;
+    	speed = _speed;
+    }
+    
     public PDriveDistance(double _dist) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveTrain);
     	distSetpoint = _dist;
+    	speed = 0.5;
     }
-
+    
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.driveTrain.resetEncoders();
+    	initYaw = Robot.driveTrain.ahrs.getFusedHeading();
     	timer.reset();
     	timer.start();
     }
@@ -47,13 +60,17 @@ public class PDriveDistance extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	// compute the pid P value
-    	double pfactor = Robot.clamp(1, -1, RobotMap.Values.driveDistanceP * piderror());
+    	double pfactor = Robot.clamp(1, -1, speed * RobotMap.Values.driveDistanceP * piderror());
     	double pfactor2 = linearAccel(pfactor);
+    	double deltaTheta = Robot.driveTrain.ahrs.getFusedHeading() - initYaw;
     	deltaT = timer.get() - lastTime;
     	lastTime = timer.get();
 
+    	// calculate yaw correction
+    	double yawcorrect = deltaTheta * Ktheta;
+    	
     	// set the output voltage
-    	Robot.driveTrain.SetVoltages(pfactor2, pfactor2);
+    	Robot.driveTrain.SetVoltages(pfactor2 - yawcorrect, pfactor2 + yawcorrect);
 
     	// Debug information to be placed on the smart dashboard.
     	SmartDashboard.putNumber("Setpoint", distSetpoint);
@@ -63,6 +80,7 @@ public class PDriveDistance extends Command {
     	SmartDashboard.putNumber("K-P factor", pfactor);
     	SmartDashboard.putNumber("K-P factor w/ Accel", pfactor2);
     	SmartDashboard.putNumber("deltaT", deltaT);
+    	SmartDashboard.putNumber("Theta Correction", yawcorrect);
     	SmartDashboard.putBoolean("On Target", onTarget());
     }
 

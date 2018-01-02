@@ -5,7 +5,7 @@ import org.usfirst.frc.team997.robot.subsystems.Claw;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.commands.AutoBucket;
 import org.usfirst.frc.team997.robot.commands.DoNothing;
-import org.usfirst.frc.team997.robot.commands.DriveToDistance;
+import org.usfirst.frc.team997.robot.commands.PDriveDistance;
 import org.usfirst.frc.team997.robot.commands.Timercommand;
 import org.usfirst.frc.team997.robot.subsystems.ArmJoint;
 
@@ -45,6 +45,7 @@ public class Robot extends IterativeRobot {
 		/*} catch (Exception e) {
 			e.printStackTrace();
 		}*/
+		driveTrain.ahrs.reset();
 		
 		//try {
 			claw = new Claw();
@@ -63,6 +64,7 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("AutoBucket", new AutoBucket());	//drive forward, does arm+claw stuff
 		//chooser.addObject("Drive forward", new DriveTo(36));	//doesn't work
 		chooser.addObject("Timertest", new Timercommand(2));	//drive forward _ seconds
+		chooser.addObject("P-Drive Test", new PDriveDistance(0.5, 5.0));	//drive forward _ seconds
 		chooser.addDefault("Do nothing", new DoNothing());
 		//chooser.addObject("Test driveToDistance", new DriveToDistance(2872));	//doesn't work
 	}
