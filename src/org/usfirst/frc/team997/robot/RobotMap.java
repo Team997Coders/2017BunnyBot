@@ -116,7 +116,7 @@ public class RobotMap {
 		
 		//Drive Distance PID
 		
-		driveDistanceP = 0.5,
+		driveDistanceP = 0.005,
 		driveDistanceI = 0,
 		driveDistanceD = 0,
 		

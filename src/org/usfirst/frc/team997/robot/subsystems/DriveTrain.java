@@ -51,7 +51,7 @@ public class DriveTrain extends Subsystem {
     	rightEncoder.reset();
     	
     	gear = 0;
-    	shiftSolenoid.set(DoubleSolenoid.Value.kForward);
+    	shiftSolenoid.set(DoubleSolenoid.Value.kReverse);
     	//this.shift(0);
     }
     
@@ -154,15 +154,19 @@ public class DriveTrain extends Subsystem {
     }
     
     public double getPidEncoder() {
-    	return leftEncoder.pidGet();
+    	return rightEncoder.pidGet();
     }
     
     public double getEncoderRate() {
-    	return leftEncoder.getRate();
+    	return rightEncoder.getRate();
     }
     
     public double getEncoderDistance() {
-    	return leftEncoder.getDistance();
+    	return rightEncoder.getDistance();
+    }
+    
+    public double getEncoderTicks() {
+    	return rightEncoder.get();
     }
 
     

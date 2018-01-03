@@ -19,7 +19,7 @@ public class PDriveDistance extends Command {
 	private double deltaT = 0;
 	private double speed = 0.5;
 	private double initYaw = -999;
-	private double Ktheta = 0.2;
+	private double Ktheta = 0.05;
 
     public PDriveDistance(double _speed, double _dist) {
         // Use requires() here to declare subsystem dependencies
@@ -39,20 +39,26 @@ public class PDriveDistance extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
+    	lastVoltage = 0;
     	Robot.driveTrain.resetEncoders();
-    	initYaw = Robot.driveTrain.ahrs.getFusedHeading();
+    	initYaw = Robot.driveTrain.ahrs.getAngle();
     	timer.reset();
     	timer.start();
+    	System.out.println("Init PDrive");
+    	lastTime = 0;
     }
     
     // current algorithm assumes that we are starting
     // from a stop
     private double linearAccel(double input) {
-    	double Klin = 1.0;
+    	double Klin = 0.8;
     	double deltaT = timer.get() - lastTime;
     	lastTime = timer.get();
     	
-    	double Volts = Robot.clamp(input, input, lastVoltage + Klin * (deltaT));
+    	double Volts = lastVoltage + Klin * (deltaT);
+    	if (Volts > input) {
+    		Volts = input;
+    	}
     	lastVoltage = Volts;
     	return Volts;
     }
@@ -60,9 +66,9 @@ public class PDriveDistance extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	// compute the pid P value
-    	double pfactor = Robot.clamp(1, -1, speed * RobotMap.Values.driveDistanceP * piderror());
+    	double pfactor = speed * Robot.clamp(1, -1, RobotMap.Values.driveDistanceP * piderror());
     	double pfactor2 = linearAccel(pfactor);
-    	double deltaTheta = Robot.driveTrain.ahrs.getFusedHeading() - initYaw;
+    	double deltaTheta = Robot.driveTrain.ahrs.getAngle() - initYaw;
     	deltaT = timer.get() - lastTime;
     	lastTime = timer.get();
 
@@ -70,22 +76,25 @@ public class PDriveDistance extends Command {
     	double yawcorrect = deltaTheta * Ktheta;
     	
     	// set the output voltage
-    	Robot.driveTrain.SetVoltages(pfactor2 - yawcorrect, pfactor2 + yawcorrect);
+    	Robot.driveTrain.SetVoltages(-pfactor2 + yawcorrect, -pfactor2 - yawcorrect);
+    	//Robot.driveTrain.SetVoltages(-pfactor, -pfactor); //without yaw correction, accel
 
     	// Debug information to be placed on the smart dashboard.
     	SmartDashboard.putNumber("Setpoint", distSetpoint);
-    	SmartDashboard.putNumber("Encoder Distance", Robot.driveTrain.getEncoderDistance());
+    	SmartDashboard.putNumber("Encoder Distance", Robot.driveTrain.getEncoderTicks());
     	SmartDashboard.putNumber("Encoder Rate", Robot.driveTrain.getEncoderRate());
     	SmartDashboard.putNumber("Distance Error", piderror());
     	SmartDashboard.putNumber("K-P factor", pfactor);
-    	SmartDashboard.putNumber("K-P factor w/ Accel", pfactor2);
+    	SmartDashboard.putNumber("K-P factor Accel", pfactor2);
     	SmartDashboard.putNumber("deltaT", deltaT);
     	SmartDashboard.putNumber("Theta Correction", yawcorrect);
     	SmartDashboard.putBoolean("On Target", onTarget());
+    	SmartDashboard.putNumber("NavX Heading", Robot.driveTrain.ahrs.getAngle());
+    	SmartDashboard.putNumber("Init Yaw", initYaw);
     }
 
     private double piderror() {
-    	return distSetpoint - Robot.driveTrain.getEncoderDistance();
+    	return distSetpoint - Robot.driveTrain.getEncoderTicks();
     }
     
     private boolean onTarget() {
@@ -98,6 +107,7 @@ public class PDriveDistance extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("PDrive End");
     	timer.stop();
     	Robot.driveTrain.StopVoltage();
     }
