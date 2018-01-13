@@ -23,7 +23,7 @@ public class Claw extends Subsystem {
 		clawSolenoid = new DoubleSolenoid(RobotMap.Ports.clawLeftSolenoidPort,RobotMap.Ports.clawRightSolenoidPort);
 		
 		clawOpen = this.openState;
-		clawSolenoid.set(DoubleSolenoid.Value.kForward);
+		clawSolenoid.set(DoubleSolenoid.Value.kReverse);
 	
     }	
 	// Put methods for controlling this subsystem
@@ -33,6 +33,7 @@ public class Claw extends Subsystem {
     	
     		clawSolenoid.set(DoubleSolenoid.Value.kReverse);
     		clawOpen = this.openState;
+    		System.out.println("Open Claw");
     	
     }
     
@@ -40,6 +41,7 @@ public class Claw extends Subsystem {
     
     		clawSolenoid.set(DoubleSolenoid.Value.kForward);
     		clawOpen = this.closeState;
+    		System.out.println("Close Claw");
     	
     }
     

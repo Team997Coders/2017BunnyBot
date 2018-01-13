@@ -80,9 +80,9 @@ public class RobotMap {
 		GoToVertical = 8,
     
 		//decellToggleButton = 0,
-		shiftButton = 5,
-		clawButton = 2,
-		clawButton2 = 6,
+		//shiftButton = 5,
+		clawButton = 9,
+		clawButton2 = 5,
 		reverseToggButton = 4,
 		
 		//THE PLURAL TO AXIS 

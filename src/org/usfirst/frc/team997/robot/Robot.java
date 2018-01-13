@@ -155,6 +155,7 @@ public class Robot extends IterativeRobot {
 		//oi.updateDashboard();
 		driveTrain.updateSmartDashboard();
 		armJoint.updateSmartDashboard();
+		claw.clawSmartDashboard();
 	}
 	
 	public static double clamp(double Max, double Min, double Val) {

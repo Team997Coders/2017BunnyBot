@@ -14,10 +14,11 @@ public class ClawButtonCommand extends Command {
     	requires(Robot.claw);
     	this.state = _state;
     }
-
+ 
     public ClawButtonCommand() {
     	requires(Robot.claw);
     	this.state = !Robot.claw.clawOpen;
+    	System.out.println("Set claw to " + state);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -28,11 +29,13 @@ public class ClawButtonCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	state = !Robot.claw.clawOpen;
     	if(state) {
-    		Robot.claw.closeClaw();
-    	} else {
     		Robot.claw.openClaw();
+    	} else {
+    		Robot.claw.closeClaw();
     	}
+    	System.out.println("State = " + state);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -47,6 +50,7 @@ public class ClawButtonCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	System.out.println("bad!");
     	end();
     }
 }

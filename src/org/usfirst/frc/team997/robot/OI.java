@@ -25,9 +25,9 @@ public class OI {
 	
 	public final JoystickButton
 	//decellToggleButton,
-	shiftButton,
+	//shiftButton,
 	clawButton,
-	clawButton2,
+	//clawButton2,
 	reverseButton,
 	MoveArmFwdButton,
 	MoveArmRevButton,
@@ -47,11 +47,11 @@ public class OI {
 		GamePad2 = new Joystick(RobotMap.Ports.GamePad2Port);
 		
 		//ARM CONTROL BUTTONS
-		clawButton = new JoystickButton(GamePad, RobotMap.Ports.clawButton2);
+		clawButton = new JoystickButton(GamePad2, RobotMap.Ports.clawButton);
 		clawButton.whenPressed(new ClawButtonCommand());
 		
-		clawButton2 = new JoystickButton(GamePad2, RobotMap.Ports.clawButton);
-		clawButton2.whenPressed(new ClawButtonCommand());
+		//clawButton2 = new JoystickButton(GamePad2, RobotMap.Ports.clawButton2);
+		//clawButton2.whenPressed(new ClawButtonCommand());
 		
 		MoveArmFwdButton = new JoystickButton(GamePad, RobotMap.Ports.ArmFwdButton);
 		MoveArmFwdButton.whileHeld(new MoveArm(0.5));
@@ -89,8 +89,8 @@ public class OI {
 		//GoToVerticalButton.whenPressed(new ArmToAngle(15792));
 		
 		//DRIVETRAIN BUTTONS
-		shiftButton = new JoystickButton(GamePad, RobotMap.Ports.shiftButton);
-		shiftButton.whenPressed(new ShiftCommand());
+		//shiftButton = new JoystickButton(GamePad, RobotMap.Ports.shiftButton);
+		//shiftButton.whenPressed(new ShiftCommand());
 		
 		reverseButton = new JoystickButton(GamePad, RobotMap.Ports.reverseToggButton);
 		reverseButton.whenPressed(new ReverseToggle());

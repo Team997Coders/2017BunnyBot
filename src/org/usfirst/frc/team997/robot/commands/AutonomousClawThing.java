@@ -8,7 +8,7 @@ import org.usfirst.frc.team997.robot.commands.ClawButtonCommand;
  *
  */
 public class AutonomousClawThing extends CommandGroup {
-	
+	//FIX THIS LATER
 
     public AutonomousClawThing() {
     	addSequential (new ClawButtonCommand(Robot.claw.openState));
