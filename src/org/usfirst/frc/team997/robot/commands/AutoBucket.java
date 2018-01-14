@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class AutoBucket extends CommandGroup {
 
     public AutoBucket() {
-    	addSequential(new AutoShift(0));
+    	//addSequential(new AutoShift(0));
     	addParallel(new Timercommand(2));
     	addSequential(new ZeroArmJoint());
     	addSequential(new ArmToAngle(RobotMap.Values.armPositionVertical));

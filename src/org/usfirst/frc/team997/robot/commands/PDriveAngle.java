@@ -4,9 +4,7 @@ import org.usfirst.frc.team997.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- *
- */
+//Allows us to turn the robot to a specified angle.
 public class PDriveAngle extends Command {
 	private double angSetpoint;
 	private double minError = 5;

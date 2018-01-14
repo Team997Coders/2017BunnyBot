@@ -7,13 +7,12 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- *
- */
+//Allows us to drive forward to a specified distance. 
 public class PDriveDistance extends Command {
 	
 	public static double ticksPerFoot = 8370.0;
-	//How many ticks on the encoder it takes to travel 1 foot.
+	//How many ticks on the encoder it takes to travel 1 foot. THIS VALUE IS NOT ENTIRELY
+	//PERFECT AND WILL CHANGE WHEN WE ACTUALLY GET THE 2018 ROBOT!!
 	
 	private double distSetpoint;
 	private double minError = 10;

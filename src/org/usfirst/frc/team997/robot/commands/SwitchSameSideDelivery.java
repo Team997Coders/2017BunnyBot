@@ -7,17 +7,16 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class SameSideDelivery extends CommandGroup {
+public class SwitchSameSideDelivery extends CommandGroup {
 
-    public SameSideDelivery() {
+    public SwitchSameSideDelivery() {
+    	
     	addSequential(new PDriveDistance(14 * PDriveDistance.ticksPerFoot));
     	if (Robot.getGameData().charAt(0) == 'L') {
     		addSequential(new PDriveAngle(90));
     	} else {
     		addSequential(new PDriveAngle(-90));
     	}
-    	
-    	//Find distance to switch...
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());
