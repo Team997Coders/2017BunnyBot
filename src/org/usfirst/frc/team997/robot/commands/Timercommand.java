@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Timercommand extends Command {
+	//About 0.3 seconds per foot at HALF speed.
 
 	public Timer timer = new Timer();
 	public double time;

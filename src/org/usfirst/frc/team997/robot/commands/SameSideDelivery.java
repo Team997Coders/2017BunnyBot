@@ -1,15 +1,24 @@
 package org.usfirst.frc.team997.robot.commands;
 
+import org.usfirst.frc.team997.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class DriveOverLine extends CommandGroup {
+public class SameSideDelivery extends CommandGroup {
 
-    public DriveOverLine() {
-    	//addSequential(new AutoShift(0));
-    	addParallel(new Timercommand(2));
+    public SameSideDelivery() {
+    	addSequential(new PDriveDistance(14 * PDriveDistance.ticksPerFoot));
+    	if (Robot.getGameData().charAt(0) == 'L') {
+    		addSequential(new PDriveAngle(90));
+    	} else {
+    		addSequential(new PDriveAngle(-90));
+    	}
+    	
+    	//Find distance to switch...
+    	
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

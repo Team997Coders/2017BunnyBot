@@ -2,14 +2,12 @@ package org.usfirst.frc.team997.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- *
- */
-public class DriveOverLine extends CommandGroup {
+//This auto routine is for if we are on the left or right starting position and our switch
+//is on the opposite side.
+public class CrossLine extends CommandGroup {
 
-    public DriveOverLine() {
-    	//addSequential(new AutoShift(0));
-    	addParallel(new Timercommand(2));
+    public CrossLine() {
+    	addSequential(new PDriveDistance(12 * PDriveDistance.ticksPerFoot));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

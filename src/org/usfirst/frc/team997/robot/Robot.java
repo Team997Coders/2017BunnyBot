@@ -30,6 +30,8 @@ public class Robot extends IterativeRobot {
 	public static Claw claw;
 	public static OI oi;
     public static ArmJoint armJoint;
+    
+    public static String gameData = "LRL";
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -65,8 +67,8 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("AutoBucket", new AutoBucket());	//drive forward, does arm+claw stuff
 		//chooser.addObject("Drive forward", new DriveTo(36));	//doesn't work
 		chooser.addObject("Timertest", new Timercommand(2));	//drive forward _ seconds
-		chooser.addObject("P-Drive Test", new PDriveDistance(1.0, 96000.0));	//drive forward _ seconds
-		chooser.addObject("P-Drive to Angle", new PDriveAngle(30));
+		chooser.addObject("P-Drive Test", new PDriveDistance(0.5, PDriveDistance.ticksPerFoot * 12.0));	//drive forward _ seconds
+		chooser.addObject("P-Drive to Angle", new PDriveAngle(90));
 		chooser.addDefault("Do nothing", new DoNothing());
 		//chooser.addObject("Test driveToDistance", new DriveToDistance(2872));	//doesn't work
 	}
@@ -174,6 +176,9 @@ public class Robot extends IterativeRobot {
 		}
 		
 		return x;
+	}
+	public static String getGameData() {
+		return gameData;
 	}
 }
 

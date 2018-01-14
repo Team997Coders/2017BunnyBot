@@ -11,7 +11,8 @@ public class PDriveAngle extends Command {
 	private double angSetpoint;
 	private double minError = 5;
 	private double initYaw = -999;
-	private double Ktheta = 0.015;
+	//private double Ktheta = 0.015; 
+	private double Ktheta = 0.02;
 
     public PDriveAngle(double _ang) {
         // Use requires() here to declare subsystem dependencies
