@@ -4,12 +4,11 @@ import org.usfirst.frc.team997.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- *
- */
+//This auto command is for when we are positioned on the inner side of the exchange
+//zone and we want to deliver our preloaded cube to either of the sides.
 public class CenterSwitchDelivery extends CommandGroup {
 	
-	int driveAngle = 45;
+	//int driveAngle = 90;
 
     public CenterSwitchDelivery() {
     	String gameData;
@@ -19,30 +18,25 @@ public class CenterSwitchDelivery extends CommandGroup {
     	
     	addSequential(new PDriveDistance(2 * PDriveDistance.ticksPerFoot));
     	if(gameData.charAt(0) == 'L') {
-    		driveAngle = -driveAngle;
+    		//driveAngle = -driveAngle;
+    		
+    		addSequential(new PDriveAngle(-65));
+    		addSequential(new PDriveDistance(4.6 * PDriveDistance.ticksPerFoot));
+    		addSequential(new PDriveAngle(65));
+    		addSequential(new PDriveDistance(3.470 * PDriveDistance.ticksPerFoot));
+    		//NEED TO DROP CUBE AFTERWARDS IN SWITCH.
+    		//NEEDS TESTING!!
+    		//When our side of the switch is on the left, this will deliver the cube to
+    		//that side.
     	}
-    	addSequential(new PDriveAngle(driveAngle));
-    	addSequential(new PDriveDistance(6.36 * PDriveDistance.ticksPerFoot));
-    	addSequential(new PDriveAngle(-driveAngle));
-    	//addSequential(new PDriveDistance( Distance to Switch from Current Pos ))
-    	
-    	//Use manipulator to place cube on switch.
-    	
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+    	else {
+    		addSequential(new PDriveAngle(65));
+    		addSequential(new PDriveDistance(4.6 * PDriveDistance.ticksPerFoot));
+    		addSequential(new PDriveAngle(-65));
+    		addSequential(new PDriveDistance(3.470 * PDriveDistance.ticksPerFoot));
+    		//NEEDS TESTING!!
+    		//When our side of the switch is on the right, this will deliver the cube to
+    		//that side.
+    	}
     }
 }

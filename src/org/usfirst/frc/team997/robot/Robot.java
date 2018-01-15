@@ -4,9 +4,12 @@ package org.usfirst.frc.team997.robot;
 import org.usfirst.frc.team997.robot.subsystems.Claw;
 import org.usfirst.frc.team997.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team997.robot.commands.AutoBucket;
+import org.usfirst.frc.team997.robot.commands.CenterSwitchDelivery;
+import org.usfirst.frc.team997.robot.commands.CrossLine;
 import org.usfirst.frc.team997.robot.commands.DoNothing;
 import org.usfirst.frc.team997.robot.commands.PDriveAngle;
 import org.usfirst.frc.team997.robot.commands.PDriveDistance;
+import org.usfirst.frc.team997.robot.commands.SwitchSameSideDelivery;
 import org.usfirst.frc.team997.robot.commands.Timercommand;
 import org.usfirst.frc.team997.robot.subsystems.ArmJoint;
 
@@ -32,6 +35,7 @@ public class Robot extends IterativeRobot {
     public static ArmJoint armJoint;
     
     public static String gameData = "LRL";
+    //Using test values for the game data since we can't update this to 2018.
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -63,13 +67,16 @@ public class Robot extends IterativeRobot {
 		 }*/
 		
 		oi = new OI();
-		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData("Auto Mode", chooser);
 		chooser.addObject("AutoBucket", new AutoBucket());	//drive forward, does arm+claw stuff
 		//chooser.addObject("Drive forward", new DriveTo(36));	//doesn't work
 		chooser.addObject("Timertest", new Timercommand(2));	//drive forward _ seconds
 		chooser.addObject("P-Drive Test", new PDriveDistance(0.5, PDriveDistance.ticksPerFoot * 12.0));	//drive forward _ seconds
 		chooser.addObject("P-Drive to Angle", new PDriveAngle(90));
 		chooser.addDefault("Do nothing", new DoNothing());
+		chooser.addObject("Cross Auto Line (PU)", new CrossLine());
+		chooser.addObject("Switch Delivery From Center (PU)", new CenterSwitchDelivery());
+		chooser.addObject("Switch Delivery From Same Side (PU)", new SwitchSameSideDelivery());
 		//chooser.addObject("Test driveToDistance", new DriveToDistance(2872));	//doesn't work
 	}
 
