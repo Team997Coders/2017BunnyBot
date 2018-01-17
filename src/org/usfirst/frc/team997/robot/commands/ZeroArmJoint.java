@@ -23,8 +23,10 @@ public class ZeroArmJoint extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
+    	
+    	
     	if (Robot.armJoint.isZeroed == false) {
-    		if (Robot.armJoint.Motor.isRevLimitSwitchClosed()) {
+    		if (Robot.armJoint.sensorCollection.isRevLimitSwitchClosed()) {
     			Robot.armJoint.isZeroed = true;
     		}
     		else {
@@ -37,7 +39,7 @@ public class ZeroArmJoint extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-		return Robot.armJoint.Motor.isRevLimitSwitchClosed();
+		return Robot.armJoint.sensorCollection.isRevLimitSwitchClosed();
     }
 
     // Called once after isFinished returns true

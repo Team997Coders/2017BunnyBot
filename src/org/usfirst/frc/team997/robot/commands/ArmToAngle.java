@@ -3,7 +3,7 @@ package org.usfirst.frc.team997.robot.commands;
 import org.usfirst.frc.team997.robot.Robot;
 import org.usfirst.frc.team997.robot.RobotMap;
 
-import com.ctre.CANTalon.TalonControlMode;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -34,7 +34,7 @@ public class ArmToAngle extends Command {
     		cancel();
     	}
     	System.out.println("setting arm to angle " + angle);
-    	Robot.armJoint.Motor.changeControlMode(TalonControlMode.Position);
+    	//Robot.armJoint.Motor.changeControlMode(TalonControlMode.Position);
     	
     	//Robot.armJoint.setSetpoint(angle);
     	//Robot.armJoint.enable();
@@ -43,17 +43,19 @@ public class ArmToAngle extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	Robot.armJoint.Motor.set(angle);
-    	Robot.armJoint.Motor.enable();
+    	Robot.armJoint.Motor.set(ControlMode.Position, angle);
+    	//Robot.armJoint.Motor.enable();
     	//Robot.armJoint.setSetpoint(angle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	System.out.println("in arm2angle isfinished: " + Robot.armJoint.Motor.getClosedLoopError());
-    	System.out.println("   ... output voltage " + Robot.armJoint.Motor.getOutputVoltage());
+    	int closedLoopError = 0;
+    	Robot.armJoint.Motor.getClosedLoopError(closedLoopError);
+    	System.out.println("in arm2angle isfinished: " + closedLoopError);
+    	System.out.println("   ... output voltage " + Robot.armJoint.Motor.getOutputCurrent());
        // return Robot.armJoint.onTarget();
-    	return !Robot.armJoint.isZeroed || (Math.abs(Robot.armJoint.Motor.getClosedLoopError()) < 60);
+    	return !Robot.armJoint.isZeroed || (Math.abs(closedLoopError) < 60);
     	//return true;
     }
 
