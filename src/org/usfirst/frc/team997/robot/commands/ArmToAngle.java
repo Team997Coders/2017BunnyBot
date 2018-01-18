@@ -31,7 +31,7 @@ public class ArmToAngle extends Command {
     	if (!Robot.armJoint.isZeroed) {
     		System.out.println("Not zeroed!");
     		end();
-    		cancel();
+    		//cancel();
     	}
     	System.out.println("setting arm to angle " + angle);
     	Robot.armJoint.Motor.changeControlMode(TalonControlMode.Position);

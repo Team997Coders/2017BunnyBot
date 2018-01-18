@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
     public static ArmJoint armJoint;
     
-    public static String gameData = "LRL";
+    public static String gameData = "RRL";
     //Using test values for the game data since we can't update this to 2018.
 
 	Command autonomousCommand;

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team997.robot.commands;
 
 import org.usfirst.frc.team997.robot.Robot;
+import org.usfirst.frc.team997.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -21,9 +22,9 @@ public class CenterSwitchDelivery extends CommandGroup {
     		//driveAngle = -driveAngle;
     		
     		addSequential(new PDriveAngle(-65));
-    		addSequential(new PDriveDistance(4.6 * PDriveDistance.ticksPerFoot));
+    		addSequential(new PDriveDistance(4.8 * PDriveDistance.ticksPerFoot));
     		addSequential(new PDriveAngle(65));
-    		addSequential(new PDriveDistance(3.470 * PDriveDistance.ticksPerFoot));
+    		addSequential(new PDriveDistance(3.62 * PDriveDistance.ticksPerFoot));
     		//NEED TO DROP CUBE AFTERWARDS IN SWITCH.
     		//NEEDS TESTING!!
     		//When our side of the switch is on the left, this will deliver the cube to
@@ -31,12 +32,15 @@ public class CenterSwitchDelivery extends CommandGroup {
     	}
     	else {
     		addSequential(new PDriveAngle(65));
-    		addSequential(new PDriveDistance(4.6 * PDriveDistance.ticksPerFoot));
+    		addSequential(new PDriveDistance(4.8 * PDriveDistance.ticksPerFoot));
     		addSequential(new PDriveAngle(-65));
-    		addSequential(new PDriveDistance(3.470 * PDriveDistance.ticksPerFoot));
+    		addSequential(new PDriveDistance(3.62 * PDriveDistance.ticksPerFoot));
     		//NEEDS TESTING!!
     		//When our side of the switch is on the right, this will deliver the cube to
     		//that side.
     	}
+    	addSequential(new ArmToAngle(RobotMap.Values.armPositionMidForward));
+    	addSequential(new Timercommand(0.5));
+    	addSequential(new ClawButtonCommand());
     }
 }
