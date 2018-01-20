@@ -50,8 +50,7 @@ public class ArmToAngle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	int closedLoopError = 0;
-    	Robot.armJoint.Motor.getClosedLoopError(closedLoopError);
+    	int closedLoopError = Robot.armJoint.Motor.getClosedLoopError(0);
     	System.out.println("in arm2angle isfinished: " + closedLoopError);
     	System.out.println("   ... output voltage " + Robot.armJoint.Motor.getOutputCurrent());
        // return Robot.armJoint.onTarget();

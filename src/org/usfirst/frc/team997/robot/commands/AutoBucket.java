@@ -22,7 +22,7 @@ public class AutoBucket extends CommandGroup {
     	//addSequential(new WaitCommand(1));
     	addSequential(new ClawButtonCommand(Robot.claw.closeState));
     	//addSequential(new WaitCommand(1));
-    	addSequential(new ArmToAngle(RobotMap.Values.armPositionMidForward));
+    	addSequential(new ArmToAngle(RobotMap.Values.armPositionForwardMid));
     	
     }
 }

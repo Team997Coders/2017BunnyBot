@@ -22,38 +22,36 @@ public class ArmJoint extends Subsystem {
 	public SensorCollection sensorCollection;
 	public static final double absoluteTolerance = 0.01;
 	public boolean isZeroed = false;
-
+	public int absolutePosition;
+	
     // Initialize your subsystem here
     public ArmJoint() {
     	
     	Motor = new TalonSRX(RobotMap.Ports.bucketLifter);
-    	Motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 2);
-    	Motor.clearStickyFaults(2);
+    	
+    	absolutePosition = Motor.getSelectedSensorPosition(0); // & 0xFFF;
+    	Motor.setSelectedSensorPosition(absolutePosition, 0, 10);
+    	
+    	Motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    	Motor.setSensorPhase(false);
+    	Motor.clearStickyFaults(10);
     	Motor.enableCurrentLimit(false);
-    	Motor.configNominalOutputForward(0, 0);
-    	Motor.configNominalOutputReverse(0, 0);
-    	Motor.configPeakOutputReverse(12, -12);
-    	Motor.configAllowableClosedloopError(0, 10, 1);
-    	//Motor.setAllowableClosedLoopErr(10);
+    	Motor.configNominalOutputForward(0, 10);
+    	Motor.configNominalOutputReverse(0, 10);
+    	Motor.configPeakOutputForward(1, 10);
+    	Motor.configPeakOutputReverse(-1, 10);
+    	Motor.configAllowableClosedloopError(0, 0, 10);
     	Motor.selectProfileSlot(0, 0);
-    	Motor.config_kP(0, RobotMap.Values.armPidP, 2);
-    	Motor.config_kI(0, RobotMap.Values.armPidI, 2);
-    	Motor.config_kD(0, RobotMap.Values.armPidD, 2);
-    	Motor.config_kF(0, 0, 2);
+    	Motor.config_kP(0, RobotMap.Values.armPidP, 10);
+    	Motor.config_kI(0, RobotMap.Values.armPidI, 10);
+    	Motor.config_kD(0, RobotMap.Values.armPidD, 10);
+    	Motor.config_kF(0, 0, 10);
     	
     	sensorCollection = new SensorCollection(Motor);
 
-    	//Motor.configEncoderCodesPerRev(1);
-    	//Motor.enableLimitSwitch(true, true);
-    	//Motor.enableBrakeMode(false);
-    	//Motor.enable();
-    	//Motor.changeControlMode(TalonControlMode.PercentVbus);
-    	
-    	//Motor.enableZeroSensorPositionOnReverseLimit(true); Could be done automatically
-    	
     	Motor.set(ControlMode.PercentOutput, 0);
     	
-    	LiveWindow.addActuator("ArmJoint", 1, (Sendable) Motor);
+    	//LiveWindow.addActuator("ArmJoint", 1, (Sendable) Motor);
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to
@@ -68,15 +66,14 @@ public class ArmJoint extends Subsystem {
     public void autozero() {
     	if (sensorCollection.isRevLimitSwitchClosed() && !isZeroed) {
     		isZeroed = true;
-    		
+    		Motor.setSelectedSensorPosition(0, 0, 10);
+    		System.out.println("Zeroed " + Motor.getSelectedSensorPosition(0));
     	}
     }
     
-    //Pretty sure this isn't used
     public void getPosition(double NewAngle) {
-    	Motor.getSelectedSensorPosition(0);
-    	double angle = Motor.getSelectedSensorPosition(0);
-    	//double angle = Motor.getEncPosition();
+    	absolutePosition = Motor.getSelectedSensorPosition(0);// & 0xFFF;
+    	Motor.setSelectedSensorPosition(absolutePosition, 0, 10);
     }
     
     public void initDefaultCommand() {
@@ -85,7 +82,7 @@ public class ArmJoint extends Subsystem {
     }
 
     public void stop() {
-    	System.out.println("Stop Arm");
+    	//System.out.println("Stop Arm");
     	Motor.set(ControlMode.PercentOutput, 0.0);
     }
     
@@ -97,13 +94,15 @@ public class ArmJoint extends Subsystem {
     }    
     
     public void updateSmartDashboard() {
-    	SmartDashboard.putNumber("TalonSRX Mode", Motor.getControlMode().value);
+    	absolutePosition = Motor.getSelectedSensorPosition(0);// & 0xFFF;
+    	
+       	SmartDashboard.putNumber("TalonSRX Mode", Motor.getControlMode().value);
+    	SmartDashboard.putNumber("Absolute position", absolutePosition);
     	SmartDashboard.putNumber("Arm Voltage", Motor.getMotorOutputVoltage());
     	SmartDashboard.putBoolean("Holo1", sensorCollection.isFwdLimitSwitchClosed());
     	SmartDashboard.putBoolean("Holo2", sensorCollection.isRevLimitSwitchClosed());
     	SmartDashboard.putBoolean("ArmZeroed", Robot.armJoint.isZeroed);
     	SmartDashboard.putNumber("ArmPIDError", Motor.getClosedLoopError(0));
-    	//SmartDashboard.putNumber("Arm Position ", Motor.getPosition());
     	SmartDashboard.putNumber("Arm Position ", Motor.getSelectedSensorPosition(0));
     }
 }

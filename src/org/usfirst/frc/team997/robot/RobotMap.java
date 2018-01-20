@@ -75,7 +75,7 @@ public class RobotMap {
 		
     //BUTTONS
 		ArmFwdButton = 1,
-		ArmBwdButton = 2,
+		ArmBwdButton = 3,
 		ZeroArm = 7,
 		GoToVertical = 8,
     
@@ -91,7 +91,7 @@ public class RobotMap {
 		rightXAxisPort = 4,
 		rightYAxisPort = 5,
 		
-		//GAMEPAD2 ARM POSITIONS
+		//GAMEPAD2 ARM BUTTONS
 		armPositionVertical = 4,
 		armPositionForwardLevel = 5,
 		armPositionForwardFloor = 7,
@@ -127,13 +127,13 @@ public class RobotMap {
 		driveAngleD = 0,
 
 		// Constants to define arm position for encoder
-		armPositionVertical = 3.8,
-		armPositionForwardLevel = 7.0,
-		armPositionForwardFloor = 7.6,
-		armPositionBackwardLevel = 0.6,
 		armPositionBackwardFloor = 0,
-		armPositionMidForward = 5.4,
-		armPositionMidBackward = 2.2,
+		armPositionBackwardLevel = 2706,
+		armPositionBackwardMid = 9000,
+		armPositionVertical = 16239,
+		armPositionForwardMid = 22823,
+		armPositionForwardLevel = 29755,
+		armPositionForwardFloor = 32647,
 		
 		
 		//*TEMPORARY* PID Values

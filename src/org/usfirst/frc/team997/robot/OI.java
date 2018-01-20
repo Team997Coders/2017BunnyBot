@@ -79,10 +79,10 @@ public class OI {
 		ArmFloorBackwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionBackwardFloor));
 		
 		ArmMidForwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionForwardMid);
-		ArmMidForwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionMidForward));
+		ArmMidForwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionForwardMid));
 		
 		ArmMidBackwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionBackwardMid);
-		ArmMidBackwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionMidBackward));
+		ArmMidBackwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionBackwardMid));
 		
 		GoToVerticalButton = new JoystickButton(GamePad, RobotMap.Ports.GoToVertical);
 		GoToVerticalButton.whenPressed(new ArmToAngle(3.81));

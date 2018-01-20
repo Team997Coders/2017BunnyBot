@@ -149,6 +149,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		armJoint.autozero();
 		updateSmartDashboard();
 	}
 
@@ -157,7 +158,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		LiveWindow.run();
+		//LiveWindow.run();
 	}
 	
 	public void updateSmartDashboard() {

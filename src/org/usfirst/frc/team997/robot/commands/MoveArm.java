@@ -23,8 +23,9 @@ public class MoveArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println("Holding MoveArm ");
     	Robot.armJoint.setVoltage(value);
+    	//System.out.println("Holding MoveArm ");
+    	//System.out.println("voltage:"+ value);
     }
 
     // Make this return true when this Command no longer needs to run execute()
