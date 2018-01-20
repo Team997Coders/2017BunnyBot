@@ -49,7 +49,7 @@ public class ArmJoint extends Subsystem {
     	
     	sensorCollection = new SensorCollection(Motor);
 
-    	Motor.set(ControlMode.PercentOutput, 0);
+    	//Motor.set(ControlMode.PercentOutput, 0);
     	
     	//LiveWindow.addActuator("ArmJoint", 1, (Sendable) Motor);
         // Use these to get going:
@@ -84,6 +84,10 @@ public class ArmJoint extends Subsystem {
     public void stop() {
     	//System.out.println("Stop Arm");
     	Motor.set(ControlMode.PercentOutput, 0.0);
+    }
+    
+    public void lock(double angle) {
+    	Motor.set(ControlMode.Position, angle);
     }
     
     public void setVoltage(double volts) {

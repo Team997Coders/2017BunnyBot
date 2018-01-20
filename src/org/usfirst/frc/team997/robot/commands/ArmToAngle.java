@@ -6,6 +6,7 @@ import org.usfirst.frc.team997.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -33,7 +34,7 @@ public class ArmToAngle extends Command {
     		end();
     		cancel();
     	}
-    	System.out.println("setting arm to angle " + angle);
+    	//SmartDashboard.putNumber("setting arm to angle", angle);
     	//Robot.armJoint.Motor.changeControlMode(TalonControlMode.Position);
     	
     	//Robot.armJoint.setSetpoint(angle);
@@ -44,6 +45,7 @@ public class ArmToAngle extends Command {
     protected void execute() {
     	
     	Robot.armJoint.Motor.set(ControlMode.Position, angle);
+    	System.out.println("setting arm to angle " + angle);
     	//Robot.armJoint.Motor.enable();
     	//Robot.armJoint.setSetpoint(angle);
     }

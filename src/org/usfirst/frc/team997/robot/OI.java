@@ -2,6 +2,7 @@ package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.ArmToAngle;
 import org.usfirst.frc.team997.robot.commands.ClawButtonCommand;
+import org.usfirst.frc.team997.robot.commands.LockArm;
 import org.usfirst.frc.team997.robot.commands.ReverseToggle;
 import org.usfirst.frc.team997.robot.commands.MoveArm;
 import org.usfirst.frc.team997.robot.commands.ShiftCommand;
@@ -55,9 +56,11 @@ public class OI {
 		
 		MoveArmFwdButton = new JoystickButton(GamePad, RobotMap.Ports.ArmFwdButton);
 		MoveArmFwdButton.whileHeld(new MoveArm(0.5));
+		MoveArmFwdButton.whenReleased(new LockArm());
 		
 		MoveArmRevButton = new JoystickButton(GamePad, RobotMap.Ports.ArmBwdButton);
 		MoveArmRevButton.whileHeld(new MoveArm(-0.5));
+		MoveArmRevButton.whenReleased(new LockArm());
 		
 		ZeroArmButton = new JoystickButton(GamePad, RobotMap.Ports.ZeroArm);
 		ZeroArmButton.whenPressed(new ZeroArmJoint());
