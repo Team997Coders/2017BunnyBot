@@ -27,6 +27,7 @@ public class DriveTrain extends Subsystem {
     //variables here
     public int gear; 
     public boolean gyroPresent = true;
+    public static double ticksPerFoot = 8370.0;
     
     public double PrevLeftV, PrevRightV;
     
@@ -36,7 +37,9 @@ public class DriveTrain extends Subsystem {
     	leftEncoder = new Encoder(RobotMap.Ports.leftEncoderFirstPort, RobotMap.Ports.leftEncoderSecondPort);
     	rightEncoder = new Encoder(RobotMap.Ports.rightEncoderFirstPort, RobotMap.Ports.rightEncoderSecondPort);
     	rightEncoder.setReverseDirection(true);
-    	rightEncoder.setDistancePerPulse(1/2873); //2873 ticks/foot
+    	
+    	rightEncoder.setDistancePerPulse(12/ticksPerFoot); //8370 ticks/foot
+    	leftEncoder.setDistancePerPulse(12/ticksPerFoot); //8370 ticks/foot
     	shiftSolenoid = new DoubleSolenoid(RobotMap.Ports.shifterSolenoidLow, RobotMap.Ports.shifterSolenoidHigh);
     	
     	try {
@@ -165,8 +168,20 @@ public class DriveTrain extends Subsystem {
     	return rightEncoder.getDistance();
     }
     
-    public double getEncoderTicks() {
+    public double getLeftEncoderTicks() {
+    	return leftEncoder.get();
+    }
+    
+    public double getRightEncoderTicks() {
     	return rightEncoder.get();
+    }
+
+    public double getLeftEncoderRate() {
+    	return leftEncoder.getRate();
+    }
+    
+    public double getRightEncoderRate() {
+    	return rightEncoder.getRate();
     }
 
     

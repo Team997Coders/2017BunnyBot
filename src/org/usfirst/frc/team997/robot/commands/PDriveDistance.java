@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //Allows us to drive forward to a specified distance. 
 public class PDriveDistance extends Command {
 	
-	public static double ticksPerFoot = 8370.0;
 	//How many ticks on the encoder it takes to travel 1 foot. THIS VALUE IS NOT ENTIRELY
 	//PERFECT AND WILL CHANGE WHEN WE ACTUALLY GET THE 2018 ROBOT!!
 	
@@ -84,7 +83,7 @@ public class PDriveDistance extends Command {
 
     	// Debug information to be placed on the smart dashboard.
     	SmartDashboard.putNumber("Setpoint", distSetpoint);
-    	SmartDashboard.putNumber("Encoder Distance", Robot.driveTrain.getEncoderTicks());
+    	SmartDashboard.putNumber("Encoder Distance", Robot.driveTrain.getRightEncoderTicks());
     	SmartDashboard.putNumber("Encoder Rate", Robot.driveTrain.getEncoderRate());
     	SmartDashboard.putNumber("Distance Error", piderror());
     	SmartDashboard.putNumber("K-P factor", pfactor);
@@ -97,7 +96,7 @@ public class PDriveDistance extends Command {
     }
 
     private double piderror() {
-    	return distSetpoint - Robot.driveTrain.getEncoderTicks();
+    	return distSetpoint - Robot.driveTrain.getRightEncoderTicks();
     }
     
     private boolean onTarget() {

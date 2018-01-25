@@ -10,7 +10,7 @@ public class SwitchSameSideDelivery extends CommandGroup {
 
     public SwitchSameSideDelivery() {
     	
-    	addSequential(new PDriveDistance(14 * PDriveDistance.ticksPerFoot));
+    	addSequential(new PDriveDistance(14 * Robot.driveTrain.ticksPerFoot));
     	if (Robot.getGameData().charAt(0) == 'L') {
     		addSequential(new PDriveAngle(90));
     	} else {

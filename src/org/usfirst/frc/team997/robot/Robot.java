@@ -14,6 +14,7 @@ import org.usfirst.frc.team997.robot.commands.Timercommand;
 import org.usfirst.frc.team997.robot.subsystems.ArmJoint;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -33,6 +34,8 @@ public class Robot extends IterativeRobot {
 	public static Claw claw;
 	public static OI oi;
     public static ArmJoint armJoint;
+    public static PowerDistributionPanel pdp;
+    private Logger logger;
     
     public static String gameData = "LRL";
     //Using test values for the game data since we can't update this to 2018.
@@ -46,6 +49,11 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		try {
+			pdp = new PowerDistributionPanel();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		//try {
 			driveTrain = new DriveTrain();
@@ -66,14 +74,16 @@ public class Robot extends IterativeRobot {
 			e.printStackTrace();
 		 }*/
 		
+		logger = Logger.getInstance();
+		
 		oi = new OI();
 		SmartDashboard.putData("Auto Mode", chooser);
+		chooser.addDefault("Do nothing", new DoNothing());
 		chooser.addObject("AutoBucket", new AutoBucket());	//drive forward, does arm+claw stuff
 		//chooser.addObject("Drive forward", new DriveTo(36));	//doesn't work
 		chooser.addObject("Timertest", new Timercommand(2));	//drive forward _ seconds
-		chooser.addObject("P-Drive Test", new PDriveDistance(0.5, PDriveDistance.ticksPerFoot * 12.0));	//drive forward _ seconds
-		chooser.addObject("P-Drive to Angle", new PDriveAngle(90));
-		chooser.addDefault("Do nothing", new DoNothing());
+		chooser.addObject("P-Drive Test - Drive 12 feet at half power", new PDriveDistance(0.5, driveTrain.ticksPerFoot * 12.0));
+		chooser.addObject("P-Drive to Angle - Pivot 90 degrees", new PDriveAngle(90));
 		chooser.addObject("Cross Auto Line (PU)", new CrossLine());
 		chooser.addObject("Switch Delivery From Center (PU)", new CenterSwitchDelivery());
 		chooser.addObject("Switch Delivery From Same Side (PU)", new SwitchSameSideDelivery());
@@ -87,7 +97,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		this.logger.close();
 	}
 
 	@Override
@@ -110,6 +120,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		logger.openFile();
 		autonomousCommand = chooser.getSelected();
 
 		/*
@@ -131,6 +142,7 @@ public class Robot extends IterativeRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		updateSmartDashboard();
+		logger.logAll();
 	}
 
 	@Override
