@@ -13,6 +13,7 @@ import org.usfirst.frc.team997.robot.commands.SwitchSameSideDelivery;
 import org.usfirst.frc.team997.robot.commands.Timercommand;
 import org.usfirst.frc.team997.robot.subsystems.ArmJoint;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
@@ -37,7 +38,7 @@ public class Robot extends IterativeRobot {
     public static PowerDistributionPanel pdp;
     private Logger logger;
     
-    public static String gameData = "LRL";
+    public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
     //Using test values for the game data since we can't update this to 2018.
 
 	Command autonomousCommand;

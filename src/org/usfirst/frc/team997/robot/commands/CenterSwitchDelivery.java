@@ -21,9 +21,9 @@ public class CenterSwitchDelivery extends CommandGroup {
     		//driveAngle = -driveAngle;
     		
     		addSequential(new PDriveAngle(-65));
-    		addSequential(new PDriveDistance(4.6 * Robot.driveTrain.ticksPerFoot));
+    		addSequential(new PDriveDistance(4.8 * Robot.driveTrain.ticksPerFoot));
     		addSequential(new PDriveAngle(65));
-    		addSequential(new PDriveDistance(3.470 * Robot.driveTrain.ticksPerFoot));
+    		addSequential(new PDriveDistance(3.62 * Robot.driveTrain.ticksPerFoot));
     		//NEED TO DROP CUBE AFTERWARDS IN SWITCH.
     		//NEEDS TESTING!!
     		//When our side of the switch is on the left, this will deliver the cube to
@@ -31,9 +31,9 @@ public class CenterSwitchDelivery extends CommandGroup {
     	}
     	else {
     		addSequential(new PDriveAngle(65));
-    		addSequential(new PDriveDistance(4.6 * Robot.driveTrain.ticksPerFoot));
+    		addSequential(new PDriveDistance(4.8 * Robot.driveTrain.ticksPerFoot));
     		addSequential(new PDriveAngle(-65));
-    		addSequential(new PDriveDistance(3.470 * Robot.driveTrain.ticksPerFoot));
+    		addSequential(new PDriveDistance(3.62 * Robot.driveTrain.ticksPerFoot));
     		//NEEDS TESTING!!
     		//When our side of the switch is on the right, this will deliver the cube to
     		//that side.

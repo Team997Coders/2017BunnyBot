@@ -21,7 +21,7 @@ public class PDriveDistance extends Command {
 	private double deltaT = 0;
 	private double speed = 0.5;
 	private double initYaw = -999;
-	private double Ktheta = 0.05;
+	private double Ktheta = 0.02;
 
     public PDriveDistance(double _speed, double _dist) {
         // Use requires() here to declare subsystem dependencies
