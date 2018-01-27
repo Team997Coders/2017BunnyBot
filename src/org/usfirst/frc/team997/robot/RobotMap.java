@@ -165,6 +165,13 @@ public class RobotMap {
 		public static String 
 		reverseMotor = "right";
 	}
+	
+	/*public static class Arrays{
+		
+		public static double[]
+		movelist = new double[] {RobotMap.Values.armPositionBackwardLevel, 
+				RobotMap.Values.armPositionVertical, RobotMap.Values.armPositionForwardLevel};
+	}*/
 		
 }
 	

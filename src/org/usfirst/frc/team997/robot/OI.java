@@ -1,12 +1,15 @@
 package org.usfirst.frc.team997.robot;
 
 import org.usfirst.frc.team997.robot.commands.ArmToAngle;
+import org.usfirst.frc.team997.robot.commands.ArraySelector;
 import org.usfirst.frc.team997.robot.commands.ClawButtonCommand;
 import org.usfirst.frc.team997.robot.commands.LockArm;
 import org.usfirst.frc.team997.robot.commands.ReverseToggle;
 import org.usfirst.frc.team997.robot.commands.MoveArm;
 import org.usfirst.frc.team997.robot.commands.ShiftCommand;
 import org.usfirst.frc.team997.robot.commands.ZeroArmJoint;
+import org.usfirst.frc.team997.robot.commands.saystuff;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -55,12 +58,18 @@ public class OI {
 		//clawButton2.whenPressed(new ClawButtonCommand());
 		
 		MoveArmFwdButton = new JoystickButton(GamePad, RobotMap.Ports.ArmFwdButton);
-		MoveArmFwdButton.whileHeld(new MoveArm(0.5));
-		MoveArmFwdButton.whenReleased(new LockArm());
+		//MoveArmFwdButton.whileHeld(new MoveArm(0.5));
+		//MoveArmFwdButton.whenReleased(new LockArm());
+		MoveArmFwdButton.whenPressed(new ArraySelector(true));	//a
+		//MoveArmFwdButton.whenReleased(new LockArm());
+		//MoveArmFwdButton.whenPressed(new saystuff());
+		
 		
 		MoveArmRevButton = new JoystickButton(GamePad, RobotMap.Ports.ArmBwdButton);
-		MoveArmRevButton.whileHeld(new MoveArm(-0.5));
-		MoveArmRevButton.whenReleased(new LockArm());
+		//MoveArmRevButton.whileHeld(new MoveArm(-0.5));
+		//MoveArmRevButton.whenReleased(new LockArm());
+		MoveArmRevButton.whenPressed(new ArraySelector(false));	//x
+		//MoveArmRevButton.whenReleased(new LockArm());
 		
 		ZeroArmButton = new JoystickButton(GamePad, RobotMap.Ports.ZeroArm);
 		ZeroArmButton.whenPressed(new ZeroArmJoint());

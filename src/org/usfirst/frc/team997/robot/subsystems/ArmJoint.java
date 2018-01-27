@@ -22,6 +22,9 @@ public class ArmJoint extends Subsystem {
 	public SensorCollection sensorCollection;
 	public static final double absoluteTolerance = 0.01;
 	public boolean isZeroed = false;
+	public static int selector = 0;
+	public static double[] movelist = new double[] {RobotMap.Values.armPositionBackwardLevel, 
+					RobotMap.Values.armPositionVertical, RobotMap.Values.armPositionForwardLevel};
 	public int absolutePosition;
 	
     // Initialize your subsystem here
@@ -94,8 +97,21 @@ public class ArmJoint extends Subsystem {
     	Motor.set(ControlMode.PercentOutput, volts);
     }
     
-    public void setArmSetpoint(double angle) {
-    }    
+    public static void incrementIndex() {
+    	selector++;
+    	if (selector > 2) {
+    		selector = 2;
+    	}
+    	System.out.println("Incremented");
+    }
+    
+    public static void decrementIndex() {
+    	selector--;
+    	if (selector < 0) {
+    		selector = 0;
+    	}
+    	System.out.println("Decremented");
+    }
     
     public void updateSmartDashboard() {
     	absolutePosition = Motor.getSelectedSensorPosition(0);// & 0xFFF;
@@ -108,5 +124,6 @@ public class ArmJoint extends Subsystem {
     	SmartDashboard.putBoolean("ArmZeroed", Robot.armJoint.isZeroed);
     	SmartDashboard.putNumber("ArmPIDError", Motor.getClosedLoopError(0));
     	SmartDashboard.putNumber("Arm Position ", Motor.getSelectedSensorPosition(0));
+    	SmartDashboard.putNumber("Array selector value", selector);
     }
 }
