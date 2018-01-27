@@ -19,6 +19,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTrain extends Subsystem {
     //arbitrary motor names
+	public static final int HIGH_GEAR_PROFILE = 1;
+	
+	
     private VictorSP leftMotor, rightMotor;
     private Encoder leftEncoder, rightEncoder;
     private DoubleSolenoid shiftSolenoid;
