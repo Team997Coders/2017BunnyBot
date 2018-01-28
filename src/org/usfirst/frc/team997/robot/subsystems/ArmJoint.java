@@ -22,9 +22,9 @@ public class ArmJoint extends Subsystem {
 	public SensorCollection sensorCollection;
 	public static final double absoluteTolerance = 0.01;
 	public boolean isZeroed = false;
-	public static int selector = 0;
-	public static double[] movelist = new double[] {RobotMap.Values.armPositionBackwardLevel, 
-					RobotMap.Values.armPositionVertical, RobotMap.Values.armPositionForwardLevel};
+	public int selector = 0;
+	public double[] movelist = new double[] {RobotMap.Values.armPositionBackwardLevel,RobotMap.Values.armPositionBackwardMid, 
+					RobotMap.Values.armPositionVertical, RobotMap.Values.armPositionForwardMid, RobotMap.Values.armPositionForwardLevel};
 	public int absolutePosition;
 	
     // Initialize your subsystem here
@@ -97,20 +97,28 @@ public class ArmJoint extends Subsystem {
     	Motor.set(ControlMode.PercentOutput, volts);
     }
     
-    public static void incrementIndex() {
+    public void incrementIndex() {
     	selector++;
-    	if (selector > 2) {
-    		selector = 2;
+    	if (selector > (movelist.length -1)) {
+    		selector = movelist.length -1;
     	}
-    	System.out.println("Incremented");
+    	System.out.println("Incremented " + selector);
     }
     
-    public static void decrementIndex() {
+    public void decrementIndex() {
     	selector--;
     	if (selector < 0) {
     		selector = 0;
     	}
-    	System.out.println("Decremented");
+    	System.out.println("Decremented " + selector);
+    }
+    
+    public int getIndex() {
+    	return selector;
+    }
+    
+    public double getItem() {
+    	return movelist[selector];
     }
     
     public void updateSmartDashboard() {
