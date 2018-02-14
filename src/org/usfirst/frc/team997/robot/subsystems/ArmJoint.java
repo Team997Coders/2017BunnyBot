@@ -1,13 +1,16 @@
 package org.usfirst.frc.team997.robot.subsystems;
 
 import org.usfirst.frc.team997.robot.Robot;
+
 import org.usfirst.frc.team997.robot.RobotMap;
 
+import com.ctre.phoenix.Util;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -26,6 +29,9 @@ public class ArmJoint extends Subsystem {
 	public double[] movelist = new double[] {RobotMap.Values.armPositionBackwardLevel,RobotMap.Values.armPositionBackwardMid, 
 					RobotMap.Values.armPositionVertical, RobotMap.Values.armPositionForwardMid, RobotMap.Values.armPositionForwardLevel};
 	public int absolutePosition;
+	
+	Preferences test = Preferences.getInstance();
+	
 	
     // Initialize your subsystem here
     public ArmJoint() {
@@ -60,6 +66,8 @@ public class ArmJoint extends Subsystem {
         //                  to
         // enable() - Enables the PID controller.
     }
+    
+    
     
     public double AngleToEncoderTick(double angle) {
     	double countPerDegree = 1024 / 360;
