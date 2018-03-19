@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 //is on the opposite side.
 public class CrossLine extends CommandGroup {
 
-    public CrossLine() {
-    	addSequential(new PDriveDistance(12 * Robot.driveTrain.ticksPerFoot));
-    }
+	public CrossLine() {
+		addSequential(new PDriveDistance(12 * Robot.driveTrain.ticksPerFoot));
+	}
 }
