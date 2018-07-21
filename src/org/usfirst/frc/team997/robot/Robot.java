@@ -61,7 +61,7 @@ public class Robot extends IterativeRobot {
 		/*} catch (Exception e) {
 			e.printStackTrace();
 		}*/
-		driveTrain.ahrs.reset();
+		//driveTrain.ahrs.reset();
 		
 		//try {
 			claw = new Claw();

@@ -43,7 +43,7 @@ public class PDriveDistance extends Command {
     protected void initialize() {
     	lastVoltage = 0;
     	Robot.driveTrain.resetEncoders();
-    	initYaw = Robot.driveTrain.ahrs.getAngle();
+    	initYaw = 0; //Robot.driveTrain.ahrs.getAngle();
     	timer.reset();
     	timer.start();
     	System.out.println("Init PDrive");
@@ -70,7 +70,7 @@ public class PDriveDistance extends Command {
     	// compute the pid P value
     	double pfactor = speed * Robot.clamp(1, -1, RobotMap.Values.driveDistanceP * piderror());
     	double pfactor2 = linearAccel(pfactor);
-    	double deltaTheta = Robot.driveTrain.ahrs.getAngle() - initYaw;
+    	double deltaTheta = 0; //Robot.driveTrain.ahrs.getAngle() - initYaw;
     	deltaT = timer.get() - lastTime;
     	lastTime = timer.get();
 
@@ -91,7 +91,7 @@ public class PDriveDistance extends Command {
     	SmartDashboard.putNumber("deltaT", deltaT);
     	SmartDashboard.putNumber("Theta Correction", yawcorrect);
     	SmartDashboard.putBoolean("On Target", onTarget());
-    	SmartDashboard.putNumber("NavX Heading", Robot.driveTrain.ahrs.getAngle());
+    	//SmartDashboard.putNumber("NavX Heading", Robot.driveTrain.ahrs.getAngle());
     	SmartDashboard.putNumber("Init Yaw", initYaw);
     }
 

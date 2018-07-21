@@ -80,18 +80,18 @@ public class RobotMap {
 		GoToVertical = 8,
     
 		//decellToggleButton = 0,
-		//shiftButton = 5,
-		clawButton = 9,
-		clawButton2 = 5,
+		shiftButton = 2,
+		clawButton = 5,
 		reverseToggButton = 4,
 		
 		//THE PLURAL TO AXIS 
 		leftXAxisPort = 0,
 		leftYAxisPort = 1,
-		rightXAxisPort = 4,
-		rightYAxisPort = 5,
+		rightXAxisPort = 2,
+		rightYAxisPort = 3//,
 		
 		//GAMEPAD2 ARM BUTTONS
+		/*
 		armPositionVertical = 4,
 		armPositionForwardLevel = 5,
 		armPositionForwardFloor = 7,
@@ -99,6 +99,7 @@ public class RobotMap {
 		armPositionBackwardFloor = 8,
 		armPositionBackwardMid = 3,
 		armPositionForwardMid = 1;
+		*/;
     
 		//GYRO
 		public static final SerialPort.Port AHRS = SerialPort.Port.kUSB;

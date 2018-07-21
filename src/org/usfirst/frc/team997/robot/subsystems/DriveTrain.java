@@ -22,7 +22,7 @@ public class DriveTrain extends Subsystem {
     private VictorSP leftMotor, rightMotor;
     private Encoder leftEncoder, rightEncoder;
     private DoubleSolenoid shiftSolenoid;
-    public AHRS ahrs;
+    //public AHRS ahrs;
    
     //variables here
     public int gear; 
@@ -42,14 +42,14 @@ public class DriveTrain extends Subsystem {
     	leftEncoder.setDistancePerPulse(12/ticksPerFoot); //8370 ticks/foot
     	shiftSolenoid = new DoubleSolenoid(RobotMap.Ports.shifterSolenoidLow, RobotMap.Ports.shifterSolenoidHigh);
     	
-    	try {
-    		ahrs = new AHRS(RobotMap.Ports.AHRS);
-    	} catch(RuntimeException e) {
-    		System.out.println("Error with ahrs");
-    	}
+    	//try {
+    	//	ahrs = new AHRS(RobotMap.Ports.AHRS);
+    	//} catch(RuntimeException e) {
+    	//	System.out.println("Error with ahrs");
+    	//}
     	
-    	gyroPresent = waitforgyro();
-    	ahrs.reset();
+    	//gyroPresent = waitforgyro();
+    	//ahrs.reset();
     	leftEncoder.reset();
     	rightEncoder.reset();
     	
@@ -70,6 +70,7 @@ public class DriveTrain extends Subsystem {
     	}
     }
 
+    /*
     public boolean waitforgyro() {
     	int count = 0;
     	if (ahrs.isConnected()) {
@@ -86,6 +87,7 @@ public class DriveTrain extends Subsystem {
     	return true;
     	//so, it is reading as though the ahrs is not connected...
     }
+    */
     	
     private double deccelIterate(double v, double prevV) {
     	/*if (disableDeccel == 1) {
@@ -153,7 +155,7 @@ public class DriveTrain extends Subsystem {
     }
     
     public void resetGyro() {
-    	ahrs.reset();
+    	//ahrs.reset();
     }
     
     public double getPidEncoder() {
@@ -192,7 +194,7 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("Left encoder value", leftEncoder.get());
     	SmartDashboard.putNumber("Right encoder value", rightEncoder.get());
     	SmartDashboard.putNumber("right encoder distance", rightEncoder.getDistance());
-    	SmartDashboard.putNumber("NavX angle", ahrs.getAngle());
+    	//SmartDashboard.putNumber("NavX angle", ahrs.getAngle());
     	SmartDashboard.putBoolean("gyroPresent", gyroPresent);
     	SmartDashboard.putBoolean("Decell (drivetrain)", Robot.oi.decellOn);
     	SmartDashboard.putNumber("Gear", gear);

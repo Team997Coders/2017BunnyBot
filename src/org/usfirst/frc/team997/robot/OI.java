@@ -27,18 +27,19 @@ public class OI {
 	public boolean arcadeDrive = true;
   
 	public final Joystick
-	GamePad2, GamePad;
+	GamePad/*, GamePad2*/;
 	
 	public final JoystickButton
 	//decellToggleButton,
-	//shiftButton,
+	shiftButton,
 	clawButton,
 	//clawButton2,
 	reverseButton,
 	MoveArmFwdButton,
 	MoveArmRevButton,
 	ZeroArmButton,
-	GoToVerticalButton,
+	GoToVerticalButton//,
+	/*
 	ArmVerticalButton,
 	ArmLevelForwardButton,
 	ArmLevelBackwardButton,
@@ -46,34 +47,37 @@ public class OI {
 	ArmFloorBackwardButton,
 	ArmMidForwardButton,
 	ArmMidBackwardButton;
+	*/;
 	
 	public OI() {
 		//Joystick Init
 		GamePad = new Joystick(RobotMap.Ports.GamePadPort);
-		GamePad2 = new Joystick(RobotMap.Ports.GamePad2Port);
+		//GamePad2 = new Joystick(RobotMap.Ports.GamePad2Port);
 		
 		//ARM CONTROL BUTTONS
-		clawButton = new JoystickButton(GamePad2, RobotMap.Ports.clawButton);
+		clawButton = new JoystickButton(GamePad, RobotMap.Ports.clawButton);
 		clawButton.whenPressed(new ClawButtonCommand());
 		
 		//clawButton2 = new JoystickButton(GamePad2, RobotMap.Ports.clawButton2);
 		//clawButton2.whenPressed(new ClawButtonCommand());
 		
 		MoveArmFwdButton = new JoystickButton(GamePad, RobotMap.Ports.ArmFwdButton);
-		//MoveArmFwdButton.whileHeld(new MoveArm(0.5));
-		//MoveArmFwdButton.whenReleased(new LockArm());
-		MoveArmFwdButton.whenPressed(new ArraySelector(true));	//a
+		MoveArmFwdButton.whileHeld(new MoveArm(0.5));
+		MoveArmFwdButton.whenReleased(new LockArm());
+		//MoveArmFwdButton.whenPressed(new ArraySelector(true));	//a
 		
 		MoveArmRevButton = new JoystickButton(GamePad, RobotMap.Ports.ArmBwdButton);
-		//MoveArmRevButton.whileHeld(new MoveArm(-0.5));
-		//MoveArmRevButton.whenReleased(new LockArm());
-		MoveArmRevButton.whenPressed(new ArraySelector(false));	//x
+		MoveArmRevButton.whileHeld(new MoveArm(-0.5));
+		MoveArmRevButton.whenReleased(new LockArm());
+		//MoveArmRevButton.whenPressed(new ArraySelector(false));	//x
 		
 		
 		ZeroArmButton = new JoystickButton(GamePad, RobotMap.Ports.ZeroArm);
 		ZeroArmButton.whenPressed(new ZeroArmJoint());
 		
 		//ARM POS BUTTONS
+		
+		/*
 		ArmVerticalButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionVertical);
 		ArmVerticalButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionVertical));
 		
@@ -94,14 +98,15 @@ public class OI {
 		
 		ArmMidBackwardButton = new JoystickButton(GamePad2, RobotMap.Ports.armPositionBackwardMid);
 		ArmMidBackwardButton.whenPressed(new ArmToAngle(RobotMap.Values.armPositionBackwardMid));
+		*/
 		
 		GoToVerticalButton = new JoystickButton(GamePad, RobotMap.Ports.GoToVertical);
 		GoToVerticalButton.whenPressed(new ArmToAngle(3.81));
 		//GoToVerticalButton.whenPressed(new ArmToAngle(15792));
 		
 		//DRIVETRAIN BUTTONS
-		//shiftButton = new JoystickButton(GamePad, RobotMap.Ports.shiftButton);
-		//shiftButton.whenPressed(new ShiftCommand());
+		shiftButton = new JoystickButton(GamePad, RobotMap.Ports.shiftButton);
+		shiftButton.whenPressed(new ShiftCommand());
 		
 		reverseButton = new JoystickButton(GamePad, RobotMap.Ports.reverseToggButton);
 		reverseButton.whenPressed(new ReverseToggle());
